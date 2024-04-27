@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -9,12 +10,17 @@ namespace ExpressPost.Classes
 {
     public abstract class User
     {
-        private int Id;
+        private int _id;
         private string _firstName;
         private string _lastName;
         private string _phoneNumber;
         private string _password;
 
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
         public string FirstName
         {
             get { return _firstName; }

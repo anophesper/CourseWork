@@ -104,6 +104,8 @@
     <Compile Include="Classes\Package.cs" />
     <Compile Include="Classes\ParcelGroup.cs" />
     <Compile Include="Classes\Route.cs" />
+    <Compile Include="Classes\UserInfo.cs" />
+    <Compile Include="DB_DataManager.cs" />
     <Compile Include="Enum\TypeP.cs" />
     <Compile Include="Enum\Status.cs" />
     <Compile Include="Enum\Cities.cs" />

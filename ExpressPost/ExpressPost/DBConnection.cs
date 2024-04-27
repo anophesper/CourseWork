@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExpressPost
 {
-    class DBConnection
+    public class DBConnection
     {
         MySqlConnection connection = new MySqlConnection("server = localhost; port = 3306; username = root; password = 06130613; database = logistics");
 

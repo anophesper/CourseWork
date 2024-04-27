@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,10 +9,15 @@ namespace ExpressPost.Classes
 {
     public class Branch
     {
-        private int Id {  get; set; }
+        private int _id {  get; set; }
         private Cities City {  get; set; }
         private string _address;
 
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
         public string Address
         {
             get { return _address; }
@@ -23,7 +29,7 @@ namespace ExpressPost.Classes
             }
         }
 
-        Branch(int id, Cities city, string address)
+        public Branch(int id, Cities city, string address)
         {
             Id = id;
             City = city;

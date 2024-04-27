@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace ExpressPost.Classes
 {
     public class ParcelGroup
     {
-        private int BillOfLading {  get; set; }
+        private int _billOfLading {  get; set; }
         private User _sender;
         private User _recipient;
         private Route _route;
@@ -17,6 +18,11 @@ namespace ExpressPost.Classes
         private DateTime _date;
         private DateTime _deliveryDate;
 
+        public int BillOfLading
+        {
+            get { return _billOfLading; }
+            set { _billOfLading = value; }
+        }
         public User Sender
         {
             get { return _sender; }
@@ -95,6 +101,17 @@ namespace ExpressPost.Classes
             Recipient = recipient;
             Route = route;
             Packages = packages;
+            DeliveryPrise = deliveryPrise;
+            Date = date;
+            DeliveryDate = deliveryDate;
+        }
+
+        public ParcelGroup(int billOfLading, User sender, User recipient, Route route, double deliveryPrise, DateTime date, DateTime deliveryDate)
+        {
+            BillOfLading = billOfLading;
+            Sender = sender;
+            Recipient = recipient;
+            Route = route;
             DeliveryPrise = deliveryPrise;
             Date = date;
             DeliveryDate = deliveryDate;

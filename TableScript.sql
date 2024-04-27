@@ -65,8 +65,8 @@ CREATE TABLE ParcelGroup (
 CREATE TABLE Package (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Weight DECIMAL(10,2),
-    Status ENUM('Створено', 'Підтверджено', 'В дорозі', 'Доставлено', 'Забрали', 'Втрачено'),
-    Type ENUM('Документи', 'Посилка', 'Великий вантаж'),
+    Status ENUM('Створено', 'Підтверджено', 'В_дорозі', 'Доставлено', 'Забрали', 'Втрачено'),
+    Type ENUM('Документи', 'Посилка', 'ВеликийВантаж'),
     BillOfLading CHAR(14),
     ValuationPrice DECIMAL(10,2),  -- Оціночна вартість
     FOREIGN KEY (BillOfLading) REFERENCES ParcelGroup(BillOfLading)

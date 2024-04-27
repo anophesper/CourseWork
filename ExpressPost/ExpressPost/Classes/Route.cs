@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,12 +9,20 @@ namespace ExpressPost.Classes
 {
     public class Route
     {
-        private int Id {  get; set; }
+        private int _id {  get; set; }
         private Branch _origin;
         private Branch _destination;
         private TimeSpan _duration;
-        private List<Branch> IntermediateBranches {  get; set; }
+        private List<Branch> IntermediateBranches;
 
+        public List<Branch> GetIntermediateBranches() { return IntermediateBranches; }
+        public void SetIntermediateBranches(List<Branch> intermediateBranches) { IntermediateBranches = intermediateBranches; }
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
         public Branch Origin
         {
             get { return _origin; }
@@ -45,13 +54,21 @@ namespace ExpressPost.Classes
             }
         }
 
-        Route(int id, Branch origin, Branch destination, TimeSpan duration, List<Branch> intermediateBranches)
+        public Route(int id, Branch origin, Branch destination, TimeSpan duration, List<Branch> intermediateBranches)
         {
             Id = id;
             Origin = origin;
             Destination = destination;
             Duration = duration;
             IntermediateBranches = intermediateBranches;
+        }
+
+        public Route(int id, Branch origin, Branch destination, TimeSpan duration)
+        {
+            Id = id;
+            Origin = origin;
+            Destination = destination;
+            Duration = duration;
         }
     }
 }
