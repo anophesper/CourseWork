@@ -4,11 +4,11 @@ USE logistics;
 
 #таблиця для збереження інформації про користувачів
 CREATE TABLE Users (
-    ID INT AUTO_INCREMENT PRIMARY KEY ,
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    PhoneNumber VARCHAR(255) UNIQUE,
-    `Password` VARCHAR(255),
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(255) CHECK (LENGTH(FirstName) >= 2 AND FirstName NOT REGEXP '[0-9]'),
+    LastName VARCHAR(255) CHECK (LENGTH(LastName) >= 2 AND LastName NOT REGEXP '[0-9]'),
+    PhoneNumber CHAR(10) UNIQUE CHECK (PhoneNumber REGEXP '^[0-9]{10}$'),
+    `Password` VARCHAR(255) CHECK (LENGTH(`Password`) >= 8 AND `Password` NOT LIKE '% %'),
     `Role` ENUM('Клієнт','Адміністратор відділення','Адміністратор системи')
 );
 
@@ -32,6 +32,7 @@ CREATE TABLE Route (
     ID INT PRIMARY KEY,
     Origin INT,
     Destination INT,
+    Duration TIME,
     FOREIGN KEY (Origin) REFERENCES Branch(ID),
     FOREIGN KEY (Destination) REFERENCES Branch(ID)
 );
@@ -52,6 +53,8 @@ CREATE TABLE ParcelGroup (
     Route INT,
     CurrentBranch INT,
     DeliveryPrice DECIMAL(10,2),  -- Ціна за доставку
+    DispatchTime TIMESTAMP,
+    DeliveryTime TIMESTAMP,
     FOREIGN KEY (SenderUser) REFERENCES Users(ID),
     FOREIGN KEY (RecipientUser) REFERENCES Users(ID),
     FOREIGN KEY (Route) REFERENCES Route(ID),
@@ -62,7 +65,7 @@ CREATE TABLE ParcelGroup (
 CREATE TABLE Package (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Weight DECIMAL(10,2),
-    Status ENUM('Створено', 'Підтверджено', 'В дорозі', 'Доставлено', 'Забрали'),
+    Status ENUM('Створено', 'Підтверджено', 'В дорозі', 'Доставлено', 'Забрали', 'Втрачено'),
     Type ENUM('Документи', 'Посилка', 'Великий вантаж'),
     BillOfLading CHAR(14),
     ValuationPrice DECIMAL(10,2),  -- Оціночна вартість

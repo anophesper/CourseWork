@@ -9,7 +9,7 @@ namespace ExpressPost
 {
     class DBConnection
     {
-        MySqlConnection connection = new MySqlConnection("server = localhost; port = 3306; username = root; password = 0613; database = logistics");
+        MySqlConnection connection = new MySqlConnection("server = localhost; port = 3306; username = root; password = 06130613; database = logistics");
 
         public void openConnection()
         {
