@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -69,6 +71,33 @@ namespace ExpressPost.Classes
             LastName = lastName;
             PhoneNumber = phoneNumber;
             Password = password;
+        }
+
+        //метод для збереження у файл інформації про авторизованого користувача
+        public void Login()
+        {
+            string json = JsonConvert.SerializeObject(this);
+            File.WriteAllText("user.json", json);
+        }
+
+        //метод для загрузки інформації з файлу (якщо він існує)
+        public static User Load()
+        {
+            if (!File.Exists("user.json"))
+                return null;
+
+            string json = File.ReadAllText("user.json");
+            UserInfo userInfo = JsonConvert.DeserializeObject<UserInfo>(json);
+
+            User user = Program.dataManager.Users.FirstOrDefault(u => u.Id == userInfo.Id);
+            return user;
+        }
+
+        //метод для виходу з акаунту тобто видалення файлу з інформацією
+        public static void Logout()
+        {
+            if (File.Exists("user.json"))
+                File.Delete("user.json");
         }
     }
 }

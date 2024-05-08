@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,6 @@ namespace ExpressPost
         public DB_DataManager(DBConnection dbConnection) 
         {
             this.dbConnection = dbConnection;
-
             // Ініціалізація делегата
             LoadData = () =>
             {
@@ -201,11 +201,12 @@ namespace ExpressPost
                 User sender = Users.FirstOrDefault(u => u.Id == Convert.ToInt32(reader["SenderUser"]));
                 User recipient = Users.FirstOrDefault(u => u.Id == Convert.ToInt32(reader["RecipientUser"]));
                 Route route = Routes.FirstOrDefault(r => r.Id == Convert.ToInt32(reader["Route"]));
+                Branch currentBranch = Branches.FirstOrDefault(b => b.Id == Convert.ToInt32(reader["CurrentBranch"]));
                 double deliveryPrise = Convert.ToDouble(reader["DeliveryPrice"]);
                 DateTime date = Convert.ToDateTime(reader["DispatchTime"]);
                 DateTime deliveryDate = Convert.ToDateTime(reader["DeliveryTime"]);
 
-                ParcelGroup parcelGroup = new ParcelGroup(billOfLading, sender, recipient, route, deliveryPrise, date, deliveryDate);
+                ParcelGroup parcelGroup = new ParcelGroup(billOfLading, sender, recipient, route, currentBranch, deliveryPrise, date, deliveryDate);
                 ParcelGroups.Add(parcelGroup);//додаємо групу посилок до списку
             }
 

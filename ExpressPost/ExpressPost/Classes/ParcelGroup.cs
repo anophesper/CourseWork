@@ -13,6 +13,7 @@ namespace ExpressPost.Classes
         private User _sender;
         private User _recipient;
         private Route _route;
+        private Branch _currentBranch;
         private List<Package> _packages;
         private double _deliveryPrise;
         private DateTime _date;
@@ -51,6 +52,16 @@ namespace ExpressPost.Classes
                 if (value == null)
                     throw new ArgumentNullException(nameof(Route), "Маршрут має бути вказаним");
                 _route = value;
+            }
+        }
+        public Branch CurrentBranch
+        {
+            get { return _currentBranch; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(Route), "Маршрут має бути вказаним");
+                _currentBranch = value;
             }
         }
         public List<Package> Packages
@@ -94,24 +105,26 @@ namespace ExpressPost.Classes
             }
         }
 
-        public ParcelGroup(int billOfLading, User sender, User recipient, Route route, List<Package> packages, double deliveryPrise, DateTime date, DateTime deliveryDate)
+        public ParcelGroup(int billOfLading, User sender, User recipient, Route route, Branch currentBranch, List<Package> packages, double deliveryPrise, DateTime date, DateTime deliveryDate)
         {
             BillOfLading = billOfLading;
             Sender = sender;
             Recipient = recipient;
             Route = route;
+            CurrentBranch = currentBranch;
             Packages = packages;
             DeliveryPrise = deliveryPrise;
             Date = date;
             DeliveryDate = deliveryDate;
         }
 
-        public ParcelGroup(int billOfLading, User sender, User recipient, Route route, double deliveryPrise, DateTime date, DateTime deliveryDate)
+        public ParcelGroup(int billOfLading, User sender, User recipient, Route route, Branch currentBranch, double deliveryPrise, DateTime date, DateTime deliveryDate)
         {
             BillOfLading = billOfLading;
             Sender = sender;
             Recipient = recipient;
             Route = route;
+            CurrentBranch = currentBranch;
             DeliveryPrise = deliveryPrise;
             Date = date;
             DeliveryDate = deliveryDate;
