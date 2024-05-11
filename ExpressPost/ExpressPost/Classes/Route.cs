@@ -28,9 +28,7 @@ namespace ExpressPost.Classes
             get { return _origin; }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException("Початкове відділення має бути вказане");
-                _origin = value;
+                _origin = value ?? throw new ArgumentNullException("Початкове відділення має бути вказане");
             }
         }
         public Branch Destination
@@ -38,9 +36,7 @@ namespace ExpressPost.Classes
             get { return _destination; }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(Destination), "Кінцеве відділення має бути вказане");
-                _destination = value;
+                _destination = value ?? throw new ArgumentNullException(nameof(Destination), "Кінцеве відділення має бути вказане");
             }
         }
         public TimeSpan Duration

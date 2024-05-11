@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace ExpressPost.Forms
 {
-    public partial class MainForm : Form
+    public partial class MainForm : BaseForm
     {
         public MainForm()
         {
@@ -22,11 +22,7 @@ namespace ExpressPost.Forms
         {
             // Виклик методу Logout для виходу з системи
             User.Logout();
-            // Закриття поточної форми
-            this.Hide();
-            // Перехід до форми авторизації
-            AuthorizeForm authorizeForm = new AuthorizeForm();
-            authorizeForm.Show();
+            FormProperties.SwitchToForm(this, new AuthorizeForm());
         }
     }
 }

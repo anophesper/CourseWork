@@ -19,13 +19,11 @@ namespace ExpressPost
         public List<Route> Routes { get; set; }
         public List<UserInfo> UsersInfo { get; set; } //проміжний список для зберігання інформації про користувачів без розподілення на ролі
 
-        private DBConnection dbConnection;
         // Делегат для завантаження даних
         public Action LoadData { get; private set; }
 
-        public DB_DataManager(DBConnection dbConnection) 
+        public DB_DataManager() 
         {
-            this.dbConnection = dbConnection;
             // Ініціалізація делегата
             LoadData = () =>
             {
@@ -41,8 +39,8 @@ namespace ExpressPost
         public void GetUsers()
         {
             Users = new List<User>();//ініціалізуємо новий список користувачів
-            dbConnection.openConnection(); //відкриваємо з'єднання з бд
-            MySqlCommand command = new MySqlCommand("SELECT * FROM users", dbConnection.getConnection()); //створюємо запит MySQL
+            DBConnection.OpenConnection(); //відкриваємо з'єднання з бд
+            MySqlCommand command = new MySqlCommand("SELECT * FROM users", DBConnection.GetConnection()); //створюємо запит MySQL
             MySqlDataReader reader = command.ExecuteReader(); //виконуємо запит
 
             //створення проміжного списку для зберігання інформації про користувачів
@@ -87,7 +85,7 @@ namespace ExpressPost
                         throw new Exception($"Невідома роль");
                 }
             }
-            dbConnection.closeConnection();//закриваємо з'єднання
+            DBConnection.CloseConnection();//закриваємо з'єднання
         }
 
         //метод для додавання посилок до вже існуючих клієнтів
@@ -98,8 +96,8 @@ namespace ExpressPost
                 if (userInfo.Role == "Клієнт")
                 {
                     // Отримання груп посилок для цього користувача
-                    dbConnection.openConnection();//відкриваємо з'єднання
-                    MySqlCommand command = new MySqlCommand("SELECT BillOfLading FROM ParcelGroup WHERE SenderUser = @id OR RecipientUser = @id", dbConnection.getConnection());//прописуємо запит
+                    DBConnection.OpenConnection();//відкриваємо з'єднання
+                    MySqlCommand command = new MySqlCommand("SELECT BillOfLading FROM ParcelGroup WHERE SenderUser = @id OR RecipientUser = @id", DBConnection.GetConnection());//прописуємо запит
                     command.Parameters.AddWithValue("@id", userInfo.Id);//вказуємо параметр за яким буде проводитись відбір даних
                     MySqlDataReader parcelGroupReader = command.ExecuteReader();//виконуємо запит
 
@@ -113,12 +111,12 @@ namespace ExpressPost
                             parcels.Add(parcelGroup);
                     }
                     parcelGroupReader.Close();//закриваємо об'єкт MySqlDataReader після завершення читання результатів
-                    dbConnection.closeConnection();//закриваємо  з'єднання
+                    DBConnection.CloseConnection();//закриваємо  з'єднання
 
                     // Додавання ParcelGroup до клієнта
                     Client client = (Client)Users.FirstOrDefault(u => u.Id == userInfo.Id);//шукаємо користувача з відповідним Id в списку Users і перетворюємо його в Client
                     if (client != null)
-                        client.SetParcels(parcels); //якщо знайдено відповідного клієнта, встановлюємо його parcels на раніше зібраний список parcels
+                        client.Parcels = parcels; //якщо знайдено відповідного клієнта, встановлюємо його parcels на раніше зібраний список parcels
                 }
             }
         }
@@ -126,8 +124,8 @@ namespace ExpressPost
         //метод для знаходження відділення за яким закріплений адміністратор
         public Branch GetBranchForUser(int userId)
         {
-            dbConnection.openConnection();//відкриваємо з'єднання
-            MySqlCommand command = new MySqlCommand("SELECT BranchID FROM BranchAdmins WHERE UserID = @id", dbConnection.getConnection());//прописуємо запит
+            DBConnection.OpenConnection();//відкриваємо з'єднання
+            MySqlCommand command = new MySqlCommand("SELECT BranchID FROM BranchAdmins WHERE UserID = @id", DBConnection.GetConnection());//прописуємо запит
             command.Parameters.AddWithValue("@id", userId);//вказуємо параметр за яким буде проводитись відбір даних
             MySqlDataReader reader = command.ExecuteReader();//виконуємо запит
 
@@ -139,7 +137,7 @@ namespace ExpressPost
             }
 
             reader.Close();//закриваємо MySqlDataReader після обробки результатів
-            dbConnection.closeConnection();//закриваємо з'єднання
+            DBConnection.CloseConnection();//закриваємо з'єднання
 
             return branch;
         }
@@ -147,8 +145,8 @@ namespace ExpressPost
         public void GetBranches()
         {
             Branches = new List<Branch>();//ініціалізуємо список Відділень
-            dbConnection.openConnection();//відкриваємо з'єднання
-            MySqlCommand command = new MySqlCommand("SELECT * FROM branch", dbConnection.getConnection());//створюємо запит
+            DBConnection.OpenConnection();//відкриваємо з'єднання
+            MySqlCommand command = new MySqlCommand("SELECT * FROM branch", DBConnection.GetConnection());//створюємо запит
             MySqlDataReader reader = command.ExecuteReader();//виконуємо запит
 
             while (reader.Read())//зчитуємо дані
@@ -162,40 +160,41 @@ namespace ExpressPost
             }
 
             reader.Close();//закриваємо MySqlDataReader після обробки результатів
-            dbConnection.closeConnection();//закриваємо з'єднання
+            DBConnection.CloseConnection();//закриваємо з'єднання
         }
 
         public void GetPackages()
         {
-            Packages = new List<Package>();//ініціалізуємо список посилок
-            dbConnection.openConnection();//відкриваємо з'єднання
-            MySqlCommand command = new MySqlCommand("SELECT * FROM package", dbConnection.getConnection());//створюємо запит
-            MySqlDataReader reader = command.ExecuteReader();//виконуємо запит
+            Packages = new List<Package>(); // ініціалізуємо список посилок
+            DBConnection.OpenConnection(); // відкриваємо з'єднання
+            MySqlCommand command = new MySqlCommand("SELECT * FROM package", DBConnection.GetConnection()); // створюємо запит
+            MySqlDataReader reader = command.ExecuteReader(); // виконуємо запит
 
-            while (reader.Read())//зчитуємо дані
+            while (reader.Read()) // зчитуємо дані
             {
                 int id = Convert.ToInt32(reader["Id"]);
                 double weight = Convert.ToDouble(reader["Weight"]);
                 Status packageStatus = (Status)Enum.Parse(typeof(Status), reader["Status"].ToString());
                 TypeP parcelType = (TypeP)Enum.Parse(typeof(TypeP), reader["Type"].ToString());
                 float valuationPrice = (float)Convert.ToDouble(reader["ValuationPrice"]);
+                int billOfLading = Convert.ToInt32(reader["BillOfLading"]);
 
-                Package package = new Package(id, weight, packageStatus, parcelType, valuationPrice);
-                Packages.Add(package);//додаємо посилку до списку
+                Package package = new Package(id, weight, packageStatus, parcelType, valuationPrice, billOfLading);
+                Packages.Add(package); // додаємо посилку до списку
             }
 
-            reader.Close();//закриваємо MySqlDataReader після обробки результатів
-            dbConnection.closeConnection();//закриваємо з'єднання
+            reader.Close(); // закриваємо MySqlDataReader після обробки результатів
+            DBConnection.CloseConnection(); // закриваємо з'єднання
         }
 
         public void GetParcelGroups()
         {
-            ParcelGroups = new List<ParcelGroup>();//ініціалізуємо список груп посилок
-            dbConnection.openConnection();//відкриваємо з'єднання
-            MySqlCommand command = new MySqlCommand("SELECT * FROM ParcelGroup", dbConnection.getConnection());//створюємо запит
-            MySqlDataReader reader = command.ExecuteReader();//виконуємо запит
+            ParcelGroups = new List<ParcelGroup>(); // ініціалізуємо список груп посилок
+            DBConnection.OpenConnection(); // відкриваємо з'єднання
+            MySqlCommand command = new MySqlCommand("SELECT * FROM ParcelGroup", DBConnection.GetConnection()); // створюємо запит
+            MySqlDataReader reader = command.ExecuteReader(); // виконуємо запит
 
-            while (reader.Read())//зчитуємо дані
+            while (reader.Read()) // зчитуємо дані
             {
                 int billOfLading = Convert.ToInt32(reader["BillOfLading"]);
                 User sender = Users.FirstOrDefault(u => u.Id == Convert.ToInt32(reader["SenderUser"]));
@@ -207,42 +206,43 @@ namespace ExpressPost
                 DateTime deliveryDate = Convert.ToDateTime(reader["DeliveryTime"]);
 
                 ParcelGroup parcelGroup = new ParcelGroup(billOfLading, sender, recipient, route, currentBranch, deliveryPrise, date, deliveryDate);
-                ParcelGroups.Add(parcelGroup);//додаємо групу посилок до списку
+                ParcelGroups.Add(parcelGroup); // додаємо групу посилок до списку
             }
 
-            reader.Close();//закриваємо MySqlDataReader після обробки результатів
+            reader.Close(); // закриваємо MySqlDataReader після обробки результатів
 
             foreach (ParcelGroup parcelGroup in ParcelGroups)
             {
                 // Отримання пакунків для цієї групи посилок
-                MySqlCommand command2 = new MySqlCommand("SELECT * FROM Package WHERE BillOfLading = @bill_of_lading", dbConnection.getConnection());//створюємо запит
-                command2.Parameters.AddWithValue("@bill_of_lading", parcelGroup.BillOfLading);//вказуємо параметр за яким буде проводитись відбір даних
-                MySqlDataReader packageReader = command2.ExecuteReader();//виконуємо запит
+                MySqlCommand command2 = new MySqlCommand("SELECT * FROM Package WHERE BillOfLading = @bill_of_lading", DBConnection.GetConnection()); // створюємо запит
+                command2.Parameters.AddWithValue("@bill_of_lading", parcelGroup.BillOfLading); // вказуємо параметр за яким буде проводитись відбір даних
+                MySqlDataReader packageReader = command2.ExecuteReader(); // виконуємо запит
 
-                List<Package> packages = new List<Package>();//ініціалізуємо список посилок
-                while (packageReader.Read())//зчитуємо дані
+                List<Package> packages = new List<Package>(); // ініціалізуємо список посилок
+                while (packageReader.Read()) // зчитуємо дані
                 {
                     int id = Convert.ToInt32(packageReader["ID"]);
                     double weight = Convert.ToDouble(packageReader["Weight"]);
                     Status status = (Status)Enum.Parse(typeof(Status), packageReader["Status"].ToString());
                     TypeP type = (TypeP)Enum.Parse(typeof(TypeP), packageReader["Type"].ToString());
                     float valuationPrice = (float)Convert.ToDouble(packageReader["ValuationPrice"]);
+                    int billOfLading = Convert.ToInt32(packageReader["BillOfLading"]); // отримуємо BillOfLading
 
-                    Package package = new Package(id, weight, status, type, valuationPrice);
-                    packages.Add(package);//додаємо посилку до списку
+                    Package package = new Package(id, weight, status, type, valuationPrice, billOfLading); // передаємо BillOfLading в конструктор
+                    packages.Add(package); // додаємо посилку до списку
                 }
-                packageReader.Close();//закриваємо MySqlDataReader після обробки результатів
+                packageReader.Close(); // закриваємо MySqlDataReader після обробки результатів
 
-                parcelGroup.Packages = packages; //встановлюємо значення Packages для parcelGroup на раніше зібраний список packages
+                parcelGroup.Packages = packages; // встановлюємо значення Packages для parcelGroup на раніше зібраний список packages
             }
-            dbConnection.closeConnection();//закриваємо з'єднання
+            DBConnection.CloseConnection(); // закриваємо з'єднання
         }
 
         public void GetRoutes()
         {
             Routes = new List<Route>();//ініціалізуємо список маршрутів
-            dbConnection.openConnection();//відкриваємо з'єднання
-            MySqlCommand command = new MySqlCommand("SELECT * FROM Route", dbConnection.getConnection());//створюємо запит
+            DBConnection.OpenConnection();//відкриваємо з'єднання
+            MySqlCommand command = new MySqlCommand("SELECT * FROM Route", DBConnection.GetConnection());//створюємо запит
             MySqlDataReader reader = command.ExecuteReader();//виконуємо запит
 
             List<Route> routes = new List<Route>();//ініціалізуємо допоміжний список (зберігаємо в ньому тільки початкове відділення та кінцеве)
@@ -262,7 +262,7 @@ namespace ExpressPost
             foreach (Route route in routes)
             {
                 // Отримання проміжних відділень
-                MySqlCommand command2 = new MySqlCommand("SELECT BranchID FROM Route_Branch WHERE RouteID = @id", dbConnection.getConnection());//створюємо запит
+                MySqlCommand command2 = new MySqlCommand("SELECT BranchID FROM Route_Branch WHERE RouteID = @id", DBConnection.GetConnection());//створюємо запит
                 command2.Parameters.AddWithValue("@id", route.Id);//вказуємо параметр за яким буде проводитись відбір даних
                 MySqlDataReader reader2 = command2.ExecuteReader();//виконуємо запит
                 List<Branch> intermediateBranches = new List<Branch>();//ініціалізуємо допоміжний список (зберігаємо в ньому тільки проміжні відділення
@@ -277,7 +277,71 @@ namespace ExpressPost
                 route.SetIntermediateBranches(intermediateBranches);//встановлюємо список проміжних відділень для маршруту
                 Routes.Add(route);//додаємо маршрут до загального списку маршрутів
             }
-            dbConnection.closeConnection();//закриваємо з'єднання
+            DBConnection.CloseConnection();//закриваємо з'єднання
+        }
+
+        public static void InsertIntoDatabase(object obj)
+        {
+            DBConnection.OpenConnection(); //відкриваємо з'єднання з бд
+            MySqlCommand command;
+            MySqlCommand command2;
+
+            switch (obj)
+            {
+                case Branch branch:
+                    // Вставляємо дані про відділення в таблицю Branch
+                    command = new MySqlCommand($"INSERT INTO Branch (City, Address) VALUES ('{branch.City}', '{branch.Address}')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case BranchAdmin branchAdmin:
+                    // Вставляємо дані про адміністратора відділення в таблицю Users
+                    command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{branchAdmin.FirstName}', '{branchAdmin.LastName}', '{branchAdmin.PhoneNumber}', '{branchAdmin.Password}', 'Адміністратор відділення')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                                               // Вставляємо дані про адміністратора відділення в таблицю BranchAdmins
+                    command2 = new MySqlCommand($"INSERT INTO BranchAdmins (UserID, BranchID) VALUES (LAST_INSERT_ID(), '{branchAdmin.Branch.Id}')", DBConnection.GetConnection());
+                    command2.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case Client client:
+                    // Вставляємо дані про клієнта в таблицю Users
+                    command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{client.FirstName}', '{client.LastName}', '{client.PhoneNumber}', '{client.Password}', 'Клієнт')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case SystemAdmin systemAdmin:
+                    // Вставляємо дані про адміністратора системи в таблицю Users
+                    command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{systemAdmin.FirstName}', '{systemAdmin.LastName}', '{systemAdmin.PhoneNumber}', '{systemAdmin.Password}', 'Адміністратор системи')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case Route route:
+                    // Вставляємо дані про маршрут в таблицю Route
+                    command = new MySqlCommand($"INSERT INTO Route (ID, Origin, Destination, Duration) VALUES ('{route.Id}', '{route.Origin.Id}', '{route.Destination.Id}', '{route.Duration}')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    foreach (Branch branch in route.GetIntermediateBranches())
+                    {
+                        // Вставляємо дані про проміжні відділення в таблицю Route_Branch
+                        command2 = new MySqlCommand($"INSERT INTO Route_Branch (RouteID, BranchID) VALUES (LAST_INSERT_ID(), '{branch.Id}')", DBConnection.GetConnection());
+                        command2.ExecuteNonQuery(); //виконуємо запит
+                    }
+                    break;
+                case Package package:
+                    // Вставляємо дані про посилку в таблицю Package
+                    command = new MySqlCommand($"INSERT INTO Package (Weight, Status, Type, BillOfLading, ValuationPrice) VALUES ('{package.Weight}', '{package.PackageStatus}', '{package.ParcelType}', '{package.BillOfLading}', '{package.ValuationPrice}')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case ParcelGroup parcelGroup:
+                    // Вставляємо дані про групу посилок в таблицю ParcelGroup
+                    command = new MySqlCommand($"INSERT INTO ParcelGroup (BillOfLading, SenderUser, RecipientUser, Route, CurrentBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcelGroup.BillOfLading}', '{parcelGroup.Sender.Id}', '{parcelGroup.Recipient.Id}', '{parcelGroup.Route.Id}', '{parcelGroup.CurrentBranch.Id}', '{parcelGroup.DeliveryPriсe}', '{parcelGroup.DispatchTime}', '{parcelGroup.DeliveryTime}')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    foreach (Package package in parcelGroup.Packages)
+                    {
+                        // Вставляємо дані про посилку в таблицю Package
+                        command2 = new MySqlCommand($"INSERT INTO Package (Weight, Status, Type, BillOfLading, ValuationPrice) VALUES ('{package.Weight}', '{package.PackageStatus}', '{package.ParcelType}', LAST_INSERT_ID(), '{package.ValuationPrice}')", DBConnection.GetConnection());
+                        command2.ExecuteNonQuery(); //виконуємо запит
+                    }
+                    break;
+                default:
+                    throw new Exception("Невідомий тип об'єкта");
+            }
+            DBConnection.CloseConnection(); //закриваємо з'єднання з бд
         }
     }
 }

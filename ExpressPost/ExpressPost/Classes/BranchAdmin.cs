@@ -15,9 +15,7 @@ namespace ExpressPost.Classes
             get => _branch;
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(Branch), "Відділення має бути вказаним");
-                _branch = value;
+                _branch = value ?? throw new ArgumentNullException(nameof(Branch), "Відділення має бути вказаним");
             }
         }
 

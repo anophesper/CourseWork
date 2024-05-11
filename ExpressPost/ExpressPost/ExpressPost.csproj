@@ -108,7 +108,6 @@
     <Compile Include="Classes\ParcelGroup.cs" />
     <Compile Include="Classes\Route.cs" />
     <Compile Include="Classes\UserInfo.cs" />
-    <Compile Include="DatabaseObserver.cs" />
     <Compile Include="DB_DataManager.cs" />
     <Compile Include="Enum\TypeP.cs" />
     <Compile Include="Enum\Status.cs" />
@@ -116,17 +115,27 @@
     <Compile Include="Classes\SystemAdmin.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="DBConnection.cs" />
+    <Compile Include="FormProperties.cs" />
     <Compile Include="Forms\AuthorizeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AuthorizeForm.Designer.cs">
       <DependentUpon>AuthorizeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RegistrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RegistrationForm.Designer.cs">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +145,9 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RegistrationForm.resx">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -144,6 +156,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -159,6 +172,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\9035846_cube_sharp_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4115230_cancel_close_delete_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

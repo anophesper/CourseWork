@@ -73,6 +73,14 @@ namespace ExpressPost.Classes
             Password = password;
         }
 
+        public User(string firstName, string lastName, string phoneNumber, string password)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            Password = password;
+        }
+
         //метод для збереження у файл інформації про авторизованого користувача
         public void Login()
         {
@@ -89,7 +97,7 @@ namespace ExpressPost.Classes
             string json = File.ReadAllText("user.json");
             UserInfo userInfo = JsonConvert.DeserializeObject<UserInfo>(json);
 
-            User user = Program.dataManager.Users.FirstOrDefault(u => u.Id == userInfo.Id);
+            User user = Program.DataManager.Users.FirstOrDefault(u => u.Id == userInfo.Id);
             return user;
         }
 

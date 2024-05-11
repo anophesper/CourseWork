@@ -9,20 +9,25 @@ namespace ExpressPost
 {
     public class DBConnection
     {
-        MySqlConnection connection = new MySqlConnection("server = localhost; port = 3306; username = root; password = 06130613; database = logistics");
+        //створюємо підключення до бази даних
+        static MySqlConnection connection = new MySqlConnection($"server = localhost; port = 3306; username = " +
+            $"{Environment.GetEnvironmentVariable("DB_USER")}; password = {Environment.GetEnvironmentVariable("DB_PASS")}; " +
+            $"database = logistics");
 
-        public void openConnection()
+        //метод для відкриття з'єднання з бд
+        public static void OpenConnection()
         {
             if (connection.State == System.Data.ConnectionState.Closed)
                 connection.Open();
         }
 
-        public void closeConnection()
+        //метод для закриття з'єднання з бд
+        public static void CloseConnection()
         {
             if (connection.State == System.Data.ConnectionState.Open)
                 connection.Close();
         }
 
-        public MySqlConnection getConnection() { return connection; }
+        public static MySqlConnection GetConnection() { return connection; }
     }
 }

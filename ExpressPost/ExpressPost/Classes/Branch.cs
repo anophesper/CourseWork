@@ -10,13 +10,23 @@ namespace ExpressPost.Classes
     public class Branch
     {
         private int _id {  get; set; }
-        private Cities City {  get; set; }
+        private Cities _city {  get; set; }
         private string _address;
 
         public int Id
         {
             get { return _id; }
             set { _id = value; }
+        }
+        public Cities City
+        {
+            get { return _city; }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Cities), value))
+                    throw new ArgumentException("Недопустиме значення для поля Місто");
+                _city = value;
+            }
         }
         public string Address
         {

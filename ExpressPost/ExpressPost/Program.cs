@@ -10,9 +10,9 @@ namespace ExpressPost
 {
     internal static class Program
     {
-
         // Створення статичного члена dataManager
-        public static DB_DataManager dataManager { get; private set; }
+        public static DB_DataManager DataManager { get; private set; }
+        public static User CurrentUser { get; set; }
 
         [STAThread]
         static void Main()
@@ -20,18 +20,34 @@ namespace ExpressPost
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Створення об'єкта для змоги підключення до бази даних
-            DBConnection dbConnection = new DBConnection();
-            // Створення об'єкта DB_DataManager
-            dataManager = new DB_DataManager(dbConnection);
-            // Виклик делегата для загрузки даних з бд в списки об'єктів класів
-            dataManager.LoadData();
+            try
+            {
+                // Створення об'єкта DB_DataManager
+                DataManager = new DB_DataManager();
+                DBConnection.OpenConnection();
+                // Виклик делегата для загрузки даних з бд в списки об'єктів класів
+                DataManager.LoadData();
 
-            User user = User.Load();
-            if (user != null)
-                Application.Run(new MainForm());// користувач уже авторизований, відкриваємо головне меню
-            else
-                Application.Run(new AuthorizeForm());// користувач не авторизований, показуємо форму авторизації*/
+                CurrentUser = User.Load();
+                if (CurrentUser != null)
+                {
+                    Form mainForm = new MainForm();// користувач уже авторизований, відкриваємо головне меню
+                    FormProperties.SetToDefaultForm(mainForm);
+                    Application.Run(mainForm);
+                }
+                else
+                {
+                    Form authorize = new AuthorizeForm();// користувач не авторизований, відкриваємо меню входу
+                    FormProperties.SetToDefaultForm(authorize);
+                    Application.Run(authorize);
+                }
+                DBConnection.CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                // Виводимо повідомлення про помилку
+                MessageBox.Show("Виникла помилка: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

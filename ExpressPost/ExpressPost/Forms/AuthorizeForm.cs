@@ -16,10 +16,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ExpressPost
 {
-    public partial class AuthorizeForm : Form
+    public partial class AuthorizeForm : BaseForm
     {
-        DBConnection dbConnection;
-
         public AuthorizeForm()
         {
             InitializeComponent();
@@ -32,23 +30,25 @@ namespace ExpressPost
             string passwordText = password.Text;
 
             // Перевірка, чи існує користувач з введеним номером телефону та паролем
-            User user = Program.dataManager.Users.FirstOrDefault(u => u.PhoneNumber == phoneText && u.Password == passwordText);
+            User user = Program.DataManager.Users.FirstOrDefault(u => u.PhoneNumber == phoneText && u.Password == passwordText);
 
             if (user != null)
             {
                 // Якщо користувач існує, зберегти інформацію про користувача
+                Program.CurrentUser = user;
                 user.Login();
-                // Закриття поточної форми
-                this.Hide();
-                //Відкрити головну форму
-                MainForm mainForm = new MainForm();
-                mainForm.Show();
+                FormProperties.SwitchToForm(this, new MainForm());
             }
             else
             {
                 // Якщо користувача не існує, показати повідомлення про помилку
                 MessageBox.Show("Невірний номер телефону або пароль");
             }
+        }
+
+        private void RegistrationLabel_Click(object sender, EventArgs e)
+        {
+            FormProperties.SwitchToForm(this, new RegistrationForm());
         }
     }
 }

@@ -33,7 +33,7 @@
             // 
             // Logout_button
             // 
-            this.Logout_button.Location = new System.Drawing.Point(12, 12);
+            this.Logout_button.Location = new System.Drawing.Point(198, 138);
             this.Logout_button.Name = "Logout_button";
             this.Logout_button.Size = new System.Drawing.Size(104, 46);
             this.Logout_button.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(960, 540);
             this.Controls.Add(this.Logout_button);
             this.Name = "MainForm";
             this.Text = "MainForm";
