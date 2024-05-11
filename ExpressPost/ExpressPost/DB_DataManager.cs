@@ -1,5 +1,6 @@
 ﻿using ExpressPost.Classes;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -78,7 +79,7 @@ namespace ExpressPost
                         Users.Add(user);
                         break;
                     case "Клієнт":
-                        user = new Client(userInfo.Id, userInfo.FirstName, userInfo.LastName, userInfo.PhoneNumber, userInfo.Password);
+                        user = new Classes.Client(userInfo.Id, userInfo.FirstName, userInfo.LastName, userInfo.PhoneNumber, userInfo.Password);
                         Users.Add(user);
                         break;
                     default:
@@ -114,7 +115,7 @@ namespace ExpressPost
                     DBConnection.CloseConnection();//закриваємо  з'єднання
 
                     // Додавання ParcelGroup до клієнта
-                    Client client = (Client)Users.FirstOrDefault(u => u.Id == userInfo.Id);//шукаємо користувача з відповідним Id в списку Users і перетворюємо його в Client
+                    Classes.Client client = (Classes.Client)Users.FirstOrDefault(u => u.Id == userInfo.Id);//шукаємо користувача з відповідним Id в списку Users і перетворюємо його в Client
                     if (client != null)
                         client.Parcels = parcels; //якщо знайдено відповідного клієнта, встановлюємо його parcels на раніше зібраний список parcels
                 }
@@ -301,7 +302,7 @@ namespace ExpressPost
                     command2 = new MySqlCommand($"INSERT INTO BranchAdmins (UserID, BranchID) VALUES (LAST_INSERT_ID(), '{branchAdmin.Branch.Id}')", DBConnection.GetConnection());
                     command2.ExecuteNonQuery(); //виконуємо запит
                     break;
-                case Client client:
+                case Classes.Client client:
                     // Вставляємо дані про клієнта в таблицю Users
                     command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{client.FirstName}', '{client.LastName}', '{client.PhoneNumber}', '{client.Password}', 'Клієнт')", DBConnection.GetConnection());
                     command.ExecuteNonQuery(); //виконуємо запит
@@ -337,6 +338,44 @@ namespace ExpressPost
                         command2 = new MySqlCommand($"INSERT INTO Package (Weight, Status, Type, BillOfLading, ValuationPrice) VALUES ('{package.Weight}', '{package.PackageStatus}', '{package.ParcelType}', LAST_INSERT_ID(), '{package.ValuationPrice}')", DBConnection.GetConnection());
                         command2.ExecuteNonQuery(); //виконуємо запит
                     }
+                    break;
+                default:
+                    throw new Exception("Невідомий тип об'єкта");
+            }
+            DBConnection.CloseConnection(); //закриваємо з'єднання з бд
+        }
+
+        public static void UpdateDatabase(object obj)
+        {
+            DBConnection.OpenConnection(); //відкриваємо з'єднання з бд
+            MySqlCommand command;
+
+            switch (obj)
+            {
+                case User user:
+                    // Оновлюємо дані про користувача в таблиці Users
+                    command = new MySqlCommand($"UPDATE Users SET FirstName = '{user.FirstName}', LastName = '{user.LastName}', PhoneNumber = '{user.PhoneNumber}', Password = '{user.Password}' WHERE Id = '{user.Id}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case Branch branch:
+                    // Оновлюємо дані про відділення в таблиці Branch
+                    command = new MySqlCommand($"UPDATE Branch SET City = '{branch.City}', Address = '{branch.Address}' WHERE Id = '{branch.Id}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case Route route:
+                    // Оновлюємо дані про маршрут в таблиці Route
+                    command = new MySqlCommand($"UPDATE Route SET Origin = '{route.Origin.Id}', Destination = '{route.Destination.Id}', Duration = '{route.Duration}' WHERE ID = '{route.Id}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case Package package:
+                    // Оновлюємо дані про посилку в таблиці Package
+                    command = new MySqlCommand($"UPDATE Package SET Weight = '{package.Weight}', Status = '{package.PackageStatus}', Type = '{package.ParcelType}', BillOfLading = '{package.BillOfLading}', ValuationPrice = '{package.ValuationPrice}' WHERE ID = '{package.Id}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+                    break;
+                case ParcelGroup parcelGroup:
+                    // Оновлюємо дані про групу посилок в таблиці ParcelGroup
+                    command = new MySqlCommand($"UPDATE ParcelGroup SET SenderUser = '{parcelGroup.Sender.Id}', RecipientUser = '{parcelGroup.Recipient.Id}', Route = '{parcelGroup.Route.Id}', CurrentBranch = '{parcelGroup.CurrentBranch.Id}', DeliveryPrice = '{parcelGroup.DeliveryPriсe}', DispatchTime = '{parcelGroup.DispatchTime}', DeliveryTime = '{parcelGroup.DeliveryTime}' WHERE BillOfLading = '{parcelGroup.BillOfLading}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
                     break;
                 default:
                     throw new Exception("Невідомий тип об'єкта");

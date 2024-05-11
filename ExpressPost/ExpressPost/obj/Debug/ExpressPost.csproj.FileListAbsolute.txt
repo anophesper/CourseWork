@@ -88,3 +88,4 @@ C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\bin\Debug\
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.MainForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.RegistrationForm.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.MyProfile.resources

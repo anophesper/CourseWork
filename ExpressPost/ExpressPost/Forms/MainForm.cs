@@ -18,11 +18,9 @@ namespace ExpressPost.Forms
             InitializeComponent();
         }
 
-        private void Logout_button_Click(object sender, EventArgs e)
+        private void MyProfile_button_Click(object sender, EventArgs e)
         {
-            // Виклик методу Logout для виходу з системи
-            User.Logout();
-            FormProperties.SwitchToForm(this, new AuthorizeForm());
+            FormProperties.SwitchToForm(this, new MyProfile());
         }
     }
 }
