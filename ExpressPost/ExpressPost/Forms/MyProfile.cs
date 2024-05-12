@@ -14,7 +14,11 @@ namespace ExpressPost.Forms
 {
     public partial class MyProfile : BaseForm
     {
-        // Створення TextBox для кожного Label
+        // Створення TextBox та Label для кожного поля
+        Label firstNameLabel = new Label();
+        Label lastNameLabel = new Label();
+        Label phoneNumberLabel = new Label();
+        
         TextBox firstNameTextBox = new TextBox();
         TextBox lastNameTextBox = new TextBox();
         TextBox phoneNumberTextBox = new TextBox();
@@ -22,46 +26,50 @@ namespace ExpressPost.Forms
         public MyProfile()
         {
             InitializeComponent();
-            LoadInfo();
+            ElementSetting();
         }
 
-        private void LoadInfo()
+        private void ElementSetting()
         {
             // Встановлення шрифту для Label та TextBox
             Font userFont = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-            Font userFont2 = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
             firstNameLabel.Font = userFont;
             lastNameLabel.Font = userFont;
             phoneNumberLabel.Font = userFont;
 
-            firstNameTextBox.Font = userFont2;
-            lastNameTextBox.Font = userFont2;
-            phoneNumberTextBox.Font = userFont2;
+            firstNameTextBox.Font = userFont;
+            lastNameTextBox.Font = userFont;
+            phoneNumberTextBox.Font = userFont;
 
+            // Ініціалізація TextBox та Label зі значеннями користувача
             firstNameLabel.Text = Program.CurrentUser.FirstName;
             lastNameLabel.Text = Program.CurrentUser.LastName;
             phoneNumberLabel.Text = Program.CurrentUser.PhoneNumber;
-
-            // Ініціалізація TextBox із значеннями Label
+            
             firstNameTextBox.Text = Program.CurrentUser.FirstName;
             lastNameTextBox.Text = Program.CurrentUser.LastName;
             phoneNumberTextBox.Text = Program.CurrentUser.PhoneNumber;
 
             // Встановлення положення TextBox
             int formWidth = this.ClientSize.Width; // Ширина форми
-            int textBoxWidth = 300; // Збільшена ширина TextBox
+            int Width = 300; // Збільшена ширина TextBox
 
-            int xPosition = (formWidth - textBoxWidth) / 2; // Розрахунок координати X для вирівнювання TextBox по центру
+            int xPosition = (formWidth - Width) / 2; // Розрахунок координати X для вирівнювання TextBox по центру
 
-            firstNameTextBox.Location = new Point(xPosition, 158); // Ваші координати для firstNameTextBox
-            lastNameTextBox.Location = new Point(xPosition, 202); // Ваші координати для lastNameTextBox
-            phoneNumberTextBox.Location = new Point(xPosition, 255); // Ваші координати для phoneNumberTextBox
+            // Встановлення однакового положення для Label і TextBox
+            firstNameTextBox.Location = firstNameLabel.Location = new Point(xPosition, 150);
+            lastNameTextBox.Location = lastNameLabel.Location = new Point(xPosition, 200);
+            phoneNumberTextBox.Location = phoneNumberLabel.Location = new Point(xPosition, 250);
 
-            // Встановлення ширини TextBox
-            firstNameTextBox.Width = textBoxWidth;
-            lastNameTextBox.Width = textBoxWidth;
-            phoneNumberTextBox.Width = textBoxWidth;
+            // Встановлення ширини
+            firstNameTextBox.Width = Width;
+            lastNameTextBox.Width = Width;
+            phoneNumberTextBox.Width = Width;
+
+            firstNameLabel.Width = Width;
+            lastNameLabel.Width = Width;
+            phoneNumberLabel.Width = Width;
 
             // Встановлення вирівнювання тексту
             firstNameLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -72,15 +80,20 @@ namespace ExpressPost.Forms
             lastNameTextBox.TextAlign = HorizontalAlignment.Center;
             phoneNumberTextBox.TextAlign = HorizontalAlignment.Center;
 
-            // Приховуємо TextBox на початку
-            firstNameTextBox.Visible = false;
-            lastNameTextBox.Visible = false;
-            phoneNumberTextBox.Visible = false;
-
             // Додаємо TextBox до форми
             this.Controls.Add(firstNameTextBox);
             this.Controls.Add(lastNameTextBox);
             this.Controls.Add(phoneNumberTextBox);
+
+            // Додаємо Label до форми
+            this.Controls.Add(firstNameLabel);
+            this.Controls.Add(lastNameLabel);
+            this.Controls.Add(phoneNumberLabel);
+
+            // Приховуємо TextBox на початку
+            firstNameTextBox.Visible = false;
+            lastNameTextBox.Visible = false;
+            phoneNumberTextBox.Visible = false;
         }
 
         private void EditButton_Click(object sender, EventArgs e)

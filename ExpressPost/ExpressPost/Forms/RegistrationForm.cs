@@ -40,7 +40,7 @@ namespace ExpressPost.Forms
             // Якщо користувач існує, зберегти інформацію про користувача
             Program.CurrentUser = newClient;
             newClient.Login();
-            FormProperties.SwitchToForm(this, new MainForm());
+            FormProperties.SwitchToForm(this, new ClientMainForm());
         }
     }
 }

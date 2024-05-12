@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.EditButton = new System.Windows.Forms.Button();
-            this.firstNameLabel = new System.Windows.Forms.Label();
-            this.phoneNumberLabel = new System.Windows.Forms.Label();
-            this.lastNameLabel = new System.Windows.Forms.Label();
             this.LogOutButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -45,33 +42,6 @@
             this.EditButton.Text = "Edit";
             this.EditButton.UseVisualStyleBackColor = true;
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
-            // 
-            // firstNameLabel
-            // 
-            this.firstNameLabel.AutoSize = true;
-            this.firstNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.firstNameLabel.Location = new System.Drawing.Point(414, 158);
-            this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(0, 25);
-            this.firstNameLabel.TabIndex = 13;
-            // 
-            // phoneNumberLabel
-            // 
-            this.phoneNumberLabel.AutoSize = true;
-            this.phoneNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.phoneNumberLabel.Location = new System.Drawing.Point(414, 255);
-            this.phoneNumberLabel.Name = "phoneNumberLabel";
-            this.phoneNumberLabel.Size = new System.Drawing.Size(0, 25);
-            this.phoneNumberLabel.TabIndex = 14;
-            // 
-            // lastNameLabel
-            // 
-            this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastNameLabel.Location = new System.Drawing.Point(414, 202);
-            this.lastNameLabel.Name = "lastNameLabel";
-            this.lastNameLabel.Size = new System.Drawing.Size(0, 25);
-            this.lastNameLabel.TabIndex = 15;
             // 
             // LogOutButton
             // 
@@ -90,22 +60,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 540);
             this.Controls.Add(this.LogOutButton);
-            this.Controls.Add(this.lastNameLabel);
-            this.Controls.Add(this.phoneNumberLabel);
-            this.Controls.Add(this.firstNameLabel);
             this.Controls.Add(this.EditButton);
             this.Name = "MyProfile";
             this.Text = "MyProfile";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button EditButton;
-        private System.Windows.Forms.Label firstNameLabel;
-        private System.Windows.Forms.Label phoneNumberLabel;
-        private System.Windows.Forms.Label lastNameLabel;
         private System.Windows.Forms.Button LogOutButton;
     }
 }

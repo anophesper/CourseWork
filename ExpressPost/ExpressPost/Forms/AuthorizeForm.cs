@@ -37,7 +37,18 @@ namespace ExpressPost
                 // Якщо користувач існує, зберегти інформацію про користувача
                 Program.CurrentUser = user;
                 user.Login();
-                FormProperties.SwitchToForm(this, new MainForm());
+
+                // Визначаємо тип користувача і відкриваємо відповідну форму
+                switch (user)
+                {
+                    case Client client:
+                        FormProperties.SwitchToForm(this, new ClientMainForm()); break;
+                    case BranchAdmin branchAdmin:
+                        //FormProperties.SwitchToForm(this, new BranchAdmMainForm()); break;
+                    case SystemAdmin systemAdmin:
+                        //FormProperties.SwitchToForm(this, new SystemAdmMainForm()); break;
+                    default: break;
+                }
             }
             else
             {

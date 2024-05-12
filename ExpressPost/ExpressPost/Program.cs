@@ -26,12 +26,12 @@ namespace ExpressPost
                 DataManager = new DB_DataManager();
                 DBConnection.OpenConnection();
                 // Виклик делегата для загрузки даних з бд в списки об'єктів класів
-                DataManager.LoadData();
+                DB_DataManager.LoadData();
 
                 CurrentUser = User.Load();
                 if (CurrentUser != null)
                 {
-                    Form mainForm = new MainForm();// користувач уже авторизований, відкриваємо головне меню
+                    Form mainForm = new ClientMainForm();// користувач уже авторизований, відкриваємо головне меню
                     FormProperties.SetToDefaultForm(mainForm);
                     Application.Run(mainForm);
                 }

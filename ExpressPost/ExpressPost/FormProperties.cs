@@ -56,8 +56,6 @@ namespace ExpressPost
                 Location = new Point(930, 0)
             };
             ExitBox.Click += (sender, e) => { Application.Exit(); }; // додаємо обробник події Click
-            //ExitBox.MouseEnter += (sender, e) => { ExitBox.Cursor = Cursors.Hand; }; // змінюємо курсор на "руку" при наведенні
-            //ExitBox.MouseLeave += (sender, e) => { ExitBox.Cursor = Cursors.Default; }; // повертаємо курсор до стану за замовчуванням, коли він покидає область PictureBox
             form.Controls.Add(ExitBox); // додаємо ExitBox до форми
         }
 

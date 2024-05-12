@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ExpressPost.Forms
 {
-    public partial class MainForm : BaseForm
+    public partial class ClientMainForm : BaseForm
     {
-        public MainForm()
+        public ClientMainForm()
         {
             InitializeComponent();
         }

@@ -21,7 +21,7 @@ namespace ExpressPost
         public List<UserInfo> UsersInfo { get; set; } //проміжний список для зберігання інформації про користувачів без розподілення на ролі
 
         // Делегат для завантаження даних
-        public Action LoadData { get; private set; }
+        public static Action LoadData { get; private set; }
 
         public DB_DataManager() 
         {
@@ -342,6 +342,7 @@ namespace ExpressPost
                 default:
                     throw new Exception("Невідомий тип об'єкта");
             }
+            LoadData();
             DBConnection.CloseConnection(); //закриваємо з'єднання з бд
         }
 
@@ -380,6 +381,7 @@ namespace ExpressPost
                 default:
                     throw new Exception("Невідомий тип об'єкта");
             }
+            DB_DataManager.LoadData();
             DBConnection.CloseConnection(); //закриваємо з'єднання з бд
         }
     }

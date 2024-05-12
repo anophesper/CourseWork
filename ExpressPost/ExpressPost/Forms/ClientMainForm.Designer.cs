@@ -1,6 +1,6 @@
 ﻿namespace ExpressPost.Forms
 {
-    partial class MainForm
+    partial class ClientMainForm
     {
         /// <summary>
         /// Required designer variable.
