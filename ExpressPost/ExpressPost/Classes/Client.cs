@@ -8,7 +8,7 @@ namespace ExpressPost.Classes
 {
     public class Client : User
     {
-        public List<ParcelGroup> Parcels { get; set; }
+        public List<Parcel> Parcels { get; set; }
 
         public Client(string firstName, string lastName, string phoneNumber, string password) :
             base(firstName, lastName, phoneNumber, password) { }
@@ -16,7 +16,7 @@ namespace ExpressPost.Classes
         public Client(int id, string firstName, string lastName, string phoneNumber, string password) :
             base(id, firstName, lastName, phoneNumber, password) { }
 
-        public Client(int id, string firstName, string lastName, string phoneNumber, string password, List<ParcelGroup> parcels) : 
+        public Client(int id, string firstName, string lastName, string phoneNumber, string password, List<Parcel> parcels) : 
             base(id, firstName, lastName, phoneNumber, password)
         {
             Parcels = parcels;

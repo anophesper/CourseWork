@@ -22,5 +22,10 @@ namespace ExpressPost.Forms
         {
             FormProperties.SwitchToForm(this, new MyProfile());
         }
+
+        private void CreatePackageButton_Click(object sender, EventArgs e)
+        {
+            FormProperties.SwitchToForm(this, new CreatePackageForm());
+        }
     }
 }

@@ -86,6 +86,7 @@ C:\Users\Owner\OneDrive\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\Expr
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.AuthorizeForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.MainForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.RegistrationForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.MyProfile.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.ClientMainForm.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.CreatePackageForm.resources

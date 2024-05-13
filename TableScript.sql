@@ -45,29 +45,21 @@ CREATE TABLE Route_Branch (
     FOREIGN KEY (BranchID) REFERENCES Branch(ID)
 );
 
-#таблиця яка створює групу посилок з одною ттн
-CREATE TABLE ParcelGroup (
-    BillOfLading CHAR(14) PRIMARY KEY NOT NULL CHECK (LENGTH(TRIM(BillOfLading)) = 14),
+CREATE TABLE Parcel (
+    BillOfLading CHAR(14) NOT NULL CHECK (LENGTH(TRIM(BillOfLading)) = 14) PRIMARY KEY UNIQUE,
     SenderUser INT NOT NULL,
     RecipientUser INT NOT NULL,
     Route INT NOT NULL,
+    Type ENUM('Документи', 'Посилка', 'ВеликийВантаж') NOT NULL,
+    Weight DECIMAL(10,2) NOT NULL,
+    Status ENUM('Створено', 'Підтверджено', 'В_дорозі', 'Доставлено', 'Забрали', 'Втрачено') NOT NULL,
     CurrentBranch INT NOT NULL,
     DeliveryPrice DECIMAL(10,2) NOT NULL,  -- Ціна за доставку
     DispatchTime TIMESTAMP NOT NULL,
     DeliveryTime TIMESTAMP NOT NULL,
+    ValuationPrice DECIMAL(10,2) NOT NULL,  -- Оціночна вартість
     FOREIGN KEY (SenderUser) REFERENCES Users(ID),
     FOREIGN KEY (RecipientUser) REFERENCES Users(ID),
     FOREIGN KEY (Route) REFERENCES Route(ID),
     FOREIGN KEY (CurrentBranch) REFERENCES Branch(ID)
-);
-
-#таблиця яка містить інформацію про посилку
-CREATE TABLE Package (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    Weight DECIMAL(10,2) NOT NULL,
-    Status ENUM('Створено', 'Підтверджено', 'В_дорозі', 'Доставлено', 'Забрали', 'Втрачено') NOT NULL,
-    Type ENUM('Документи', 'Посилка', 'ВеликийВантаж') NOT NULL,
-    BillOfLading CHAR(14) NOT NULL,
-    ValuationPrice DECIMAL(10,2) NOT NULL,  -- Оціночна вартість
-    FOREIGN KEY (BillOfLading) REFERENCES ParcelGroup(BillOfLading)
 );
