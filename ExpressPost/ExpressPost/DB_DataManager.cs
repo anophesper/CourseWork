@@ -96,7 +96,7 @@ namespace ExpressPost
                 {
                     // Отримання посилок для цього користувача
                     DBConnection.OpenConnection(); // відкриваємо з'єднання
-                    MySqlCommand command = new MySqlCommand("SELECT BillOfLading FROM Parcel WHERE SenderUser = @id OR RecipientUser = @id", DBConnection.GetConnection()); // прописуємо запит
+                    MySqlCommand command = new MySqlCommand("SELECT BillOfLading FROM ParcelUsers WHERE SenderUser = @id OR RecipientUser = @id", DBConnection.GetConnection()); // прописуємо запит
                     command.Parameters.AddWithValue("@id", userInfo.Id); // вказуємо параметр за яким буде проводитись відбір даних
                     MySqlDataReader parcelReader = command.ExecuteReader(); // виконуємо запит
 
@@ -166,7 +166,7 @@ namespace ExpressPost
         {
             parcels = new List<Parcel>(); // ініціалізуємо список посилок
             DBConnection.OpenConnection(); // відкриваємо з'єднання
-            MySqlCommand command = new MySqlCommand("SELECT * FROM Parcel", DBConnection.GetConnection()); // створюємо запит
+            MySqlCommand command = new MySqlCommand("SELECT Parcel.*, ParcelUsers.SenderUser, ParcelUsers.RecipientUser, ParcelRouteDelivery.Route, ParcelRouteDelivery.CurrentBranch, ParcelRouteDelivery.DeliveryPrice, ParcelRouteDelivery.DispatchTime, ParcelRouteDelivery.DeliveryTime FROM Parcel INNER JOIN ParcelUsers ON Parcel.BillOfLading = ParcelUsers.BillOfLading INNER JOIN ParcelRouteDelivery ON Parcel.BillOfLading = ParcelRouteDelivery.BillOfLading", DBConnection.GetConnection()); // створюємо запит
             MySqlDataReader reader = command.ExecuteReader(); // виконуємо запит
 
             while (reader.Read()) // зчитуємо дані
@@ -278,7 +278,15 @@ namespace ExpressPost
                     break;
                 case Parcel parcel:
                     // Вставляємо дані про посилку в таблицю Parcel
-                    command = new MySqlCommand($"INSERT INTO Parcel (BillOfLading, SenderUser, RecipientUser, Route, Type, Weight, Status, CurrentBranch, DeliveryPrice, DispatchTime, DeliveryTime, ValuationPrice) VALUES ('{parcel.BillOfLading}', '{parcel.SenderUser}', '{parcel.RecipientUser}', '{parcel.Route}', '{parcel.Type}', '{parcel.Weight}', '{parcel.Status}', '{parcel.CurrentBranch}', '{parcel.DeliveryPrice}', '{parcel.DispatchTime}', '{parcel.DeliveryTime}', '{parcel.ValuationPrice}')", DBConnection.GetConnection());
+                    command = new MySqlCommand($"INSERT INTO Parcel (BillOfLading, Type, Weight, Status, ValuationPrice) VALUES ('{parcel.BillOfLading}', '{parcel.Type}', '{parcel.Weight}', '{parcel.Status}', '{parcel.ValuationPrice}')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+
+                    // Вставляємо дані про відправника та отримувача в таблицю ParcelUsers
+                    command = new MySqlCommand($"INSERT INTO ParcelUsers (BillOfLading, SenderUser, RecipientUser) VALUES ('{parcel.BillOfLading}', '{parcel.SenderUser}', '{parcel.RecipientUser}')", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+
+                    // Вставляємо дані про маршрут, поточне відділення, ціну доставки, час відправки та час доставки в таблицю ParcelRouteDelivery
+                    command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, Route, CurrentBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.Route}', '{parcel.CurrentBranch}', '{parcel.DeliveryPrice}', '{parcel.DispatchTime}', '{parcel.DeliveryTime}')", DBConnection.GetConnection());
                     command.ExecuteNonQuery(); //виконуємо запит
                     break;
                 default:
@@ -312,7 +320,15 @@ namespace ExpressPost
                     break;
                 case Parcel parcel:
                     // Оновлюємо дані про посилку в таблиці Parcel
-                    command = new MySqlCommand($"UPDATE Parcel SET Weight = '{parcel.Weight}', Status = '{parcel.Status}', Type = '{parcel.Type}', SenderUser = '{parcel.SenderUser}', RecipientUser = '{parcel.RecipientUser}', Route = '{parcel.Route}', CurrentBranch = '{parcel.CurrentBranch}', DeliveryPrice = '{parcel.DeliveryPrice}', DispatchTime = '{parcel.DispatchTime}', DeliveryTime = '{parcel.DeliveryTime}', ValuationPrice = '{parcel.ValuationPrice}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    command = new MySqlCommand($"UPDATE Parcel SET Type = '{parcel.Type}', Weight = '{parcel.Weight}', Status = '{parcel.Status}', ValuationPrice = '{parcel.ValuationPrice}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+
+                    // Оновлюємо дані про відправника та отримувача в таблиці ParcelUsers
+                    command = new MySqlCommand($"UPDATE ParcelUsers SET SenderUser = '{parcel.SenderUser}', RecipientUser = '{parcel.RecipientUser}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); //виконуємо запит
+
+                    // Оновлюємо дані про маршрут, поточне відділення, ціну доставки, час відправки та час доставки в таблиці ParcelRouteDelivery
+                    command = new MySqlCommand($"UPDATE ParcelRouteDelivery SET Route = '{parcel.Route}', CurrentBranch = '{parcel.CurrentBranch}', DeliveryPrice = '{parcel.DeliveryPrice}', DispatchTime = '{parcel.DispatchTime}', DeliveryTime = '{parcel.DeliveryTime}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
                     command.ExecuteNonQuery(); //виконуємо запит
                     break;
                 default:

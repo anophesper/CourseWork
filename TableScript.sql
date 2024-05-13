@@ -47,19 +47,29 @@ CREATE TABLE Route_Branch (
 
 CREATE TABLE Parcel (
     BillOfLading CHAR(14) NOT NULL CHECK (LENGTH(TRIM(BillOfLading)) = 14) PRIMARY KEY UNIQUE,
-    SenderUser INT NOT NULL,
-    RecipientUser INT NOT NULL,
-    Route INT NOT NULL,
     Type ENUM('Документи', 'Посилка', 'ВеликийВантаж') NOT NULL,
     Weight DECIMAL(10,2) NOT NULL,
     Status ENUM('Створено', 'Підтверджено', 'В_дорозі', 'Доставлено', 'Забрали', 'Втрачено') NOT NULL,
+    ValuationPrice DECIMAL(10,2) NOT NULL  -- Оціночна вартість
+);
+
+CREATE TABLE ParcelUsers (
+    BillOfLading CHAR(14) NOT NULL,
+    SenderUser INT NOT NULL,
+    RecipientUser INT NOT NULL,
+    FOREIGN KEY (BillOfLading) REFERENCES Parcel(BillOfLading),
+    FOREIGN KEY (SenderUser) REFERENCES Users(ID),
+    FOREIGN KEY (RecipientUser) REFERENCES Users(ID)
+);
+
+CREATE TABLE ParcelRouteDelivery (
+    BillOfLading CHAR(14) NOT NULL,
+    Route INT NOT NULL,
     CurrentBranch INT NOT NULL,
     DeliveryPrice DECIMAL(10,2) NOT NULL,  -- Ціна за доставку
     DispatchTime TIMESTAMP NOT NULL,
     DeliveryTime TIMESTAMP NOT NULL,
-    ValuationPrice DECIMAL(10,2) NOT NULL,  -- Оціночна вартість
-    FOREIGN KEY (SenderUser) REFERENCES Users(ID),
-    FOREIGN KEY (RecipientUser) REFERENCES Users(ID),
+    FOREIGN KEY (BillOfLading) REFERENCES Parcel(BillOfLading),
     FOREIGN KEY (Route) REFERENCES Route(ID),
     FOREIGN KEY (CurrentBranch) REFERENCES Branch(ID)
 );

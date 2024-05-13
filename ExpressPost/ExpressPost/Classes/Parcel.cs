@@ -139,7 +139,7 @@ namespace ExpressPost.Classes
             ValuationPrice = valuationPrice;
         }
 
-        public void GenerateBillOfLading()
+        public static string GenerateBillOfLading()
         {
             // Отримуємо поточну дату та час
             DateTime now = DateTime.Now;
@@ -147,12 +147,8 @@ namespace ExpressPost.Classes
             // Форматуємо дату та час в рядок
             string dateString = now.ToString("yyyyMMddHHmmss");
 
-            // Генеруємо унікальний ідентифікатор для посилки
-            string uniqueId = Guid.NewGuid().ToString().Substring(0, 8);
-
             // Комбінуємо дату, час та унікальний ідентифікатор для створення ТТН
-            _billOfLading = dateString + uniqueId;
+            return dateString;
         }
-
     }
 }

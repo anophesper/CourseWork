@@ -31,9 +31,26 @@ namespace ExpressPost
                 CurrentUser = User.Load();
                 if (CurrentUser != null)
                 {
-                    Form mainForm = new ClientMainForm();// користувач уже авторизований, відкриваємо головне меню
-                    FormProperties.SetToDefaultForm(mainForm);
-                    Application.Run(mainForm);
+                    Form mainForm=  new ClientMainForm(); // Оголошуємо змінну для головної форми
+
+                    // Визначаємо тип користувача і відкриваємо відповідну форму
+                    switch (CurrentUser)
+                    {
+                        case Client client:
+                            mainForm = new ClientMainForm();
+                            break;
+                        case BranchAdmin branchAdmin:
+                            //mainForm = new BranchAdmMainForm();
+                            break;
+                        case SystemAdmin systemAdmin:
+                            //mainForm = new SystemAdmMainForm();
+                            break;
+                        default:
+                            throw new Exception("Невідомий тип користувача");
+                    }
+
+                    FormProperties.SetToDefaultForm(mainForm); // Встановлюємо властивості форми за замовчуванням
+                    Application.Run(mainForm); // Запускаємо головну форму
                 }
                 else
                 {
