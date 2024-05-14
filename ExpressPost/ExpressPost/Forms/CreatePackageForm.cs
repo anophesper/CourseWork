@@ -48,7 +48,7 @@ namespace ExpressPost.Forms
 
                 if (Program.CurrentUser is Client)
                 {
-                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, type, weight, "Створено", deliveryPrice, estimatedCost);
+                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, type, weight, "Створено", false, estimatedCost);
                     DB_DataManager.InsertIntoDatabase(parcel);
 
                     FormProperties.SwitchToForm(this, new ClientMainForm());
@@ -74,8 +74,8 @@ namespace ExpressPost.Forms
 
                     int currentBranch = origin.Id;
 
-                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route.Id, type, weight, "Підтверджено", 
-                        currentBranch, deliveryPrice, dispatchTime, deliveryTime, estimatedCost);
+                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route.Id, type, weight, "Створено", 
+                        currentBranch, true, deliveryPrice, dispatchTime, deliveryTime, estimatedCost);
                     DB_DataManager.InsertIntoDatabase(parcel);
 
                     FormProperties.SwitchToForm(this, new BranchAdmMainForm());
@@ -122,7 +122,7 @@ namespace ExpressPost.Forms
  * -----
  * продумать систему "отслеживания местоположения" посылки. добавить новые поля в бд и в класс, отредактировать методы
  * -----
- * создать меню для администратора отделения
+ * DONE создать меню для администратора отделения
  * создать форму для отметки прибывших посылок на отделение + отметки посылок которые уехали
  * подумать что делать если получателя нет в базе
  * создать форму для выдачи посылок

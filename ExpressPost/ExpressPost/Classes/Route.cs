@@ -72,9 +72,7 @@ namespace ExpressPost.Classes
             foreach (var route in Program.DataManager.Routes)
             {
                 if (route.Origin == origin && route.Destination == destination)
-                {
                     return route;
-                }
             }
             return null; // повертаємо null, якщо маршрут не знайдено
         }

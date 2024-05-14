@@ -115,25 +115,31 @@
     <Compile Include="Classes\User.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="FormProperties.cs" />
-    <Compile Include="Forms\AuthorizeForm.cs">
+    <Compile Include="Forms\ArrivedPackages.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AuthorizeForm.Designer.cs">
+    <Compile Include="Forms\ArrivedPackages.Designer.cs">
+      <DependentUpon>ArrivedPackages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Autorize_Menu\AuthorizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Autorize_Menu\AuthorizeForm.Designer.cs">
       <DependentUpon>AuthorizeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BaseForm.cs">
+    <Compile Include="Forms\Autorize_Menu\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BranchAdmMainForm.cs">
+    <Compile Include="Forms\Autorize_Menu\BranchAdmMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BranchAdmMainForm.Designer.cs">
+    <Compile Include="Forms\Autorize_Menu\BranchAdmMainForm.Designer.cs">
       <DependentUpon>BranchAdmMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ClientMainForm.cs">
+    <Compile Include="Forms\Autorize_Menu\ClientMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ClientMainForm.Designer.cs">
+    <Compile Include="Forms\Autorize_Menu\ClientMainForm.Designer.cs">
       <DependentUpon>ClientMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CreatePackageForm.cs">
@@ -148,27 +154,42 @@
     <Compile Include="Forms\MyProfile.Designer.cs">
       <DependentUpon>MyProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RegistrationForm.cs">
+    <Compile Include="Forms\Autorize_Menu\RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RegistrationForm.Designer.cs">
+    <Compile Include="Forms\Autorize_Menu\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SystemAdmMainForm.cs">
+    <Compile Include="Forms\Autorize_Menu\SystemAdmMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SystemAdmMainForm.Designer.cs">
+    <Compile Include="Forms\Autorize_Menu\SystemAdmMainForm.Designer.cs">
       <DependentUpon>SystemAdmMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PickUpPackages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PickUpPackages.Designer.cs">
+      <DependentUpon>PickUpPackages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SendPackages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SendPackages.Designer.cs">
+      <DependentUpon>SendPackages.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AuthorizeForm.resx">
+    <EmbeddedResource Include="Forms\ArrivedPackages.resx">
+      <DependentUpon>ArrivedPackages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Autorize_Menu\AuthorizeForm.resx">
       <DependentUpon>AuthorizeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BranchAdmMainForm.resx">
+    <EmbeddedResource Include="Forms\Autorize_Menu\BranchAdmMainForm.resx">
       <DependentUpon>BranchAdmMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ClientMainForm.resx">
+    <EmbeddedResource Include="Forms\Autorize_Menu\ClientMainForm.resx">
       <DependentUpon>ClientMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreatePackageForm.resx">
@@ -177,11 +198,17 @@
     <EmbeddedResource Include="Forms\MyProfile.resx">
       <DependentUpon>MyProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RegistrationForm.resx">
+    <EmbeddedResource Include="Forms\Autorize_Menu\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SystemAdmMainForm.resx">
+    <EmbeddedResource Include="Forms\Autorize_Menu\SystemAdmMainForm.resx">
       <DependentUpon>SystemAdmMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PickUpPackages.resx">
+      <DependentUpon>PickUpPackages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SendPackages.resx">
+      <DependentUpon>SendPackages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

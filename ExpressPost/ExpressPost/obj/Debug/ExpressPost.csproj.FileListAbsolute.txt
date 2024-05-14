@@ -92,3 +92,6 @@ C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.CreatePackageForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.BranchAdmMainForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.SystemAdmMainForm.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.ArrivedPackages.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.PickUpPackages.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.SendPackages.resources

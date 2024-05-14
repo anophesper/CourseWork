@@ -7,22 +7,23 @@ using System.Threading.Tasks;
 
 namespace ExpressPost.Classes
 {
+    //ЗМІНИТИ ТАКІ ТУПИ ПОМИЛКИ ЯК ТИП ДАНИХ _senderUser _recipientUser _currentBranch
     public class Parcel
     {
         private string _billOfLading;
         private int _senderUser;
         private int _recipientUser;
         private bool _isSenderPay;
-        private int _route;
+        private Route _route;
         private string _type;
         private double _weight;
         private string _status;
         private int _currentBranch;
+        private bool _isConfirmedBranch;
         private decimal _deliveryPrice;  // Ціна за доставку
         private DateTime _dispatchTime;
         private DateTime _deliveryTime;
         private decimal _valuationPrice;// Оціночна вартість
-
 
         public string BillOfLading
         {
@@ -44,7 +45,7 @@ namespace ExpressPost.Classes
             get { return _recipientUser; }
             set { _recipientUser = value; }
         }
-        public int Route
+        public Route Route
         {
             get { return _route; }
             set { _route = value; }
@@ -83,6 +84,11 @@ namespace ExpressPost.Classes
         {
             get { return _currentBranch; }
             set { _currentBranch = value; }
+        }
+        public bool IsConfirmedBranch
+        {
+            get { return _isConfirmedBranch; }
+            set { _isConfirmedBranch = value; }
         }
         public decimal DeliveryPrice
         {
@@ -130,8 +136,8 @@ namespace ExpressPost.Classes
             set { _isSenderPay = value; }
         }
 
-        public Parcel(string billOfLading, int senderUser, int recipientUser, bool isSenderPay, int route, string type, double weight, string status,
-            int currentBranch, decimal deliveryPrice, DateTime dispatchTime, DateTime deliveryTime, decimal valuationPrice)
+        public Parcel(string billOfLading, int senderUser, int recipientUser, bool isSenderPay, Route route, string type, double weight, string status,
+    int currentBranch, bool isConfirmedBranch, decimal deliveryPrice, DateTime dispatchTime, DateTime deliveryTime, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
             SenderUser = senderUser;
@@ -141,6 +147,7 @@ namespace ExpressPost.Classes
             Weight = weight;
             Status = status;
             CurrentBranch = currentBranch;
+            IsConfirmedBranch = isConfirmedBranch;
             DeliveryPrice = deliveryPrice;
             DispatchTime = dispatchTime;
             DeliveryTime = deliveryTime;
@@ -148,7 +155,7 @@ namespace ExpressPost.Classes
             IsSenderPay = isSenderPay;
         }
 
-        public Parcel(string billOfLading, int senderUser, int recipientUser, bool isSenderPay, string type, double weight, string status, decimal deliveryPrice, decimal valuationPrice)
+        public Parcel(string billOfLading, int senderUser, int recipientUser, bool isSenderPay, string type, double weight, string status, bool isConfirmedBranch, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
             SenderUser = senderUser;
@@ -157,7 +164,7 @@ namespace ExpressPost.Classes
             Type = type;
             Weight = weight;
             Status = status;
-            DeliveryPrice = deliveryPrice;
+            IsConfirmedBranch = isConfirmedBranch;
             ValuationPrice = valuationPrice;
         }
 
