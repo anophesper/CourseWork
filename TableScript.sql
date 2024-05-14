@@ -32,7 +32,7 @@ CREATE TABLE Route (
     ID INT PRIMARY KEY,
     Origin INT NOT NULL,
     Destination INT NOT NULL,
-    Duration TIME NOT NULL,
+    Duration DOUBLE NOT NULL,
     FOREIGN KEY (Origin) REFERENCES Branch(ID),
     FOREIGN KEY (Destination) REFERENCES Branch(ID)
 );
@@ -54,21 +54,22 @@ CREATE TABLE Parcel (
 );
 
 CREATE TABLE ParcelUsers (
-    BillOfLading CHAR(14) NOT NULL,
+    BillOfLading CHAR(14) NOT NULL UNIQUE,
     SenderUser INT NOT NULL,
     RecipientUser INT NOT NULL,
+	IsSenderPay BOOL NOT NULL,
     FOREIGN KEY (BillOfLading) REFERENCES Parcel(BillOfLading),
     FOREIGN KEY (SenderUser) REFERENCES Users(ID),
     FOREIGN KEY (RecipientUser) REFERENCES Users(ID)
 );
 
 CREATE TABLE ParcelRouteDelivery (
-    BillOfLading CHAR(14) NOT NULL,
-    Route INT NOT NULL,
-    CurrentBranch INT NOT NULL,
-    DeliveryPrice DECIMAL(10,2) NOT NULL,  -- Ціна за доставку
-    DispatchTime TIMESTAMP NOT NULL,
-    DeliveryTime TIMESTAMP NOT NULL,
+    BillOfLading CHAR(14) NOT NULL UNIQUE,
+    Route INT,
+    CurrentBranch INT,
+    DeliveryPrice DECIMAL(10,2),  -- Ціна за доставку
+    DispatchTime TIMESTAMP,
+    DeliveryTime TIMESTAMP,
     FOREIGN KEY (BillOfLading) REFERENCES Parcel(BillOfLading),
     FOREIGN KEY (Route) REFERENCES Route(ID),
     FOREIGN KEY (CurrentBranch) REFERENCES Branch(ID)

@@ -63,6 +63,16 @@ namespace ExpressPost.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _172570_back_icon {
+            get {
+                object obj = ResourceManager.GetObject("172570_back_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _4115230_cancel_close_delete_icon {
             get {
                 object obj = ResourceManager.GetObject("4115230_cancel_close_delete_icon", resourceCulture);

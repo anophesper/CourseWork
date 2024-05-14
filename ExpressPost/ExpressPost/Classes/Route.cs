@@ -12,7 +12,7 @@ namespace ExpressPost.Classes
         private int _id {  get; set; }
         private Branch _origin;
         private Branch _destination;
-        private TimeSpan _duration;
+        private double _duration;
         private List<Branch> IntermediateBranches;
 
         public List<Branch> GetIntermediateBranches() { return IntermediateBranches; }
@@ -39,18 +39,18 @@ namespace ExpressPost.Classes
                 _destination = value ?? throw new ArgumentNullException(nameof(Destination), "Кінцеве відділення має бути вказане");
             }
         }
-        public TimeSpan Duration
+        public double Duration
         {
             get { return _duration; }
             set
             {
-                if (value <= TimeSpan.Zero)
+                if (value <= 0)
                     throw new ArgumentException("Тривалість маршруту не може бути від'ємною");
                 _duration = value;
             }
         }
 
-        public Route(int id, Branch origin, Branch destination, TimeSpan duration, List<Branch> intermediateBranches)
+        public Route(int id, Branch origin, Branch destination, double duration, List<Branch> intermediateBranches)
         {
             Id = id;
             Origin = origin;
@@ -59,12 +59,24 @@ namespace ExpressPost.Classes
             IntermediateBranches = intermediateBranches;
         }
 
-        public Route(int id, Branch origin, Branch destination, TimeSpan duration)
+        public Route(int id, Branch origin, Branch destination, double duration)
         {
             Id = id;
             Origin = origin;
             Destination = destination;
             Duration = duration;
+        }
+
+        public static Route SearchRoute(Branch origin, Branch destination)
+        {
+            foreach (var route in Program.DataManager.Routes)
+            {
+                if (route.Origin == origin && route.Destination == destination)
+                {
+                    return route;
+                }
+            }
+            return null; // повертаємо null, якщо маршрут не знайдено
         }
     }
 }

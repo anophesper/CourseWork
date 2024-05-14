@@ -13,6 +13,7 @@ namespace ExpressPost.Forms
         {
             FormProperties.SetToDefaultForm(this);
             FormProperties.AddExitButtonToForm(this);
+            FormProperties.AddBackButtonToForm(this);
             // Інші налаштування форми...
         }
     }

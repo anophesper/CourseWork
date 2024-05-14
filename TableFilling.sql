@@ -111,17 +111,17 @@ INSERT INTO Parcel (BillOfLading, Type, Weight, Status, ValuationPrice) VALUES
 ('20240422180009', 'ВеликийВантаж', 9.0, 'Підтверджено', 900.00),
 ('20240423090010', 'Документи', 10.1, 'В_дорозі', 1010.00);
 
-INSERT INTO ParcelUsers (BillOfLading, SenderUser, RecipientUser) VALUES
-('20240422100001', 3, 10),
-('20240423110002', 10, 11),
-('20240424120003', 11, 12),
-('20240421130004', 3, 13),
-('20240422140005', 10, 14),
-('20240423150006', 11, 15),
-('20240424160007', 12, 16),
-('20240421170008', 3, 17),
-('20240422180009', 10, 18),
-('20240423090010', 11, 3);
+INSERT INTO ParcelUsers (BillOfLading, SenderUser, RecipientUser, IsSenderPay) VALUES
+('20240422100001', 3, 10, TRUE),
+('20240423110002', 10, 11, FALSE),
+('20240424120003', 11, 12, TRUE),
+('20240421130004', 3, 13, FALSE),
+('20240422140005', 10, 14, TRUE),
+('20240423150006', 11, 15, FALSE),
+('20240424160007', 12, 16, TRUE),
+('20240421170008', 3, 17, FALSE),
+('20240422180009', 10, 18, TRUE),
+('20240423090010', 11, 3, FALSE);
 
 INSERT INTO ParcelRouteDelivery (BillOfLading, Route, CurrentBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES
 ('20240422100001', 1, 1, 100.00, '2024-04-22 10:00:00', '2024-04-22 15:00:00'),

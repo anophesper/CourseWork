@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpressPost.Forms;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -59,10 +60,33 @@ namespace ExpressPost
             form.Controls.Add(ExitBox); // додаємо ExitBox до форми
         }
 
+        public static void AddBackButtonToForm(Form form)
+        {
+            // Перевіряємо, чи форма є одним з вказаних типів
+            if (form is AuthorizeForm || form is ClientMainForm || form is BranchAdmMainForm || form is SystemAdmMainForm || form is RegistrationForm)
+                return;
+
+            // Створюємо нову кнопку "Назад"
+            PictureBox BackBox = new PictureBox
+            {
+                Image = ExpressPost.Properties.Resources._172570_back_icon,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Size = new Size(23, 23),
+                Location = new Point(0, 3) // Розташування відзеркалене від кнопки "Вихід"
+            };
+
+            // Додаємо обробник події Click, який закриває поточну форму
+            BackBox.Click += (sender, e) => { SwitchToForm(form, Program.backForm); };
+
+            // Додаємо BackBox до форми
+            form.Controls.Add(BackBox);
+        }
+
         public static void SwitchToForm(Form currentForm, Form newForm)
         {
             SetToDefaultForm(newForm);
             currentForm.Hide();
+            Program.backForm = currentForm;
             newForm.Show();
         }
     }

@@ -25,35 +25,43 @@ namespace ExpressPost
 
         private void Button_Click(object sender, EventArgs e)
         {
-            // Отримання введеного номера телефону та паролю
-            string phoneText = phone.Text;
-            string passwordText = password.Text;
-
-            // Перевірка, чи існує користувач з введеним номером телефону та паролем
-            User user = Program.DataManager.Users.FirstOrDefault(u => u.PhoneNumber == phoneText && u.Password == passwordText);
-
-            if (user != null)
+            try
             {
-                // Якщо користувач існує, зберегти інформацію про користувача
-                Program.CurrentUser = user;
-                user.Login();
+                // Отримання введеного номера телефону та паролю
+                string phoneText = phone.Text;
+                string passwordText = password.Text;
 
-                // Визначаємо тип користувача і відкриваємо відповідну форму
-                switch (user)
+                // Перевірка, чи існує користувач з введеним номером телефону та паролем
+                User user = Program.DataManager.Users.FirstOrDefault(u => u.PhoneNumber == phoneText && u.Password == passwordText);
+
+                if (user != null)
                 {
-                    case Client client:
-                        FormProperties.SwitchToForm(this, new ClientMainForm()); break;
-                    case BranchAdmin branchAdmin:
-                        //FormProperties.SwitchToForm(this, new BranchAdmMainForm()); break;
-                    case SystemAdmin systemAdmin:
-                        //FormProperties.SwitchToForm(this, new SystemAdmMainForm()); break;
-                    default: break;
+                    // Якщо користувач існує, зберегти інформацію про користувача
+                    Program.CurrentUser = user;
+                    user.Login();
+
+                    // Визначаємо тип користувача і відкриваємо відповідну форму
+                    switch (user)
+                    {
+                        case Client client:
+                            FormProperties.SwitchToForm(this, new ClientMainForm()); break;
+                        case BranchAdmin branchAdmin:
+                            FormProperties.SwitchToForm(this, new BranchAdmMainForm()); break;
+                        case SystemAdmin systemAdmin:
+                            FormProperties.SwitchToForm(this, new SystemAdmMainForm()); break;
+                        default: break;
+                    }
+                }
+                else
+                {
+                    // Якщо користувача не існує, показати повідомлення про помилку
+                    MessageBox.Show("Невірний номер телефону або пароль");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // Якщо користувача не існує, показати повідомлення про помилку
-                MessageBox.Show("Невірний номер телефону або пароль");
+                // Обробка помилки
+                MessageBox.Show($"Виникла помилка: {ex.Message}");
             }
         }
 

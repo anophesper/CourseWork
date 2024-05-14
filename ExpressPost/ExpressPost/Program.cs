@@ -13,6 +13,7 @@ namespace ExpressPost
         // Створення статичного члена dataManager
         public static DB_DataManager DataManager { get; private set; }
         public static User CurrentUser { get; set; }
+        public static Form backForm { get; set; }
 
         [STAThread]
         static void Main()
@@ -40,10 +41,10 @@ namespace ExpressPost
                             mainForm = new ClientMainForm();
                             break;
                         case BranchAdmin branchAdmin:
-                            //mainForm = new BranchAdmMainForm();
+                            mainForm = new BranchAdmMainForm();
                             break;
                         case SystemAdmin systemAdmin:
-                            //mainForm = new SystemAdmMainForm();
+                            mainForm = new SystemAdmMainForm();
                             break;
                         default:
                             throw new Exception("Невідомий тип користувача");

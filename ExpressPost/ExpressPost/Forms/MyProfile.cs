@@ -98,54 +98,70 @@ namespace ExpressPost.Forms
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            if (EditButton.Text == "Edit")
+            try
             {
-                // Приховуємо Label і робимо TextBox видимим
-                firstNameLabel.Visible = false;
-                lastNameLabel.Visible = false;
-                phoneNumberLabel.Visible = false;
+                if (EditButton.Text == "Edit")
+                {
+                    // Приховуємо Label і робимо TextBox видимим
+                    firstNameLabel.Visible = false;
+                    lastNameLabel.Visible = false;
+                    phoneNumberLabel.Visible = false;
 
-                firstNameTextBox.Visible = true;
-                lastNameTextBox.Visible = true;
-                phoneNumberTextBox.Visible = true;
+                    firstNameTextBox.Visible = true;
+                    lastNameTextBox.Visible = true;
+                    phoneNumberTextBox.Visible = true;
 
-                EditButton.Text = "Save changes";
-                LogOutButton.Visible = false;
+                    EditButton.Text = "Save changes";
+                    LogOutButton.Visible = false;
+                }
+                else if (EditButton.Text == "Save changes")
+                {
+                    // Приховуємо TextBox  і робимо Label видимим
+                    firstNameTextBox.Visible = false;
+                    lastNameTextBox.Visible = false;
+                    phoneNumberTextBox.Visible = false;
+
+                    firstNameLabel.Visible = true;
+                    lastNameLabel.Visible = true;
+                    phoneNumberLabel.Visible = true;
+
+                    EditButton.Text = "Edit";
+                    LogOutButton.Visible = true;
+
+                    // Оновлюємо дані користувача
+                    Program.CurrentUser.FirstName = firstNameTextBox.Text;
+                    Program.CurrentUser.LastName = lastNameTextBox.Text;
+                    Program.CurrentUser.PhoneNumber = phoneNumberTextBox.Text;
+
+                    // Зберігаємо зміни в базі даних
+                    DB_DataManager.UpdateDatabase(Program.CurrentUser);
+
+                    // Оновлюємо Label з новими даними
+                    firstNameLabel.Text = Program.CurrentUser.FirstName;
+                    lastNameLabel.Text = Program.CurrentUser.LastName;
+                    phoneNumberLabel.Text = Program.CurrentUser.PhoneNumber;
+                }
             }
-            else if (EditButton.Text == "Save changes")
+            catch (Exception ex)
             {
-                // Приховуємо TextBox  і робимо Label видимим
-                firstNameTextBox.Visible = false;
-                lastNameTextBox.Visible = false;
-                phoneNumberTextBox.Visible = false;
-
-                firstNameLabel.Visible = true;
-                lastNameLabel.Visible = true;
-                phoneNumberLabel.Visible = true;
-
-                EditButton.Text = "Edit";
-                LogOutButton.Visible = true;
-
-                // Оновлюємо дані користувача
-                Program.CurrentUser.FirstName = firstNameTextBox.Text;
-                Program.CurrentUser.LastName = lastNameTextBox.Text;
-                Program.CurrentUser.PhoneNumber = phoneNumberTextBox.Text;
-
-                // Зберігаємо зміни в базі даних
-                DB_DataManager.UpdateDatabase(Program.CurrentUser);
-
-                // Оновлюємо Label з новими даними
-                firstNameLabel.Text = Program.CurrentUser.FirstName;
-                lastNameLabel.Text = Program.CurrentUser.LastName;
-                phoneNumberLabel.Text = Program.CurrentUser.PhoneNumber;
+                // Обробка помилок
+                MessageBox.Show("Помилка: " + ex.Message);
             }
         }
 
         private void LogOutButton_Click(object sender, EventArgs e)
         {
-            // Виклик методу Logout для виходу з системи
-            User.Logout();
-            FormProperties.SwitchToForm(this, new AuthorizeForm());
+            try
+            {
+                // Виклик методу Logout для виходу з системи
+                User.Logout();
+                FormProperties.SwitchToForm(this, new AuthorizeForm());
+            }
+            catch (Exception ex)
+            {
+                // Обробка помилок
+                MessageBox.Show("Помилка: " + ex.Message);
+            }
         }
     }
 }

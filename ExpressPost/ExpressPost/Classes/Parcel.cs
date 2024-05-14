@@ -12,6 +12,7 @@ namespace ExpressPost.Classes
         private string _billOfLading;
         private int _senderUser;
         private int _recipientUser;
+        private bool _isSenderPay;
         private int _route;
         private string _type;
         private double _weight;
@@ -20,7 +21,8 @@ namespace ExpressPost.Classes
         private decimal _deliveryPrice;  // Ціна за доставку
         private DateTime _dispatchTime;
         private DateTime _deliveryTime;
-        private decimal _valuationPrice;  // Оціночна вартість
+        private decimal _valuationPrice;// Оціночна вартість
+
 
         public string BillOfLading
         {
@@ -122,8 +124,14 @@ namespace ExpressPost.Classes
                 _valuationPrice = value;
             }
         }
+        public bool IsSenderPay
+        {
+            get { return _isSenderPay; }
+            set { _isSenderPay = value; }
+        }
 
-        public Parcel(string billOfLading, int senderUser, int recipientUser, int route, string type, double weight, string status, int currentBranch, decimal deliveryPrice, DateTime dispatchTime, DateTime deliveryTime, decimal valuationPrice)
+        public Parcel(string billOfLading, int senderUser, int recipientUser, bool isSenderPay, int route, string type, double weight, string status,
+            int currentBranch, decimal deliveryPrice, DateTime dispatchTime, DateTime deliveryTime, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
             SenderUser = senderUser;
@@ -136,6 +144,20 @@ namespace ExpressPost.Classes
             DeliveryPrice = deliveryPrice;
             DispatchTime = dispatchTime;
             DeliveryTime = deliveryTime;
+            ValuationPrice = valuationPrice;
+            IsSenderPay = isSenderPay;
+        }
+
+        public Parcel(string billOfLading, int senderUser, int recipientUser, bool isSenderPay, string type, double weight, string status, decimal deliveryPrice, decimal valuationPrice)
+        {
+            BillOfLading = billOfLading;
+            SenderUser = senderUser;
+            RecipientUser = recipientUser;
+            IsSenderPay = isSenderPay;
+            Type = type;
+            Weight = weight;
+            Status = status;
+            DeliveryPrice = deliveryPrice;
             ValuationPrice = valuationPrice;
         }
 

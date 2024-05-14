@@ -55,6 +55,10 @@
             this.paymentLabel = new System.Windows.Forms.Label();
             this.CreateButton = new System.Windows.Forms.Button();
             this.billOfLadingLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // senderLabel
@@ -135,7 +139,7 @@
             // 
             this.parcelTypeLabel.AutoSize = true;
             this.parcelTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.parcelTypeLabel.Location = new System.Drawing.Point(120, 226);
+            this.parcelTypeLabel.Location = new System.Drawing.Point(120, 218);
             this.parcelTypeLabel.Name = "parcelTypeLabel";
             this.parcelTypeLabel.Size = new System.Drawing.Size(87, 20);
             this.parcelTypeLabel.TabIndex = 9;
@@ -145,7 +149,7 @@
             // 
             this.documentRadioButton.AutoSize = true;
             this.documentRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.documentRadioButton.Location = new System.Drawing.Point(124, 249);
+            this.documentRadioButton.Location = new System.Drawing.Point(3, 5);
             this.documentRadioButton.Name = "documentRadioButton";
             this.documentRadioButton.Size = new System.Drawing.Size(136, 24);
             this.documentRadioButton.TabIndex = 10;
@@ -157,7 +161,7 @@
             // 
             this.parcelRadioButton.AutoSize = true;
             this.parcelRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.parcelRadioButton.Location = new System.Drawing.Point(124, 278);
+            this.parcelRadioButton.Location = new System.Drawing.Point(3, 37);
             this.parcelRadioButton.Name = "parcelRadioButton";
             this.parcelRadioButton.Size = new System.Drawing.Size(160, 24);
             this.parcelRadioButton.TabIndex = 11;
@@ -169,7 +173,7 @@
             // 
             this.c.AutoSize = true;
             this.c.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.c.Location = new System.Drawing.Point(124, 311);
+            this.c.Location = new System.Drawing.Point(3, 67);
             this.c.Name = "c";
             this.c.Size = new System.Drawing.Size(70, 24);
             this.c.TabIndex = 12;
@@ -249,6 +253,7 @@
             this.cityComboBox.Name = "cityComboBox";
             this.cityComboBox.Size = new System.Drawing.Size(207, 28);
             this.cityComboBox.TabIndex = 20;
+            this.cityComboBox.SelectedIndexChanged += new System.EventHandler(this.cityComboBox_SelectedIndexChanged);
             // 
             // departmentComboBox
             // 
@@ -273,7 +278,7 @@
             // 
             this.recipientRadioButton.AutoSize = true;
             this.recipientRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.recipientRadioButton.Location = new System.Drawing.Point(566, 409);
+            this.recipientRadioButton.Location = new System.Drawing.Point(3, 32);
             this.recipientRadioButton.Name = "recipientRadioButton";
             this.recipientRadioButton.Size = new System.Drawing.Size(94, 24);
             this.recipientRadioButton.TabIndex = 25;
@@ -285,7 +290,7 @@
             // 
             this.senderRadioButton.AutoSize = true;
             this.senderRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.senderRadioButton.Location = new System.Drawing.Point(566, 380);
+            this.senderRadioButton.Location = new System.Drawing.Point(3, 3);
             this.senderRadioButton.Name = "senderRadioButton";
             this.senderRadioButton.Size = new System.Drawing.Size(79, 24);
             this.senderRadioButton.TabIndex = 24;
@@ -324,15 +329,34 @@
             this.billOfLadingLabel.TabIndex = 27;
             this.billOfLadingLabel.Text = "ТТН";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.parcelRadioButton);
+            this.panel1.Controls.Add(this.documentRadioButton);
+            this.panel1.Controls.Add(this.c);
+            this.panel1.Location = new System.Drawing.Point(124, 241);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 28;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.senderRadioButton);
+            this.panel2.Controls.Add(this.recipientRadioButton);
+            this.panel2.Location = new System.Drawing.Point(569, 380);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(113, 68);
+            this.panel2.TabIndex = 29;
+            // 
             // CreatePackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 540);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.billOfLadingLabel);
             this.Controls.Add(this.CreateButton);
-            this.Controls.Add(this.recipientRadioButton);
-            this.Controls.Add(this.senderRadioButton);
             this.Controls.Add(this.paymentLabel);
             this.Controls.Add(this.departmentComboBox);
             this.Controls.Add(this.departmentLabel);
@@ -344,9 +368,6 @@
             this.Controls.Add(this.nameRecipientTextBox);
             this.Controls.Add(this.ectimatedCostLabel);
             this.Controls.Add(this.estimatedCostTextBox);
-            this.Controls.Add(this.c);
-            this.Controls.Add(this.parcelRadioButton);
-            this.Controls.Add(this.documentRadioButton);
             this.Controls.Add(this.parcelTypeLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.weightTextBox);
@@ -358,6 +379,10 @@
             this.Controls.Add(this.senderLabel);
             this.Name = "CreatePackageForm";
             this.Text = "CreatePackageForm";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -392,5 +417,7 @@
         private System.Windows.Forms.Label paymentLabel;
         private System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.Label billOfLadingLabel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

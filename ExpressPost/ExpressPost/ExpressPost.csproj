@@ -124,6 +124,12 @@
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\BranchAdmMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BranchAdmMainForm.Designer.cs">
+      <DependentUpon>BranchAdmMainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ClientMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,10 +154,19 @@
     <Compile Include="Forms\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SystemAdmMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SystemAdmMainForm.Designer.cs">
+      <DependentUpon>SystemAdmMainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AuthorizeForm.resx">
       <DependentUpon>AuthorizeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BranchAdmMainForm.resx">
+      <DependentUpon>BranchAdmMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClientMainForm.resx">
       <DependentUpon>ClientMainForm.cs</DependentUpon>
@@ -164,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SystemAdmMainForm.resx">
+      <DependentUpon>SystemAdmMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -194,6 +212,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\4115230_cancel_close_delete_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\172570_back_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

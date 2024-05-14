@@ -12,6 +12,8 @@ namespace ExpressPost.Classes
 {
     public abstract class User
     {
+        private static string filePath = @"C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\user.json";
+
         private int _id;
         private string _firstName;
         private string _lastName;
@@ -85,16 +87,16 @@ namespace ExpressPost.Classes
         public void Login()
         {
             string json = JsonConvert.SerializeObject(this);
-            File.WriteAllText("user.json", json);
+            File.WriteAllText(filePath, json);
         }
 
         //метод для загрузки інформації з файлу (якщо він існує)
         public static User Load()
         {
-            if (!File.Exists("user.json"))
+            string json = File.ReadAllText(filePath);
+            if (string.IsNullOrWhiteSpace(json))
                 return null;
 
-            string json = File.ReadAllText("user.json");
             UserInfo userInfo = JsonConvert.DeserializeObject<UserInfo>(json);
 
             User user = Program.DataManager.Users.FirstOrDefault(u => u.Id == userInfo.Id);
@@ -104,8 +106,9 @@ namespace ExpressPost.Classes
         //метод для виходу з акаунту тобто видалення файлу з інформацією
         public static void Logout()
         {
-            if (File.Exists("user.json"))
-                File.Delete("user.json");
+            // Перевіряємо, чи існує файл
+            if (File.Exists(filePath))
+                File.WriteAllText(filePath, String.Empty);
         }
     }
 }
