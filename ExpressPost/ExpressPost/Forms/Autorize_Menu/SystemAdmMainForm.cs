@@ -31,5 +31,10 @@ namespace ExpressPost.Forms
         {
             FormProperties.SwitchToForm(this, new RoutesForm());
         }
+
+        private void BranchesButton_Click(object sender, EventArgs e)
+        {
+            FormProperties.SwitchToForm(this, new BranchesForm());
+        }
     }
 }

@@ -152,6 +152,12 @@
     <Compile Include="Forms\Autorize_Menu\ClientMainForm.Designer.cs">
       <DependentUpon>ClientMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\BranchesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BranchesForm.Designer.cs">
+      <DependentUpon>BranchesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CreatePackageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Autorize_Menu\ClientMainForm.resx">
       <DependentUpon>ClientMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BranchesForm.resx">
+      <DependentUpon>BranchesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreatePackageForm.resx">
       <DependentUpon>CreatePackageForm.cs</DependentUpon>

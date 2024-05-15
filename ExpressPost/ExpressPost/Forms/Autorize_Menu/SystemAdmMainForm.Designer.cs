@@ -31,6 +31,7 @@
             this.WorkersButton = new System.Windows.Forms.Button();
             this.MyProfile_button = new System.Windows.Forms.Button();
             this.routesButton = new System.Windows.Forms.Button();
+            this.BranchesButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // WorkersButton
@@ -66,11 +67,23 @@
             this.routesButton.UseVisualStyleBackColor = true;
             this.routesButton.Click += new System.EventHandler(this.routesButton_Click);
             // 
+            // BranchesButton
+            // 
+            this.BranchesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BranchesButton.Location = new System.Drawing.Point(195, 169);
+            this.BranchesButton.Name = "BranchesButton";
+            this.BranchesButton.Size = new System.Drawing.Size(145, 49);
+            this.BranchesButton.TabIndex = 5;
+            this.BranchesButton.Text = "Branches";
+            this.BranchesButton.UseVisualStyleBackColor = true;
+            this.BranchesButton.Click += new System.EventHandler(this.BranchesButton_Click);
+            // 
             // SystemAdmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 540);
+            this.Controls.Add(this.BranchesButton);
             this.Controls.Add(this.routesButton);
             this.Controls.Add(this.WorkersButton);
             this.Controls.Add(this.MyProfile_button);
@@ -85,5 +98,6 @@
         private System.Windows.Forms.Button WorkersButton;
         private System.Windows.Forms.Button MyProfile_button;
         private System.Windows.Forms.Button routesButton;
+        private System.Windows.Forms.Button BranchesButton;
     }
 }
