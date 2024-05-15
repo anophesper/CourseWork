@@ -14,7 +14,7 @@ namespace ExpressPost.Classes
         private User _recipientUser;
         private bool _isSenderPay;
         private Route _route;
-        private string _type;
+        private TypeP _type;
         private double _weight;
         private Status _status;
         private Branch _currentBranch;
@@ -49,13 +49,15 @@ namespace ExpressPost.Classes
             get { return _route; }
             set { _route = value; }
         }
-        public string Type
+        public TypeP Type
         {
             get { return _type; }
             set
             {
-                if (value != "Документи" && value != "Посилка" && value != "ВеликийВантаж")
+                if (!Enum.IsDefined(typeof(TypeP), value))
+                {
                     throw new ArgumentException("Тип посилки повинен бути одним із наступних: 'Документи', 'Посилка', 'ВеликийВантаж'");
+                }
                 _type = value;
             }
         }
@@ -135,7 +137,7 @@ namespace ExpressPost.Classes
             set { _isSenderPay = value; }
         }
 
-        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, Route route, string type, double weight, Status status,
+        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, Route route, TypeP type, double weight, Status status,
     Branch currentBranch, bool isConfirmedBranch, decimal deliveryPrice, DateTime dispatchTime, DateTime deliveryTime, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
@@ -154,7 +156,7 @@ namespace ExpressPost.Classes
             IsSenderPay = isSenderPay;
         }
 
-        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, string type, double weight, Status status, bool isConfirmedBranch, decimal valuationPrice)
+        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, TypeP type, double weight, Status status, bool isConfirmedBranch, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
             SenderUser = senderUser;

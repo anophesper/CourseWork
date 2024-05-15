@@ -41,14 +41,14 @@ namespace ExpressPost.Forms
                 User senderUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumberSenderTextBox.Text);
                 User recipientUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumberRecipientTextBox.Text);
                 bool isSenderPay = senderRadioButton.Checked;
-                string type = documentRadioButton.Checked ? "Документи" : (parcelRadioButton.Checked ? "Посилка" : "ВеликийВантаж");
+                TypeP type = documentRadioButton.Checked ? TypeP.Документи : (parcelRadioButton.Checked ? TypeP.Посилка : TypeP.ВеликийВантаж);
                 double weight = double.Parse(weightTextBox.Text);
                 decimal deliveryPrice = 100;
                 decimal estimatedCost = decimal.Parse(estimatedCostTextBox.Text);
 
                 if (Program.CurrentUser is Client)
                 {
-                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, type, weight, "Створено", false, estimatedCost);
+                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, type, weight, Status.Створено, false, estimatedCost);
                     DB_DataManager.InsertIntoDatabase(parcel);
 
                     FormProperties.SwitchToForm(this, new ClientMainForm());
@@ -75,7 +75,7 @@ namespace ExpressPost.Forms
 
                     Branch currentBranch = origin;
 
-                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route, type, weight, "Створено",
+                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route, type, weight, Status.Створено,
                         currentBranch, true, deliveryPrice, dispatchTime, deliveryTime, estimatedCost);
                     DB_DataManager.InsertIntoDatabase(parcel);
 
@@ -114,18 +114,6 @@ namespace ExpressPost.Forms
 }
 
 /*to do
- * DONE добавить поле в бд для отметки того кто платит за доставку + изменить методы под это изменение 
- * DONE изменить систему назначения даты отправки
- * DONE продумать как формируется цена за доставку (или сделать всё по 100)
- * подумать над расчетом времени доставки
- * прописать создание обьекта Parcel и проверить правильность работы метода добавление данных в бд
- * -----
- * продумать систему "отслеживания местоположения" посылки. добавить новые поля в бд и в класс, отредактировать методы
- * -----
- * DONE создать меню для администратора отделения
- * создать форму для отметки прибывших посылок на отделение + отметки посылок которые уехали
  * подумать что делать если получателя нет в базе
- * создать форму для выдачи посылок
- * 
  * если поиск маршрута не дает ничего надо что-то сделать
  */

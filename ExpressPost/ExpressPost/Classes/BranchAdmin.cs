@@ -24,6 +24,12 @@ namespace ExpressPost.Classes
         {
             Branch = branch;
         }
+
+        public BranchAdmin(string firstName, string lastName, string phoneNumber, string password, Branch branch) :
+            base(firstName, lastName, phoneNumber, password)
+        {
+            Branch = branch;
+        }
     }
 
 }

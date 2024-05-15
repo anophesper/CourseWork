@@ -5,6 +5,11 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressPost", "ExpressPost\ExpressPost.csproj", "{1C718A58-D494-4DC6-B972-4850B178E3BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlLibrary", "ControlLibrary1\ControlLibrary.csproj", "{2CB94400-6244-4E6D-9B59-D95AC3B1833E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1C718A58-D494-4DC6-B972-4850B178E3BB} = {1C718A58-D494-4DC6-B972-4850B178E3BB}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{1C718A58-D494-4DC6-B972-4850B178E3BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C718A58-D494-4DC6-B972-4850B178E3BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C718A58-D494-4DC6-B972-4850B178E3BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB94400-6244-4E6D-9B59-D95AC3B1833E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB94400-6244-4E6D-9B59-D95AC3B1833E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB94400-6244-4E6D-9B59-D95AC3B1833E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB94400-6244-4E6D-9B59-D95AC3B1833E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,5 +10,9 @@ namespace ExpressPost.Classes
     {
         public SystemAdmin(int id, string firstName, string lastName, string phoneNumber, string password) : 
             base(id, firstName, lastName, phoneNumber, password){}
+
+        public SystemAdmin(string firstName, string lastName, string phoneNumber, string password) :
+            base(firstName, lastName, phoneNumber, password)
+        { }
     }
 }

@@ -16,5 +16,15 @@ namespace ExpressPost.Forms
         {
             InitializeComponent();
         }
+
+        private void MyProfile_button_Click(object sender, EventArgs e)
+        {
+            FormProperties.SwitchToForm(this, new MyProfile());
+        }
+
+        private void WorkersButton_Click(object sender, EventArgs e)
+        {
+            FormProperties.SwitchToForm(this, new WorkersForm());
+        }
     }
 }

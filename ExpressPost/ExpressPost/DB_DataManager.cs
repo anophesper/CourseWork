@@ -180,7 +180,7 @@ namespace ExpressPost
                 User recipientUser = User.GetUserById(Convert.ToInt32(reader["RecipientUser"]));
                 bool isSenderPay = Convert.ToBoolean(reader["IsSenderPay"]);
                 Route route = Route.SearchRoute((Convert.ToInt32(reader["Route"])));
-                string type = reader["Type"].ToString();
+                TypeP type = (TypeP)Enum.Parse(typeof(TypeP), reader["Type"].ToString());
                 double weight = Convert.ToDouble(reader["Weight"]);
                 Status status = (Status)Enum.Parse(typeof(Status), reader["Status"].ToString());
                 Branch currentBranch = Branch.GetBranchById(Convert.ToInt32(reader["CurrentBranch"]));
@@ -349,6 +349,49 @@ namespace ExpressPost
             }
             LoadData();
             DBConnection.CloseConnection(); //закриваємо з'єднання з бд
+        }
+
+        public static void DeleteFromDatabase(object obj)
+        {
+            DBConnection.OpenConnection(); // Відкриваємо з'єднання з базою даних
+            MySqlCommand command;
+
+            switch (obj)
+            {
+                case User user:
+                    // Видаляємо користувача з таблиці Users
+                    command = new MySqlCommand($"DELETE FROM Users WHERE Id = '{user.Id}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); // Виконуємо запит
+                    break;
+                case Branch branch:
+                    // Видаляємо відділення з таблиці Branch
+                    command = new MySqlCommand($"DELETE FROM Branch WHERE Id = '{branch.Id}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); // Виконуємо запит
+                    break;
+                case Route route:
+                    // Видаляємо маршрут з таблиці Route
+                    command = new MySqlCommand($"DELETE FROM Route WHERE ID = '{route.Id}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); // Виконуємо запит
+                    break;
+                case Parcel parcel:
+                    // Видаляємо посилку з таблиці Parcel
+                    command = new MySqlCommand($"DELETE FROM Parcel WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); // Виконуємо запит
+
+                    // Видаляємо пов'язані дані з таблиці ParcelUsers
+                    command = new MySqlCommand($"DELETE FROM ParcelUsers WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); // Виконуємо запит
+
+                    // Видаляємо пов'язані дані з таблиці ParcelRouteDelivery
+                    command = new MySqlCommand($"DELETE FROM ParcelRouteDelivery WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    command.ExecuteNonQuery(); // Виконуємо запит
+                    break;
+                default:
+                    throw new Exception("Невідомий тип об'єкта для видалення");
+            }
+
+            LoadData(); // Метод для оновлення даних у програмі після видалення запису
+            DBConnection.CloseConnection(); // Закриваємо з'єднання з базою даних
         }
     }
 }
