@@ -113,6 +113,7 @@
     <Compile Include="Classes\Branch.cs" />
     <Compile Include="Classes\BranchAdmin.cs" />
     <Compile Include="Classes\Client.cs" />
+    <Compile Include="Classes\IBranchAdmin.cs" />
     <Compile Include="Classes\Parcel.cs" />
     <Compile Include="Classes\Route.cs" />
     <Compile Include="Classes\UserInfo.cs" />
