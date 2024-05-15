@@ -3,32 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost\\expresspost\\classes\\parcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|solutionrelative:expresspost\\classes\\parcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost\\expresspost\\forms\\sendpackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|solutionrelative:expresspost\\forms\\sendpackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost\\expresspost\\forms\\pickuppackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|solutionrelative:expresspost\\forms\\pickuppackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost\\expresspost\\forms\\arrivedpackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|solutionrelative:expresspost\\forms\\arrivedpackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\expresspost\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|solutionrelative:expresspost\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\expresspost\\db_datamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|solutionrelative:expresspost\\db_datamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\expresspost\\formproperties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|solutionrelative:expresspost\\formproperties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost\\expresspost\\db_datamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C718A58-D494-4DC6-B972-4850B178E3BB}|ExpressPost\\ExpressPost.csproj|solutionrelative:expresspost\\db_datamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,17 +22,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "DB_DataManager.cs",
               "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\DB_DataManager.cs",
               "RelativeDocumentMoniker": "ExpressPost\\DB_DataManager.cs",
               "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\DB_DataManager.cs",
               "RelativeToolTip": "ExpressPost\\DB_DataManager.cs",
-              "ViewState": "AQIAAKgAAAAAAAAAAAAiwL8AAAASAAAA",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAiwGIBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-27T11:20:13.928Z",
               "IsPinned": true,
@@ -56,13 +40,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "FormProperties.cs",
               "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\FormProperties.cs",
               "RelativeDocumentMoniker": "ExpressPost\\FormProperties.cs",
               "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\FormProperties.cs",
               "RelativeToolTip": "ExpressPost\\FormProperties.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAADwv1MAAAAAAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAADwvygAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-14T09:04:44.151Z",
               "IsPinned": true,
@@ -70,68 +54,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Program.cs",
               "RelativeDocumentMoniker": "ExpressPost\\Program.cs",
               "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Program.cs",
               "RelativeToolTip": "ExpressPost\\Program.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABoAAAAzAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-10T11:20:23.609Z",
               "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Parcel.cs",
-              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Classes\\Parcel.cs",
-              "RelativeDocumentMoniker": "ExpressPost\\Classes\\Parcel.cs",
-              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Classes\\Parcel.cs",
-              "RelativeToolTip": "ExpressPost\\Classes\\Parcel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-14T13:34:21.281Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ArrivedPackages.cs",
-              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Forms\\ArrivedPackages.cs",
-              "RelativeDocumentMoniker": "ExpressPost\\Forms\\ArrivedPackages.cs",
-              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Forms\\ArrivedPackages.cs",
-              "RelativeToolTip": "ExpressPost\\Forms\\ArrivedPackages.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-14T13:00:10.145Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PickUpPackages.cs",
-              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Forms\\PickUpPackages.cs",
-              "RelativeDocumentMoniker": "ExpressPost\\Forms\\PickUpPackages.cs",
-              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Forms\\PickUpPackages.cs",
-              "RelativeToolTip": "ExpressPost\\Forms\\PickUpPackages.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-14T13:00:03.114Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SendPackages.cs",
-              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Forms\\SendPackages.cs",
-              "RelativeDocumentMoniker": "ExpressPost\\Forms\\SendPackages.cs",
-              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost\\ExpressPost\\Forms\\SendPackages.cs",
-              "RelativeToolTip": "ExpressPost\\Forms\\SendPackages.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-14T12:59:58.923Z",
               "EditorCaption": ""
             },
             {

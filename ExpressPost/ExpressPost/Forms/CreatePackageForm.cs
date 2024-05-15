@@ -38,8 +38,8 @@ namespace ExpressPost.Forms
             {
                 // Отримуємо дані з полів форми
                 string billOfLading = billOfLadingLabel.Text;
-                int senderUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumberSenderTextBox.Text).Id;
-                int recipientUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumberRecipientTextBox.Text).Id;
+                User senderUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumberSenderTextBox.Text);
+                User recipientUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumberRecipientTextBox.Text);
                 bool isSenderPay = senderRadioButton.Checked;
                 string type = documentRadioButton.Checked ? "Документи" : (parcelRadioButton.Checked ? "Посилка" : "ВеликийВантаж");
                 double weight = double.Parse(weightTextBox.Text);
@@ -69,12 +69,13 @@ namespace ExpressPost.Forms
 
                     Route route = Route.SearchRoute(origin, destination);
 
-                    DateTime dispatchTime = DateTime.Now; // відраховуємо до круглої години
-                    DateTime deliveryTime = (dispatchTime.AddHours(1).AddMinutes(-DateTime.Now.Minute)).AddHours(route.Duration); // відраховуємо к-ть годин від dispatchTime
+                    DateTime now = DateTime.Now;
+                    DateTime dispatchTime = new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0).AddHours(1);
+                    DateTime deliveryTime = dispatchTime.AddHours(route.Duration);
 
-                    int currentBranch = origin.Id;
+                    Branch currentBranch = origin;
 
-                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route.Id, type, weight, "Створено", 
+                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route, type, weight, "Створено",
                         currentBranch, true, deliveryPrice, dispatchTime, deliveryTime, estimatedCost);
                     DB_DataManager.InsertIntoDatabase(parcel);
 
@@ -84,7 +85,6 @@ namespace ExpressPost.Forms
             }
             catch (Exception ex)
             {
-                // Обробка помилок
                 MessageBox.Show("Помилка: " + ex.Message);
             }
         }
@@ -126,4 +126,6 @@ namespace ExpressPost.Forms
  * создать форму для отметки прибывших посылок на отделение + отметки посылок которые уехали
  * подумать что делать если получателя нет в базе
  * создать форму для выдачи посылок
+ * 
+ * если поиск маршрута не дает ничего надо что-то сделать
  */

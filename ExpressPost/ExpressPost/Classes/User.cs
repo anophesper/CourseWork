@@ -83,6 +83,16 @@ namespace ExpressPost.Classes
             Password = password;
         }
 
+        public static User GetUserById(int id)
+        {
+            foreach (User user in Program.DataManager.Users)
+            {
+                if (user.Id == id)
+                    return user;
+            }
+            return null;
+        }
+
         //метод для збереження у файл інформації про авторизованого користувача
         public void Login()
         {

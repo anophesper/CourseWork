@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace ExpressPost.Classes
 {
@@ -44,6 +45,16 @@ namespace ExpressPost.Classes
             Id = id;
             City = city;
             Address = address;
+        }
+
+        public static Branch GetBranchById(int id)
+        {
+            foreach (Branch branch in Program.DataManager.Branches)
+            {
+                if (branch.Id == id)
+                    return branch;
+            }
+            return null;
         }
     }
 }

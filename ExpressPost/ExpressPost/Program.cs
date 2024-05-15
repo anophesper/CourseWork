@@ -32,7 +32,7 @@ namespace ExpressPost
                 CurrentUser = User.Load();
                 if (CurrentUser != null)
                 {
-                    Form mainForm=  new ClientMainForm(); // Оголошуємо змінну для головної форми
+                    Form mainForm =  new ClientMainForm(); // Оголошуємо змінну для головної форми
 
                     // Визначаємо тип користувача і відкриваємо відповідну форму
                     switch (CurrentUser)

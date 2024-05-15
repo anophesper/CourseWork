@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace ExpressPost.Classes
 {
-    //ЗМІНИТИ ТАКІ ТУПИ ПОМИЛКИ ЯК ТИП ДАНИХ _senderUser _recipientUser _currentBranch
     public class Parcel
     {
         private string _billOfLading;
-        private int _senderUser;
-        private int _recipientUser;
+        private User _senderUser;
+        private User _recipientUser;
         private bool _isSenderPay;
         private Route _route;
         private string _type;
         private double _weight;
-        private string _status;
-        private int _currentBranch;
+        private Status _status;
+        private Branch _currentBranch;
         private bool _isConfirmedBranch;
         private decimal _deliveryPrice;  // Ціна за доставку
         private DateTime _dispatchTime;
@@ -35,12 +34,12 @@ namespace ExpressPost.Classes
                 _billOfLading = value;
             }
         }
-        public int SenderUser
+        public User SenderUser
         {
             get { return _senderUser; }
             set { _senderUser = value; }
         }
-        public int RecipientUser
+        public User RecipientUser
         {
             get { return _recipientUser; }
             set { _recipientUser = value; }
@@ -70,17 +69,19 @@ namespace ExpressPost.Classes
                 _weight = value;
             }
         }
-        public string Status
+        public Status Status
         {
             get { return _status; }
             set
             {
-                if (value != "Створено" && value != "Підтверджено" && value != "В_дорозі" && value != "Доставлено" && value != "Забрали" && value != "Втрачено")
-                    throw new ArgumentException("Статус пакета повинен бути одним із наступних: 'Створено', 'Підтверджено', 'В_дорозі', 'Доставлено', 'Забрали', 'Втрачено'");
+                if (!Enum.IsDefined(typeof(Status), value))
+                {
+                    throw new ArgumentException("Статус повинен бути одним із наступних: 'Створено', 'В_дорозі', 'Доставлено', 'Забрали', 'Втрачено'");
+                }
                 _status = value;
             }
         }
-        public int CurrentBranch
+        public Branch CurrentBranch
         {
             get { return _currentBranch; }
             set { _currentBranch = value; }
@@ -105,8 +106,6 @@ namespace ExpressPost.Classes
             get { return _dispatchTime; }
             set
             {
-                if (value > DateTime.Now)
-                    throw new ArgumentException("Дата коли створили накладну не може бути в майбутньому");
                 _dispatchTime = value;
             }
         }
@@ -136,8 +135,8 @@ namespace ExpressPost.Classes
             set { _isSenderPay = value; }
         }
 
-        public Parcel(string billOfLading, int senderUser, int recipientUser, bool isSenderPay, Route route, string type, double weight, string status,
-    int currentBranch, bool isConfirmedBranch, decimal deliveryPrice, DateTime dispatchTime, DateTime deliveryTime, decimal valuationPrice)
+        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, Route route, string type, double weight, Status status,
+    Branch currentBranch, bool isConfirmedBranch, decimal deliveryPrice, DateTime dispatchTime, DateTime deliveryTime, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
             SenderUser = senderUser;
@@ -155,7 +154,7 @@ namespace ExpressPost.Classes
             IsSenderPay = isSenderPay;
         }
 
-        public Parcel(string billOfLading, int senderUser, int recipientUser, bool isSenderPay, string type, double weight, string status, bool isConfirmedBranch, decimal valuationPrice)
+        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, string type, double weight, Status status, bool isConfirmedBranch, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
             SenderUser = senderUser;

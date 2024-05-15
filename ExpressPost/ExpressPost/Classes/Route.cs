@@ -76,5 +76,15 @@ namespace ExpressPost.Classes
             }
             return null; // повертаємо null, якщо маршрут не знайдено
         }
+
+        public static Route SearchRoute(int id)
+        {
+            foreach (Route route in Program.DataManager.Routes)
+            {
+                if (route.Id == id)
+                    return route;
+            }
+            return null;
+        }
     }
 }

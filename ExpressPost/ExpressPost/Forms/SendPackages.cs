@@ -15,7 +15,7 @@ namespace ExpressPost.Forms
     {
         //посилки на відправку
         public List<Parcel> sendPackages = Program.DataManager.Parcels.Where(parcel => parcel.IsConfirmedBranch && 
-        parcel.CurrentBranch != parcel.Route.Destination).ToList();
+        parcel.CurrentBranch.Id != parcel.Route.Destination.Id).ToList();
 
         public SendPackages()
         {

@@ -14,7 +14,7 @@ namespace ExpressPost.Forms
     public partial class PickUpPackages : BaseForm
     {
         //посилки які мають видати 
-        public List<Parcel> pickUpPackages = Program.DataManager.Parcels.Where(parcel => parcel.CurrentBranch == parcel.Route.Destination.Id).ToList();
+        public List<Parcel> pickUpPackages = Program.DataManager.Parcels.Where(parcel => parcel.CurrentBranch.Id == parcel.Route.Destination.Id).ToList();
 
         public PickUpPackages()
         {
