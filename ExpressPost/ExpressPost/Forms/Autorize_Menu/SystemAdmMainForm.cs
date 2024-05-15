@@ -26,5 +26,10 @@ namespace ExpressPost.Forms
         {
             FormProperties.SwitchToForm(this, new WorkersForm());
         }
+
+        private void routesButton_Click(object sender, EventArgs e)
+        {
+            FormProperties.SwitchToForm(this, new RoutesForm());
+        }
     }
 }

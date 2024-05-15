@@ -30,6 +30,7 @@
         {
             this.WorkersButton = new System.Windows.Forms.Button();
             this.MyProfile_button = new System.Windows.Forms.Button();
+            this.routesButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // WorkersButton
@@ -54,11 +55,23 @@
             this.MyProfile_button.UseVisualStyleBackColor = true;
             this.MyProfile_button.Click += new System.EventHandler(this.MyProfile_button_Click);
             // 
+            // routesButton
+            // 
+            this.routesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.routesButton.Location = new System.Drawing.Point(195, 90);
+            this.routesButton.Name = "routesButton";
+            this.routesButton.Size = new System.Drawing.Size(145, 49);
+            this.routesButton.TabIndex = 4;
+            this.routesButton.Text = "Routes";
+            this.routesButton.UseVisualStyleBackColor = true;
+            this.routesButton.Click += new System.EventHandler(this.routesButton_Click);
+            // 
             // SystemAdmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 540);
+            this.Controls.Add(this.routesButton);
             this.Controls.Add(this.WorkersButton);
             this.Controls.Add(this.MyProfile_button);
             this.Name = "SystemAdmMainForm";
@@ -71,5 +84,6 @@
 
         private System.Windows.Forms.Button WorkersButton;
         private System.Windows.Forms.Button MyProfile_button;
+        private System.Windows.Forms.Button routesButton;
     }
 }

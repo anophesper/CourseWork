@@ -182,6 +182,12 @@
     <Compile Include="Forms\PickUpPackages.Designer.cs">
       <DependentUpon>PickUpPackages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RoutesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RoutesForm.Designer.cs">
+      <DependentUpon>RoutesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SendPackages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PickUpPackages.resx">
       <DependentUpon>PickUpPackages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RoutesForm.resx">
+      <DependentUpon>RoutesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SendPackages.resx">
       <DependentUpon>SendPackages.cs</DependentUpon>

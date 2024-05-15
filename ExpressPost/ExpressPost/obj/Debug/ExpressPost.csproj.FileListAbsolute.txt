@@ -100,3 +100,4 @@ C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.exe
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.pdb
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.WorkersForm.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.RoutesForm.resources
