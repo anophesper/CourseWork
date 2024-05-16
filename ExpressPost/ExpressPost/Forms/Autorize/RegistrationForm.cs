@@ -35,13 +35,13 @@ namespace ExpressPost.Forms
                 string password = password_textBox.Text;
 
                 // Створюємо новий об'єкт класу Client
-                Client newClient = new Client(firstName, lastName, phoneNumber, password);
+                User newClient = new Client(firstName, lastName, phoneNumber, password);
 
                 // Вставляємо нового клієнта в базу даних
                 DB_DataManager.InsertIntoDatabase(newClient);
                 // Зберігаємо інформацію про користувача
-                Program.CurrentUser = newClient;
-                newClient.Login();
+                Program.CurrentUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumber);//після внесення змін в бд, списки оновлились тому робимо пошук
+                Program.CurrentUser.Login();
                 FormProperties.SwitchToForm(this, new ClientMainForm());
             }
             catch (Exception ex)
