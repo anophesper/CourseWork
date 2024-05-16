@@ -1,5 +1,6 @@
 ﻿using ExpressPost.Classes;
 using ExpressPost.Forms;
+using ExpressPost.Forms.Autorize;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,8 @@ namespace ExpressPost.Forms
         TextBox firstNameTextBox = new TextBox();
         TextBox lastNameTextBox = new TextBox();
         TextBox phoneNumberTextBox = new TextBox();
+
+        Button ChangePasswordButton = new Button();
 
         public MyProfile()
         {
@@ -53,7 +56,7 @@ namespace ExpressPost.Forms
 
             // Встановлення положення TextBox
             int formWidth = this.ClientSize.Width; // Ширина форми
-            int Width = 300; // Збільшена ширина TextBox
+            int Width = 300; // Ширина TextBox
 
             int xPosition = (formWidth - Width) / 2; // Розрахунок координати X для вирівнювання TextBox по центру
 
@@ -94,6 +97,18 @@ namespace ExpressPost.Forms
             firstNameTextBox.Visible = false;
             lastNameTextBox.Visible = false;
             phoneNumberTextBox.Visible = false;
+
+            // Ініціалізація кнопки зміни паролю
+            ChangePasswordButton.Text = "Change Password";
+            ChangePasswordButton.Location = new Point(xPosition, 300); // Встановлення положення кнопки
+            ChangePasswordButton.Size = new Size(130, 30);//Встановлюємо розміри кнопки
+            ChangePasswordButton.Visible = false; // Приховуємо кнопку на початку
+
+            // Додаємо кнопку до форми
+            this.Controls.Add(ChangePasswordButton);
+
+            // Додаємо обробник подій для кнопки
+            ChangePasswordButton.Click += ChangePasswordButton_Click;
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -113,6 +128,7 @@ namespace ExpressPost.Forms
 
                     EditButton.Text = "Save changes";
                     LogOutButton.Visible = false;
+                    ChangePasswordButton.Visible = true;
                 }
                 else if (EditButton.Text == "Save changes")
                 {
@@ -127,6 +143,7 @@ namespace ExpressPost.Forms
 
                     EditButton.Text = "Edit";
                     LogOutButton.Visible = true;
+                    ChangePasswordButton.Visible = false;
 
                     // Оновлюємо дані користувача
                     Program.CurrentUser.FirstName = firstNameTextBox.Text;
@@ -147,6 +164,12 @@ namespace ExpressPost.Forms
                 // Обробка помилок
                 MessageBox.Show("Помилка: " + ex.Message);
             }
+        }
+
+        private void ChangePasswordButton_Click(object sender, EventArgs e)
+        {
+            ChangePasswordForm changePasswordForm = new ChangePasswordForm();
+            changePasswordForm.Show();
         }
 
         private void LogOutButton_Click(object sender, EventArgs e)

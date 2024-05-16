@@ -102,3 +102,4 @@ C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.WorkersForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.RoutesForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.BranchesForm.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\obj\Debug\ExpressPost.Forms.Autorize.ChangePasswordForm.resources
