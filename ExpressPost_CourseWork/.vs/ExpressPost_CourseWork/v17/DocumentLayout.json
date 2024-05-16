@@ -1,0 +1,153 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\authorize\\changepasswordform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\authorize\\changepasswordform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\authorize\\changepasswordform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\authorize\\changepasswordform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\authorize\\myprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\authorize\\myprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\authorize\\myprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\authorize\\myprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\forms\\client\\createpackageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\client\\createpackageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\client\\createpackageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\client\\createpackageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\formproperties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:formproperties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FormProperties.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\FormProperties.cs",
+              "RelativeDocumentMoniker": "FormProperties.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\FormProperties.cs",
+              "RelativeToolTip": "FormProperties.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T17:49:24.378Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T18:24:12.245Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChangePasswordForm.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Authorize\\ChangePasswordForm.cs",
+              "RelativeDocumentMoniker": "Forms\\Authorize\\ChangePasswordForm.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Authorize\\ChangePasswordForm.cs",
+              "RelativeToolTip": "Forms\\Authorize\\ChangePasswordForm.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T19:18:39.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChangePasswordForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Authorize\\ChangePasswordForm.cs",
+              "RelativeDocumentMoniker": "Forms\\Authorize\\ChangePasswordForm.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Authorize\\ChangePasswordForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Forms\\Authorize\\ChangePasswordForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T19:18:37.423Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MyProfile.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Authorize\\MyProfile.cs",
+              "RelativeDocumentMoniker": "Forms\\Authorize\\MyProfile.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Authorize\\MyProfile.cs",
+              "RelativeToolTip": "Forms\\Authorize\\MyProfile.cs",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAiwGQAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T19:17:38.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MyProfile.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Authorize\\MyProfile.cs",
+              "RelativeDocumentMoniker": "Forms\\Authorize\\MyProfile.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Authorize\\MyProfile.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Forms\\Authorize\\MyProfile.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T19:17:36.975Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreatePackageForm.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Client\\CreatePackageForm.cs",
+              "RelativeDocumentMoniker": "Forms\\Client\\CreatePackageForm.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Client\\CreatePackageForm.cs",
+              "RelativeToolTip": "Forms\\Client\\CreatePackageForm.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAADwv2AAAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T18:57:53.531Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CreatePackageForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Client\\CreatePackageForm.cs",
+              "RelativeDocumentMoniker": "Forms\\Client\\CreatePackageForm.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Client\\CreatePackageForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Forms\\Client\\CreatePackageForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T18:53:29.255Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

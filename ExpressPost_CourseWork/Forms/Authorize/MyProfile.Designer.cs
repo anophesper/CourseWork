@@ -1,0 +1,76 @@
+﻿namespace ExpressPost_CourseWork.Forms.Authorize
+{
+    partial class MyProfile
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.EditButton = new System.Windows.Forms.Button();
+            this.LogOutButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // EditButton
+            // 
+            this.EditButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditButton.Location = new System.Drawing.Point(407, 368);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(170, 40);
+            this.EditButton.TabIndex = 13;
+            this.EditButton.Text = "Змінити";
+            this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            // 
+            // LogOutButton
+            // 
+            this.LogOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogOutButton.Location = new System.Drawing.Point(433, 414);
+            this.LogOutButton.Name = "LogOutButton";
+            this.LogOutButton.Size = new System.Drawing.Size(120, 30);
+            this.LogOutButton.TabIndex = 14;
+            this.LogOutButton.Text = "Вихід";
+            this.LogOutButton.UseVisualStyleBackColor = true;
+            this.LogOutButton.Click += new System.EventHandler(this.LogOutButton_Click);
+            // 
+            // MyProfile
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(960, 540);
+            this.Controls.Add(this.LogOutButton);
+            this.Controls.Add(this.EditButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "MyProfile";
+            this.Text = "MyProfile";
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button EditButton;
+        private System.Windows.Forms.Button LogOutButton;
+    }
+}
