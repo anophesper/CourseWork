@@ -40,17 +40,17 @@ namespace ExpressPost_CourseWork.Forms.Authorize
             {
                 string currentUserPassword = Program.CurrentUser.Password;
                 if (currentPasswordTextBox.Text != currentUserPassword)
-                    throw new Exception("Current password incorrect");
+                    throw new Exception("Поточний пароль введено неправильно");
 
                 if (newPasswordTextBox.Text != newPasswordAgainTextBox.Text)
-                    throw new Exception("New password and New password Again not the same");
+                    throw new Exception("Нові паролі не співпадають");
 
                 // Якщо все в порядку, оновлюємо пароль
                 Program.CurrentUser.Password = newPasswordTextBox.Text;
                 DB_DataManager.UpdateDatabase(Program.CurrentUser); // Оновлюємо дані в базі даних
 
                 // Повідомлення про успішну зміну паролю
-                MessageBox.Show("Password was changed");
+                MessageBox.Show("Пароль успішно змінено");
                 this.Close();
             }
             catch (Exception ex)

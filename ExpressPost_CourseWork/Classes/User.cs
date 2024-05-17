@@ -10,7 +10,7 @@ namespace ExpressPost_CourseWork.Classes
 {
     public abstract class User
     {
-        private static string filePath = @"C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost\ExpressPost\user.json";
+        private static string filePath = @"C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\user.json";
 
         private int _id;
         private string _firstName;
@@ -94,6 +94,16 @@ namespace ExpressPost_CourseWork.Classes
         //метод для збереження у файл інформації про авторизованого користувача
         public void Login()
         {
+            // Перевіряємо, чи файл вже існує
+            if (!File.Exists(filePath))
+            {
+                // Створюємо файл
+                using (StreamWriter sw = File.CreateText(filePath))
+                {
+                    sw.WriteLine("{}"); // Записуємо порожній об'єкт JSON
+                }
+            }
+
             string json = JsonConvert.SerializeObject(this);
             File.WriteAllText(filePath, json);
         }

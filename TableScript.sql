@@ -58,20 +58,20 @@ CREATE TABLE ParcelUsers (
     SenderUser INT NOT NULL,
     RecipientUser INT NOT NULL,
 	IsSenderPay BOOL NOT NULL,
+	Route INT NOT NULL,
     FOREIGN KEY (BillOfLading) REFERENCES Parcel(BillOfLading),
     FOREIGN KEY (SenderUser) REFERENCES Users(ID),
-    FOREIGN KEY (RecipientUser) REFERENCES Users(ID)
+    FOREIGN KEY (RecipientUser) REFERENCES Users(ID),
+    FOREIGN KEY (Route) REFERENCES Route(ID)
 );
 
 CREATE TABLE ParcelRouteDelivery (
     BillOfLading CHAR(14) NOT NULL UNIQUE,
-    Route INT,
     CurrentBranch INT,
     IsConfirmedBranch BOOL,
     DeliveryPrice DECIMAL(10,2),  -- Ціна за доставку
     DispatchTime TIMESTAMP,
     DeliveryTime TIMESTAMP,
     FOREIGN KEY (BillOfLading) REFERENCES Parcel(BillOfLading),
-    FOREIGN KEY (Route) REFERENCES Route(ID),
     FOREIGN KEY (CurrentBranch) REFERENCES Branch(ID)
 );

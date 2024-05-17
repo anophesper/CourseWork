@@ -165,10 +165,10 @@ namespace ExpressPost_CourseWork
         {
             Parcels = new List<Parcel>(); // ініціалізуємо список посилок
             DBConnection.OpenConnection(); // відкриваємо з'єднання
-            MySqlCommand command = new MySqlCommand("SELECT Parcel.*, ParcelUsers.SenderUser, ParcelUsers.RecipientUser, ParcelUsers.IsSenderPay, " +
-                "ParcelRouteDelivery.Route, ParcelRouteDelivery.CurrentBranch, ParcelRouteDelivery.IsConfirmedBranch, " +
+            MySqlCommand command = new MySqlCommand("SELECT Parcel.*, ParcelUsers.SenderUser, ParcelUsers.RecipientUser, ParcelUsers.IsSenderPay, ParcelUsers.Route, " +
+                "ParcelRouteDelivery.CurrentBranch, ParcelRouteDelivery.IsConfirmedBranch, " +
                 "ParcelRouteDelivery.DeliveryPrice, ParcelRouteDelivery.DispatchTime, ParcelRouteDelivery.DeliveryTime FROM Parcel INNER JOIN " +
-                "ParcelUsers ON Parcel.BillOfLading = ParcelUsers.BillOfLading INNER JOIN ParcelRouteDelivery ON Parcel.BillOfLading = " +
+                "ParcelUsers ON Parcel.BillOfLading = ParcelUsers.BillOfLading LEFT JOIN ParcelRouteDelivery ON Parcel.BillOfLading = " +
                 "ParcelRouteDelivery.BillOfLading", DBConnection.GetConnection()); // створюємо запит
             MySqlDataReader reader = command.ExecuteReader(); // виконуємо запит
 
@@ -182,8 +182,13 @@ namespace ExpressPost_CourseWork
                 TypeP type = (TypeP)System.Enum.Parse(typeof(TypeP), reader["Type"].ToString());
                 double weight = Convert.ToDouble(reader["Weight"]);
                 Status status = (Status)System.Enum.Parse(typeof(Status), reader["Status"].ToString());
-                Branch currentBranch = Branch.GetBranchById(Convert.ToInt32(reader["CurrentBranch"]));
-                bool isConfirmedBranch = Convert.ToBoolean(reader["IsConfirmedBranch"]);  // Нове поле
+                Branch currentBranch = null;
+                bool isConfirmedBranch = false;
+                if (reader["CurrentBranch"] != DBNull.Value)
+                {
+                    currentBranch = Branch.GetBranchById(Convert.ToInt32(reader["CurrentBranch"]));
+                    isConfirmedBranch = Convert.ToBoolean(reader["IsConfirmedBranch"]);  // Нове поле
+                }
                 decimal deliveryPrice = Convert.ToDecimal(reader["DeliveryPrice"]);
                 DateTime dispatchTime = Convert.ToDateTime(reader["DispatchTime"]);
                 DateTime deliveryTime = Convert.ToDateTime(reader["DeliveryTime"]);
@@ -286,18 +291,18 @@ namespace ExpressPost_CourseWork
                     command.ExecuteNonQuery(); //виконуємо запит
 
                     // Вставляємо дані про відправника та отримувача в таблицю ParcelUsers
-                    command = new MySqlCommand($"INSERT INTO ParcelUsers (BillOfLading, SenderUser, RecipientUser, IsSenderPay) VALUES ('{parcel.BillOfLading}', '{parcel.SenderUser.Id}', '{parcel.RecipientUser.Id}', '{parcel.IsSenderPay}')", DBConnection.GetConnection());
+                    command = new MySqlCommand($"INSERT INTO ParcelUsers (BillOfLading, SenderUser, RecipientUser, IsSenderPay, Route) VALUES ('{parcel.BillOfLading}', '{parcel.SenderUser.Id}', '{parcel.RecipientUser.Id}', '{parcel.IsSenderPay}', '{parcel.Route.Id}')", DBConnection.GetConnection());
                     command.ExecuteNonQuery(); //виконуємо запит
 
-                    // Перевіряємо, чи було створено об'єкт parcel за допомогою першого конструктора
-                    if (parcel.Route != null)
-                    {
-                        // Конвертуємо DateTime в рядок у форматі, який MySQL може правильно обробити
-                        string dispatchTimeString = parcel.DispatchTime.ToString("yyyy-MM-dd HH:mm:ss");
-                        string deliveryTimeString = parcel.DeliveryTime.ToString("yyyy-MM-dd HH:mm:ss");
+                    // Конвертуємо DateTime в рядок у форматі, який MySQL може правильно обробити
+                    string dispatchTimeString = parcel.DispatchTime.ToString("yyyy-MM-dd HH:mm:ss");
+                    string deliveryTimeString = parcel.DeliveryTime.ToString("yyyy-MM-dd HH:mm:ss");
 
+                    // Перевіряємо, чи CurrentBranch не null
+                    if (parcel.CurrentBranch != null)
+                    {
                         // Вставляємо дані про маршрут, поточне відділення, підтвердження відділення, ціну доставки, час відправки та час доставки в таблицю ParcelRouteDelivery
-                        command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, Route, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.Route.Id}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{dispatchTimeString}', '{deliveryTimeString}')", DBConnection.GetConnection());
+                        command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{dispatchTimeString}', '{deliveryTimeString}')", DBConnection.GetConnection());
                         command.ExecuteNonQuery(); //виконуємо запит
                     }
                     break;
@@ -336,11 +341,23 @@ namespace ExpressPost_CourseWork
                     command.ExecuteNonQuery(); //виконуємо запит
 
                     // Оновлюємо дані про відправника та отримувача в таблиці ParcelUsers
-                    command = new MySqlCommand($"UPDATE ParcelUsers SET SenderUser = '{parcel.SenderUser.Id}', RecipientUser = '{parcel.RecipientUser.Id}', IsSenderPay = '{parcel.IsSenderPay}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    command = new MySqlCommand($"UPDATE ParcelUsers SET SenderUser = '{parcel.SenderUser.Id}', RecipientUser = '{parcel.RecipientUser.Id}', IsSenderPay = '{parcel.IsSenderPay}', Route = '{parcel.Route.Id}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
                     command.ExecuteNonQuery(); //виконуємо запит
 
-                    // Оновлюємо дані про маршрут, поточне відділення, підтвердження відділення, ціну доставки, час відправки та час доставки в таблиці ParcelRouteDelivery
-                    command = new MySqlCommand($"UPDATE ParcelRouteDelivery SET Route = '{parcel.Route.Id}', CurrentBranch = '{parcel.CurrentBranch.Id}', IsConfirmedBranch = '{parcel.IsConfirmedBranch}', DeliveryPrice = '{parcel.DeliveryPrice}', DispatchTime = '{parcel.DispatchTime}', DeliveryTime = '{parcel.DeliveryTime}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    // Перевіряємо, чи існує запис з таким BillOfLading
+                    command = new MySqlCommand($"SELECT COUNT(*) FROM ParcelRouteDelivery WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        // Якщо запис існує, оновлюємо дані
+                        command = new MySqlCommand($"UPDATE ParcelRouteDelivery SET CurrentBranch = '{parcel.CurrentBranch.Id}', IsConfirmedBranch = '{parcel.IsConfirmedBranch}', DeliveryPrice = '{parcel.DeliveryPrice}', DispatchTime = '{parcel.DispatchTime}', DeliveryTime = '{parcel.DeliveryTime}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                    }
+                    else
+                    {
+                        // Якщо запису не існує, створюємо новий
+                        command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{parcel.DispatchTime}', '{parcel.DeliveryTime}')", DBConnection.GetConnection());
+                    }
                     command.ExecuteNonQuery(); //виконуємо запит
                     break;
                 default:

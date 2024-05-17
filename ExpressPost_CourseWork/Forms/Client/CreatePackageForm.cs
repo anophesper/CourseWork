@@ -23,7 +23,10 @@ namespace ExpressPost_CourseWork.Forms.Client
             billOfLadingLabel.Text = Parcel.GenerateBillOfLading();
             // Отримуємо всі значення з переліку Cities і додаємо їх до cityComboBox
             foreach (string city in System.Enum.GetNames(typeof(Cities)))
-                CityComboBox.Items.Add(city);
+                CityRecipientComboBox.Items.Add(city);
+            // Отримуємо всі значення з переліку Cities і додаємо їх до cityComboBox
+            foreach (string city in System.Enum.GetNames(typeof(Cities)))
+                CitySenderComboBox.Items.Add(city);
             InitializeForm(Program.CurrentUser);
         }
 
@@ -33,6 +36,12 @@ namespace ExpressPost_CourseWork.Forms.Client
             {
                 SenderNameTextBox.Text = currentUser.FirstName + " " + currentUser.LastName;
                 SenderPhoneNumberTextBox.Text = currentUser.PhoneNumber;
+            }
+            if(currentUser is Classes.BranchAdmin)
+            {
+                Classes.BranchAdmin branchAdmin = currentUser as Classes.BranchAdmin;
+                CitySenderComboBox.SelectedItem = branchAdmin.Branch.City.ToString();
+                DepartmentSenderComboBox.SelectedItem = $"{branchAdmin.Branch.Id}, {branchAdmin.Branch.Address}";
             }
         }
 
@@ -50,9 +59,29 @@ namespace ExpressPost_CourseWork.Forms.Client
                 decimal deliveryPrice = 100;
                 decimal estimatedCost = decimal.Parse(EstimatedCostTextBox.Text);
 
+                //формуємо маршрут
+                string CitySenderString = CitySenderComboBox.SelectedItem.ToString();
+                System.Enum.TryParse(CitySenderString, out Cities citySender);
+                string DepartmentSenderString = DepartmentSenderComboBox.SelectedItem.ToString();
+                string[] parts1 = DepartmentSenderString.Split(',');
+                int idSender = int.Parse(parts1[0].Trim());
+
+                string CityRecipientString = CityRecipientComboBox.SelectedItem.ToString();
+                System.Enum.TryParse(CityRecipientString, out Cities cityRecipient);
+                string DepartmentRecipientString = DepartmentRecipientComboBox.SelectedItem.ToString();
+                string[] parts2 = DepartmentRecipientString.Split(',');
+                int idRecipient = int.Parse(parts2[0].Trim());
+
+                // Знаходимо відділення відправника та отримувача
+                Branch origin = Program.DataManager.Branches.FirstOrDefault(b => b.City == citySender && b.Id == idSender);
+                Branch destination = Program.DataManager.Branches.FirstOrDefault(b => b.City == cityRecipient && b.Id == idRecipient);
+
+                Route route = Route.SearchRoute(origin, destination);
+
                 if (Program.CurrentUser is Classes.Client)
                 {
-                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, type, weight, Status.Створено, false, estimatedCost);
+
+                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route, type, weight, Status.Створено, false, estimatedCost);
                     DB_DataManager.InsertIntoDatabase(parcel);
 
                     FormProperties.SwitchToForm(this, new ClientMainForm());
@@ -61,18 +90,6 @@ namespace ExpressPost_CourseWork.Forms.Client
                 else
                 {
                     //дані, які не можемо просто вщяти з полів отримуємо за допомогою пошуку та інших речей
-                    string cityString = CityComboBox.SelectedItem.ToString();
-                    System.Enum.TryParse(cityString, out Cities city);
-
-                    string department = DepartmentComboBox.SelectedItem.ToString();
-                    string[] parts = department.Split(',');
-                    int id = int.Parse(parts[0].Trim());
-
-                    Branch origin = ((Classes.BranchAdmin)Program.CurrentUser).Branch;
-                    Branch destination = Program.DataManager.Branches.FirstOrDefault(b => b.City == city && b.Id == id);
-
-                    Route route = Route.SearchRoute(origin, destination);
-
                     DateTime now = DateTime.Now;
                     DateTime dispatchTime = new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0).AddHours(1);
                     DateTime deliveryTime = dispatchTime.AddHours(route.Duration);
@@ -94,24 +111,82 @@ namespace ExpressPost_CourseWork.Forms.Client
         }
 
         // Заповнюємо комбобокс з відділеннями
-        private void cityComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void CitySenderComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 // Очищаємо departmentComboBox
-                DepartmentComboBox.Items.Clear();
+                DepartmentSenderComboBox.Items.Clear();
                 // Отримуємо вибране місто
-                Cities selectedCity = (Cities)System.Enum.Parse(typeof(Cities), CityComboBox.SelectedItem.ToString());
+                Cities selectedSenderCity = (Cities)System.Enum.Parse(typeof(Cities), CitySenderComboBox.SelectedItem.ToString());
                 // Знаходимо всі відділення в цьому місті
-                List<Branch> branchesInCity = Program.DataManager.Branches.Where(branch => branch.City == selectedCity).ToList();
+                List<Branch> branchesInCitySender = Program.DataManager.Branches.Where(branch => branch.City == selectedSenderCity).ToList();
                 // Додаємо відділення до departmentComboBox
-                foreach (Branch branch in branchesInCity)
-                    DepartmentComboBox.Items.Add($"{branch.Id}, {branch.Address}");
+                foreach (Branch branch in branchesInCitySender)
+                    DepartmentSenderComboBox.Items.Add($"{branch.Id}, {branch.Address}");
             }
             catch (Exception ex)
             {
                 // Обробка помилок
                 MessageBox.Show("Помилка: " + ex.Message);
+            }
+        }
+
+        // Заповнюємо комбобокс з відділеннями
+        private void CityRecipientComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // Очищаємо departmentComboBox
+                DepartmentRecipientComboBox.Items.Clear();
+                // Отримуємо вибране місто
+                Cities selectedRecipientCity = (Cities)System.Enum.Parse(typeof(Cities), CityRecipientComboBox.SelectedItem.ToString());
+                // Знаходимо всі відділення в цьому місті
+                List<Branch> branchesInCityRecipient = Program.DataManager.Branches.Where(branch => branch.City == selectedRecipientCity).ToList();
+                // Додаємо відділення до departmentComboBox
+                foreach (Branch branch in branchesInCityRecipient)
+                    DepartmentRecipientComboBox.Items.Add($"{branch.Id}, {branch.Address}");
+            }
+            catch (Exception ex)
+            {
+                // Обробка помилок
+                MessageBox.Show("Помилка: " + ex.Message);
+            }
+        }
+
+        private void SenderPhoneNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Отримуємо номер телефону відправника
+            string senderPhoneNumber = SenderPhoneNumberTextBox.Text;
+            // Знаходимо користувача з таким номером телефону
+            User senderUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == senderPhoneNumber);
+            if (senderUser != null)
+            {
+                // Якщо користувач знайдений, заповнюємо поле імені відправника
+                SenderNameTextBox.Text = senderUser.FirstName + " " + senderUser.LastName;
+            }
+            else
+            {
+                // Якщо користувача не знайдено, виконуємо іншу логіку
+                // TODO: додати іншу логіку
+            }
+        }
+
+        private void RecipientPhoneNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Отримуємо номер телефону отримувача
+            string recipientPhoneNumber = RecipientPhoneNumberTextBox.Text;
+            // Знаходимо користувача з таким номером телефону
+            User recipientUser = Program.DataManager.Users.FirstOrDefault(user => user.PhoneNumber == recipientPhoneNumber);
+            if (recipientUser != null)
+            {
+                // Якщо користувач знайдений, заповнюємо поле імені отримувача
+                RecipientNameTextBox.Text = recipientUser.FirstName + " " + recipientUser.LastName;
+            }
+            else
+            {
+                // Якщо користувача не знайдено, виконуємо іншу логіку
+                // TODO: додати іншу логіку
             }
         }
     }

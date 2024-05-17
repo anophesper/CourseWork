@@ -18,11 +18,5 @@ namespace ExpressPost_CourseWork.Classes
         public Client(int id, string firstName, string lastName, string phoneNumber, string password) :
             base(id, firstName, lastName, phoneNumber, password)
         { }
-
-        public Client(int id, string firstName, string lastName, string phoneNumber, string password, List<Parcel> parcels) :
-            base(id, firstName, lastName, phoneNumber, password)
-        {
-            Parcels = parcels;
-        }
     }
 }
