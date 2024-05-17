@@ -45,28 +45,27 @@
 - **SearchRoute(Branch origin, Branch destination)**: static Route
 - **SearchRoute(int id)**: static Route
 
-### **PackageGroup**
-- **BillOfLading:** Унікальний ідентифікатор групи пакунків - ТТН (String).
-- **Sender:** Відправник пакунків (User).
-- **Recipient:** Отримувач пакунків (User).
+### **Parcel**
+- **BillOfLading:** Унікальний ідентифікатор пакунка - ТТН (String).
+- **SenderUser:** Відправник пакунка (User).
+- **RecipientUser:** Отримувач пакунка (User).
+- **IsSenderPay:** Чи оплачує відправник доставку (bool).
 - **Route:** Маршрут (Route).
-- **Packages:** Посилки закріплені за ТТН (List<Package>).
-- **DeliveryPrice:** Ціна за достовку (Double).
-- **Date:** Дата відправки пакунка (DateTime).
-- **DeliveryDate:** Дата доставки пакунка (DateTime).
-
-### **Package**
-- **ID:** Унікальний ідентифікатор пакунка (int).
+- **Type:** Тип пакунка (TypeP).
 - **Weight:** Вага пакунка (float).
-- **Status:** Статус пакунка (Enum Status).
-- **Type:** Тип пакунка (Enum PackageType).
-- **ValuationPrice:** Оціночна вартість пакунка (float).
+- **Status:** Статус пакунка (Enum.Status).
+- **CurrentBranch:** Поточне відділення, де знаходиться пакунок (Branch).
+- **IsConfirmedBranch:** Чи підтверджено відділення (bool).
+- **DeliveryPrice:** Ціна за доставку (decimal).
+- **DispatchTime:** Час відправки (DateTime).
+- **DeliveryTime:** Час доставки (DateTime).
+- **ValuationPrice:** Оціночна вартість пакунка (decimal).
 - **GenerateBillOfLading()**: static string
 
 #### Enums
 - **Cities:** Київ, Харків, Львів, Одеса, Тернопіль, Дніпро
 - **PackageType:** Документи, Посилка, Великий вантаж.
-- **Status:** Створено, Підтверджено, В дорозі, Доставлено, Забрали, Втрачено.
+- **Status:** Створено, В дорозі, Доставлено, Забрали, Втрачено.
 
 ### **DBConnection**
 - **connection**: static MySqlConnection
