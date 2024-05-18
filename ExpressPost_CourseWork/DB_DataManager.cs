@@ -3,9 +3,12 @@ using ExpressPost_CourseWork.Enum;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace ExpressPost_CourseWork
 {
@@ -183,15 +186,15 @@ namespace ExpressPost_CourseWork
                 double weight = Convert.ToDouble(reader["Weight"]);
                 Status status = (Status)System.Enum.Parse(typeof(Status), reader["Status"].ToString());
                 Branch currentBranch = null;
-                bool isConfirmedBranch = false;
+                bool? isConfirmedBranch = null;
                 if (reader["CurrentBranch"] != DBNull.Value)
                 {
                     currentBranch = Branch.GetBranchById(Convert.ToInt32(reader["CurrentBranch"]));
                     isConfirmedBranch = Convert.ToBoolean(reader["IsConfirmedBranch"]);  // Нове поле
                 }
-                decimal deliveryPrice = Convert.ToDecimal(reader["DeliveryPrice"]);
-                DateTime dispatchTime = Convert.ToDateTime(reader["DispatchTime"]);
-                DateTime deliveryTime = Convert.ToDateTime(reader["DeliveryTime"]);
+                decimal? deliveryPrice = reader["DeliveryPrice"] != DBNull.Value ? Convert.ToDecimal(reader["DeliveryPrice"]) : (decimal?)null;
+                DateTime? dispatchTime = reader["DispatchTime"] != DBNull.Value ? Convert.ToDateTime(reader["DispatchTime"]) : (DateTime?)null;
+                DateTime? deliveryTime = reader["DeliveryTime"] != DBNull.Value ? Convert.ToDateTime(reader["DeliveryTime"]) : (DateTime?)null;
                 decimal valuationPrice = Convert.ToDecimal(reader["ValuationPrice"]);
 
                 Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route, type, weight, status, currentBranch, isConfirmedBranch, deliveryPrice, dispatchTime, deliveryTime, valuationPrice);
@@ -246,168 +249,213 @@ namespace ExpressPost_CourseWork
         public static void InsertIntoDatabase(object obj)
         {
             DBConnection.OpenConnection(); //відкриваємо з'єднання з бд
-            MySqlCommand command;
-            MySqlCommand command2;
+            MySqlTransaction transaction = null;
 
-            switch (obj)
+            try
             {
-                case Branch branch:
-                    // Вставляємо дані про відділення в таблицю Branch
-                    command = new MySqlCommand($"INSERT INTO Branch (City, Address) VALUES ('{branch.City}', '{branch.Address}')", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-                    break;
-                case BranchAdmin branchAdmin:
-                    // Вставляємо дані про адміністратора відділення в таблицю Users
-                    command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{branchAdmin.FirstName}', '{branchAdmin.LastName}', '{branchAdmin.PhoneNumber}', '{branchAdmin.Password}', 'Адміністратор відділення')", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-                                               // Вставляємо дані про адміністратора відділення в таблицю BranchAdmins
-                    command2 = new MySqlCommand($"INSERT INTO BranchAdmins (UserID, BranchID) VALUES (LAST_INSERT_ID(), '{branchAdmin.Branch.Id}')", DBConnection.GetConnection());
-                    command2.ExecuteNonQuery(); //виконуємо запит
-                    break;
-                case Classes.Client client:
-                    // Вставляємо дані про клієнта в таблицю Users
-                    command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{client.FirstName}', '{client.LastName}', '{client.PhoneNumber}', '{client.Password}', 'Клієнт')", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-                    break;
-                case SystemAdmin systemAdmin:
-                    // Вставляємо дані про адміністратора системи в таблицю Users
-                    command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{systemAdmin.FirstName}', '{systemAdmin.LastName}', '{systemAdmin.PhoneNumber}', '{systemAdmin.Password}', 'Адміністратор системи')", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-                    break;
-                case Route route:
-                    // Вставляємо дані про маршрут в таблицю Route
-                    command = new MySqlCommand($"INSERT INTO Route (ID, Origin, Destination, Duration) VALUES ('{route.Id}', '{route.Origin.Id}', '{route.Destination.Id}', '{route.Duration}')", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-                    foreach (Branch branch in route.GetIntermediateBranches())
-                    {
-                        // Вставляємо дані про проміжні відділення в таблицю Route_Branch
-                        command2 = new MySqlCommand($"INSERT INTO Route_Branch (RouteID, BranchID) VALUES (LAST_INSERT_ID(), '{branch.Id}')", DBConnection.GetConnection());
-                        command2.ExecuteNonQuery(); //виконуємо запит
-                    }
-                    break;
-                case Parcel parcel:
-                    // Вставляємо дані про посилку в таблицю Parcel
-                    command = new MySqlCommand($"INSERT INTO Parcel (BillOfLading, Type, Weight, Status, ValuationPrice) VALUES ('{parcel.BillOfLading}', '{parcel.Type}', '{parcel.Weight}', '{parcel.Status}', '{parcel.ValuationPrice}')", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
+                transaction = DBConnection.GetConnection().BeginTransaction(); //починаємо транзакцію
+                MySqlCommand command;
+                MySqlCommand command2;
 
-                    // Вставляємо дані про відправника та отримувача в таблицю ParcelUsers
-                    command = new MySqlCommand($"INSERT INTO ParcelUsers (BillOfLading, SenderUser, RecipientUser, IsSenderPay, Route) VALUES ('{parcel.BillOfLading}', '{parcel.SenderUser.Id}', '{parcel.RecipientUser.Id}', '{parcel.IsSenderPay}', '{parcel.Route.Id}')", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-
-                    // Конвертуємо DateTime в рядок у форматі, який MySQL може правильно обробити
-                    string dispatchTimeString = parcel.DispatchTime.ToString("yyyy-MM-dd HH:mm:ss");
-                    string deliveryTimeString = parcel.DeliveryTime.ToString("yyyy-MM-dd HH:mm:ss");
-
-                    // Перевіряємо, чи CurrentBranch не null
-                    if (parcel.CurrentBranch != null)
-                    {
-                        // Вставляємо дані про маршрут, поточне відділення, підтвердження відділення, ціну доставки, час відправки та час доставки в таблицю ParcelRouteDelivery
-                        command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{dispatchTimeString}', '{deliveryTimeString}')", DBConnection.GetConnection());
+                switch (obj)
+                {
+                    case Branch branch:
+                        // Вставляємо дані про відділення в таблицю Branch
+                        command = new MySqlCommand($"INSERT INTO Branch (City, Address) VALUES ('{branch.City}', '{branch.Address}')", DBConnection.GetConnection());
                         command.ExecuteNonQuery(); //виконуємо запит
-                    }
-                    break;
-                default:
-                    throw new Exception("Невідомий тип об'єкта");
+                        break;
+                    case BranchAdmin branchAdmin:
+                        // Вставляємо дані про адміністратора відділення в таблицю Users
+                        command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{branchAdmin.FirstName}', '{branchAdmin.LastName}', '{branchAdmin.PhoneNumber}', '{branchAdmin.Password}', 'Адміністратор відділення')", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+                                                   // Вставляємо дані про адміністратора відділення в таблицю BranchAdmins
+                        command2 = new MySqlCommand($"INSERT INTO BranchAdmins (UserID, BranchID) VALUES (LAST_INSERT_ID(), '{branchAdmin.Branch.Id}')", DBConnection.GetConnection());
+                        command2.ExecuteNonQuery(); //виконуємо запит
+                        break;
+                    case Classes.Client client:
+                        // Вставляємо дані про клієнта в таблицю Users
+                        command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{client.FirstName}', '{client.LastName}', '{client.PhoneNumber}', '{client.Password}', 'Клієнт')", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+                        break;
+                    case SystemAdmin systemAdmin:
+                        // Вставляємо дані про адміністратора системи в таблицю Users
+                        command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{systemAdmin.FirstName}', '{systemAdmin.LastName}', '{systemAdmin.PhoneNumber}', '{systemAdmin.Password}', 'Адміністратор системи')", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+                        break;
+                    case Route route:
+                        // Вставляємо дані про маршрут в таблицю Route
+                        command = new MySqlCommand($"INSERT INTO Route (ID, Origin, Destination, Duration) VALUES ('{route.Id}', '{route.Origin.Id}', '{route.Destination.Id}', '{route.Duration}')", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+                        foreach (Branch branch in route.GetIntermediateBranches())
+                        {
+                            // Вставляємо дані про проміжні відділення в таблицю Route_Branch
+                            command2 = new MySqlCommand($"INSERT INTO Route_Branch (RouteID, BranchID) VALUES (LAST_INSERT_ID(), '{branch.Id}')", DBConnection.GetConnection());
+                            command2.ExecuteNonQuery(); //виконуємо запит
+                        }
+                        break;
+                    case Parcel parcel:
+                        string weightString = parcel.Weight.ToString(CultureInfo.InvariantCulture).Replace(',', '.'); //конвертуємо вагу в прийнятний для бд тип даних
+                                                                                                                      // Вставляємо дані про посилку в таблицю Parcel
+                        command = new MySqlCommand($"INSERT INTO Parcel (BillOfLading, Type, Weight, Status, ValuationPrice) VALUES ('{parcel.BillOfLading}', '{parcel.Type}', '{weightString}', '{parcel.Status}', '{parcel.ValuationPrice}')", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+
+                        // Вставляємо дані про відправника та отримувача в таблицю ParcelUsers
+                        command = new MySqlCommand($"INSERT INTO ParcelUsers (BillOfLading, SenderUser, RecipientUser, IsSenderPay, Route) VALUES ('{parcel.BillOfLading}', '{parcel.SenderUser.Id}', '{parcel.RecipientUser.Id}', '{parcel.IsSenderPay}', '{parcel.Route.Id}')", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+
+                        // Конвертуємо DateTime в рядок у форматі, який MySQL може правильно обробити якцо це не null
+                        string dispatchTimeString = parcel.DispatchTime.HasValue ? parcel.DispatchTime.Value.ToString("yyyy-MM-dd HH:mm:ss") : null;
+                        string deliveryTimeString = parcel.DeliveryTime.HasValue ? parcel.DeliveryTime.Value.ToString("yyyy-MM-dd HH:mm:ss") : null;
+
+                        // Перевіряємо, чи CurrentBranch не null
+                        if (parcel.CurrentBranch != null)
+                        {
+                            // Вставляємо дані про маршрут, поточне відділення, підтвердження відділення, ціну доставки, час відправки та час доставки в таблицю ParcelRouteDelivery
+                            command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{dispatchTimeString}', '{deliveryTimeString}')", DBConnection.GetConnection());
+                            command.ExecuteNonQuery(); //виконуємо запит
+                        }
+                        break;
+                    default:
+                        throw new Exception("Невідомий тип об'єкта");
+                }
+                transaction.Commit(); //завершуємо транзакцію, якщо всі запити успішно виконані
+                LoadData();
             }
-            LoadData();
-            DBConnection.CloseConnection(); //закриваємо з'єднання з бд
+            catch (Exception)
+            {
+                transaction?.Rollback(); //відкочуємо транзакцію, якщо виникла помилка
+                throw; //перекидуємо помилку вище
+            }
+            finally
+            {
+                DBConnection.CloseConnection(); //закриваємо з'єднання з бд
+            }
         }
 
         public static void UpdateDatabase(object obj)
         {
             DBConnection.OpenConnection(); //відкриваємо з'єднання з бд
-            MySqlCommand command;
+            MySqlTransaction transaction = null;
 
-            switch (obj)
+            try
             {
-                case User user:
-                    // Оновлюємо дані про користувача в таблиці Users
-                    command = new MySqlCommand($"UPDATE Users SET FirstName = '{user.FirstName}', LastName = '{user.LastName}', PhoneNumber = '{user.PhoneNumber}', Password = '{user.Password}' WHERE Id = '{user.Id}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-                    break;
-                case Branch branch:
-                    // Оновлюємо дані про відділення в таблиці Branch
-                    command = new MySqlCommand($"UPDATE Branch SET City = '{branch.City}', Address = '{branch.Address}' WHERE Id = '{branch.Id}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-                    break;
-                case Route route:
-                    // Оновлюємо дані про маршрут в таблиці Route
-                    command = new MySqlCommand($"UPDATE Route SET Origin = '{route.Origin.Id}', Destination = '{route.Destination.Id}', Duration = '{route.Duration}' WHERE ID = '{route.Id}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
-                    break;
-                case Parcel parcel:
-                    // Оновлюємо дані про посилку в таблиці Parcel
-                    command = new MySqlCommand($"UPDATE Parcel SET Type = '{parcel.Type}', Weight = '{parcel.Weight}', Status = '{parcel.Status}', ValuationPrice = '{parcel.ValuationPrice}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
+                transaction = DBConnection.GetConnection().BeginTransaction(); //починаємо транзакцію
+                MySqlCommand command;
 
-                    // Оновлюємо дані про відправника та отримувача в таблиці ParcelUsers
-                    command = new MySqlCommand($"UPDATE ParcelUsers SET SenderUser = '{parcel.SenderUser.Id}', RecipientUser = '{parcel.RecipientUser.Id}', IsSenderPay = '{parcel.IsSenderPay}', Route = '{parcel.Route.Id}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); //виконуємо запит
+                switch (obj)
+                {
+                    case User user:
+                        // Оновлюємо дані про користувача в таблиці Users
+                        command = new MySqlCommand($"UPDATE Users SET FirstName = '{user.FirstName}', LastName = '{user.LastName}', PhoneNumber = '{user.PhoneNumber}', Password = '{user.Password}' WHERE Id = '{user.Id}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+                        break;
+                    case Branch branch:
+                        // Оновлюємо дані про відділення в таблиці Branch
+                        command = new MySqlCommand($"UPDATE Branch SET City = '{branch.City}', Address = '{branch.Address}' WHERE Id = '{branch.Id}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+                        break;
+                    case Route route:
+                        // Оновлюємо дані про маршрут в таблиці Route
+                        command = new MySqlCommand($"UPDATE Route SET Origin = '{route.Origin.Id}', Destination = '{route.Destination.Id}', Duration = '{route.Duration}' WHERE ID = '{route.Id}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
+                        break;
+                    case Parcel parcel:
+                        // Оновлюємо дані про посилку в таблиці Parcel
+                        command = new MySqlCommand($"UPDATE Parcel SET Type = '{parcel.Type}', Weight = '{parcel.Weight}', Status = '{parcel.Status}', ValuationPrice = '{parcel.ValuationPrice}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
 
-                    // Перевіряємо, чи існує запис з таким BillOfLading
-                    command = new MySqlCommand($"SELECT COUNT(*) FROM ParcelRouteDelivery WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                    int count = Convert.ToInt32(command.ExecuteScalar());
+                        // Оновлюємо дані про відправника та отримувача в таблиці ParcelUsers
+                        command = new MySqlCommand($"UPDATE ParcelUsers SET SenderUser = '{parcel.SenderUser.Id}', RecipientUser = '{parcel.RecipientUser.Id}', IsSenderPay = '{parcel.IsSenderPay}', Route = '{parcel.Route.Id}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
 
-                    if (count > 0)
-                    {
-                        // Якщо запис існує, оновлюємо дані
-                        command = new MySqlCommand($"UPDATE ParcelRouteDelivery SET CurrentBranch = '{parcel.CurrentBranch.Id}', IsConfirmedBranch = '{parcel.IsConfirmedBranch}', DeliveryPrice = '{parcel.DeliveryPrice}', DispatchTime = '{parcel.DispatchTime}', DeliveryTime = '{parcel.DeliveryTime}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                    }
-                    else
-                    {
-                        // Якщо запису не існує, створюємо новий
-                        command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{parcel.DispatchTime}', '{parcel.DeliveryTime}')", DBConnection.GetConnection());
-                    }
-                    command.ExecuteNonQuery(); //виконуємо запит
-                    break;
-                default:
-                    throw new Exception("Невідомий тип об'єкта");
+                        // Перевіряємо, чи існує запис з таким BillOfLading
+                        command = new MySqlCommand($"SELECT COUNT(*) FROM ParcelRouteDelivery WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                        int count = Convert.ToInt32(command.ExecuteScalar());
+
+                        if (count > 0)
+                        {
+                            // Якщо запис існує, оновлюємо дані
+                            command = new MySqlCommand($"UPDATE ParcelRouteDelivery SET CurrentBranch = '{parcel.CurrentBranch.Id}', IsConfirmedBranch = '{parcel.IsConfirmedBranch}', DeliveryPrice = '{parcel.DeliveryPrice}', DispatchTime = '{parcel.DispatchTime}', DeliveryTime = '{parcel.DeliveryTime}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                        }
+                        else
+                        {
+                            // Якщо запису не існує, створюємо новий
+                            command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{parcel.DispatchTime}', '{parcel.DeliveryTime}')", DBConnection.GetConnection());
+                        }
+                        command.ExecuteNonQuery(); //виконуємо запит
+                        break;
+                    default:
+                        throw new Exception("Невідомий тип об'єкта");
+                }
+                transaction.Commit(); //завершуємо транзакцію, якщо всі запити успішно виконані
+                LoadData();
             }
-            LoadData();
-            DBConnection.CloseConnection(); //закриваємо з'єднання з бд
+            catch (Exception)
+            {
+                transaction?.Rollback(); //відкочуємо транзакцію, якщо виникла помилка
+                throw; //перекидуємо помилку вище
+            }
+            finally
+            {
+                DBConnection.CloseConnection(); //закриваємо з'єднання з бд
+            }
         }
 
         public static void DeleteFromDatabase(object obj)
         {
-            DBConnection.OpenConnection(); // Відкриваємо з'єднання з базою даних
-            MySqlCommand command;
+            DBConnection.OpenConnection(); //відкриваємо з'єднання з бд
+            MySqlTransaction transaction = null;
 
-            switch (obj)
+            try
             {
-                case User user:
-                    // Видаляємо користувача з таблиці Users
-                    command = new MySqlCommand($"DELETE FROM Users WHERE Id = '{user.Id}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); // Виконуємо запит
-                    break;
-                case Branch branch:
-                    // Видаляємо відділення з таблиці Branch
-                    command = new MySqlCommand($"DELETE FROM Branch WHERE Id = '{branch.Id}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); // Виконуємо запит
-                    break;
-                case Route route:
-                    // Видаляємо маршрут з таблиці Route
-                    command = new MySqlCommand($"DELETE FROM Route WHERE ID = '{route.Id}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); // Виконуємо запит
-                    break;
-                case Parcel parcel:
-                    // Видаляємо посилку з таблиці Parcel
-                    command = new MySqlCommand($"DELETE FROM Parcel WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); // Виконуємо запит
+                transaction = DBConnection.GetConnection().BeginTransaction(); //починаємо транзакцію
+                MySqlCommand command;
 
-                    // Видаляємо пов'язані дані з таблиці ParcelUsers
-                    command = new MySqlCommand($"DELETE FROM ParcelUsers WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); // Виконуємо запит
+                switch (obj)
+                {
+                    case User user:
+                        // Видаляємо користувача з таблиці Users
+                        command = new MySqlCommand($"DELETE FROM Users WHERE Id = '{user.Id}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); // Виконуємо запит
+                        break;
+                    case Branch branch:
+                        // Видаляємо відділення з таблиці Branch
+                        command = new MySqlCommand($"DELETE FROM Branch WHERE Id = '{branch.Id}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); // Виконуємо запит
+                        break;
+                    case Route route:
+                        // Видаляємо маршрут з таблиці Route
+                        command = new MySqlCommand($"DELETE FROM Route WHERE ID = '{route.Id}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); // Виконуємо запит
+                        break;
+                    case Parcel parcel:
+                        // Видаляємо посилку з таблиці Parcel
+                        command = new MySqlCommand($"DELETE FROM Parcel WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); // Виконуємо запит
 
-                    // Видаляємо пов'язані дані з таблиці ParcelRouteDelivery
-                    command = new MySqlCommand($"DELETE FROM ParcelRouteDelivery WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                    command.ExecuteNonQuery(); // Виконуємо запит
-                    break;
-                default:
-                    throw new Exception("Невідомий тип об'єкта для видалення");
+                        // Видаляємо пов'язані дані з таблиці ParcelUsers
+                        command = new MySqlCommand($"DELETE FROM ParcelUsers WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); // Виконуємо запит
+
+                        // Видаляємо пов'язані дані з таблиці ParcelRouteDelivery
+                        command = new MySqlCommand($"DELETE FROM ParcelRouteDelivery WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); // Виконуємо запит
+                        break;
+                    default:
+                        throw new Exception("Невідомий тип об'єкта для видалення");
+                }
+                transaction.Commit(); //завершуємо транзакцію, якщо всі запити успішно виконані
+                LoadData();
             }
-
-            LoadData(); // Метод для оновлення даних у програмі після видалення запису
-            DBConnection.CloseConnection(); // Закриваємо з'єднання з базою даних
+            catch (Exception)
+            {
+                transaction?.Rollback(); //відкочуємо транзакцію, якщо виникла помилка
+                throw; //перекидуємо помилку вище
+            }
+            finally
+            {
+                DBConnection.CloseConnection(); //закриваємо з'єднання з бд
+            }
         }
     }
 }

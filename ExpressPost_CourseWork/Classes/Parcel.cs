@@ -19,10 +19,10 @@ namespace ExpressPost_CourseWork.Classes
         private double _weight;
         private Enum.Status _status;
         private Branch _currentBranch;
-        private bool _isConfirmedBranch;
-        private decimal _deliveryPrice;  // Ціна за доставку
-        private DateTime _dispatchTime;
-        private DateTime _deliveryTime;
+        private bool? _isConfirmedBranch;
+        private decimal? _deliveryPrice;  // Ціна за доставку
+        private DateTime? _dispatchTime;
+        private DateTime? _deliveryTime;
         private decimal _valuationPrice;// Оціночна вартість
 
         public string BillOfLading
@@ -89,12 +89,12 @@ namespace ExpressPost_CourseWork.Classes
             get { return _currentBranch; }
             set { _currentBranch = value; }
         }
-        public bool IsConfirmedBranch
+        public bool? IsConfirmedBranch
         {
             get { return _isConfirmedBranch; }
             set { _isConfirmedBranch = value; }
         }
-        public decimal DeliveryPrice
+        public decimal? DeliveryPrice
         {
             get { return _deliveryPrice; }
             set
@@ -104,7 +104,7 @@ namespace ExpressPost_CourseWork.Classes
                 _deliveryPrice = value;
             }
         }
-        public DateTime DispatchTime
+        public DateTime? DispatchTime
         {
             get { return _dispatchTime; }
             set
@@ -112,7 +112,7 @@ namespace ExpressPost_CourseWork.Classes
                 _dispatchTime = value;
             }
         }
-        public DateTime DeliveryTime
+        public DateTime? DeliveryTime
         {
             get { return _deliveryTime; }
             set
@@ -139,7 +139,7 @@ namespace ExpressPost_CourseWork.Classes
         }
 
         public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, Route route, TypeP type, double weight, Enum.Status status,
-    Branch currentBranch, bool isConfirmedBranch, decimal deliveryPrice, DateTime dispatchTime, DateTime deliveryTime, decimal valuationPrice)
+            Branch currentBranch, bool? isConfirmedBranch, decimal? deliveryPrice, DateTime? dispatchTime, DateTime? deliveryTime, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
             SenderUser = senderUser;
@@ -157,7 +157,7 @@ namespace ExpressPost_CourseWork.Classes
             IsSenderPay = isSenderPay;
         }
 
-        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, Route route, TypeP type, double weight, Enum.Status status, bool isConfirmedBranch, decimal valuationPrice)
+        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, Route route, TypeP type, double weight, Enum.Status status, bool? isConfirmedBranch, decimal valuationPrice)
         {
             BillOfLading = billOfLading;
             SenderUser = senderUser;
