@@ -9,8 +9,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//RoutesForm, BranchesForn - EditButton_Click відредагувати другий foreach
-
 namespace ExpressPost_CourseWork
 {
     internal static class Program
