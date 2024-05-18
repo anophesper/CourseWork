@@ -46,14 +46,21 @@ namespace ExpressPost_CourseWork.Classes
             set { _role = value; }
         }
 
+        public string FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
+        }
+
+        public string BranchInfo { get; set; }
+
         public UserInfo(int id, string firstName, string lastName, string phoneNumber, string password, string role)
         {
-            _id = id;
-            _firstName = firstName;
-            _lastName = lastName;
-            _phoneNumber = phoneNumber;
-            _password = password;
-            _role = role;
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            Password = password;
+            Role = role;
         }
     }
 }

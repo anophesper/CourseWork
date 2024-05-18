@@ -117,6 +117,7 @@ namespace ExpressPost_CourseWork.Forms.Client
             {
                 // Очищаємо departmentComboBox
                 DepartmentSenderComboBox.Items.Clear();
+                DepartmentSenderComboBox.SelectedIndex = -1;
                 // Отримуємо вибране місто
                 Cities selectedSenderCity = (Cities)System.Enum.Parse(typeof(Cities), CitySenderComboBox.SelectedItem.ToString());
                 // Знаходимо всі відділення в цьому місті
@@ -139,6 +140,7 @@ namespace ExpressPost_CourseWork.Forms.Client
             {
                 // Очищаємо departmentComboBox
                 DepartmentRecipientComboBox.Items.Clear();
+                DepartmentRecipientComboBox.SelectedIndex = -1;
                 // Отримуємо вибране місто
                 Cities selectedRecipientCity = (Cities)System.Enum.Parse(typeof(Cities), CityRecipientComboBox.SelectedItem.ToString());
                 // Знаходимо всі відділення в цьому місті
@@ -156,6 +158,7 @@ namespace ExpressPost_CourseWork.Forms.Client
 
         private void SenderPhoneNumberTextBox_TextChanged(object sender, EventArgs e)
         {
+            SenderNameTextBox.Text = "";
             // Отримуємо номер телефону відправника
             string senderPhoneNumber = SenderPhoneNumberTextBox.Text;
             // Знаходимо користувача з таким номером телефону
@@ -174,6 +177,7 @@ namespace ExpressPost_CourseWork.Forms.Client
 
         private void RecipientPhoneNumberTextBox_TextChanged(object sender, EventArgs e)
         {
+            RecipientNameTextBox.Text = "";
             // Отримуємо номер телефону отримувача
             string recipientPhoneNumber = RecipientPhoneNumberTextBox.Text;
             // Знаходимо користувача з таким номером телефону

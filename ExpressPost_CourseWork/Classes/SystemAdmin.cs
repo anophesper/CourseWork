@@ -8,6 +8,11 @@ namespace ExpressPost_CourseWork.Classes
 {
     public class SystemAdmin : User
     {
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
+
         public SystemAdmin(int id, string firstName, string lastName, string phoneNumber, string password) :
             base(id, firstName, lastName, phoneNumber, password)
         { }

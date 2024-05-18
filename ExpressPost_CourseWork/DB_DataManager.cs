@@ -89,7 +89,6 @@ namespace ExpressPost_CourseWork
             DBConnection.CloseConnection();//закриваємо з'єднання
         }
 
-        //метод для додавання посилок до вже існуючих клієнтів
         public void AddParcelsToClients(List<UserInfo> usersInfo)
         {
             foreach (UserInfo userInfo in usersInfo)
@@ -102,14 +101,14 @@ namespace ExpressPost_CourseWork
                     command.Parameters.AddWithValue("@id", userInfo.Id); // вказуємо параметр за яким буде проводитись відбір даних
                     MySqlDataReader parcelReader = command.ExecuteReader(); // виконуємо запит
 
-                    Parcels = new List<Parcel>(); // ініціалізуємо список посилок який потім додамо до клієнта
+                    List<Parcel> userParcels = new List<Parcel>(); // ініціалізуємо список посилок який потім додамо до клієнта
 
                     while (parcelReader.Read())
                     {
                         string billOfLading = parcelReader["BillOfLading"].ToString(); // зчитуємо дані 
-                        Parcel parcel = Parcels.FirstOrDefault(p => p.BillOfLading == billOfLading); // шукаємо посилку з відповідним значенням "BillOfLading" в списку Parcels
+                        Parcel parcel = Program.DataManager.Parcels.FirstOrDefault(p => p.BillOfLading == billOfLading); // шукаємо посилку з відповідним значенням "BillOfLading" в списку Parcels
                         if (parcel != null)
-                            Parcels.Add(parcel);
+                            userParcels.Add(parcel);
                     }
                     parcelReader.Close(); // закриваємо об'єкт MySqlDataReader після завершення читання результатів
                     DBConnection.CloseConnection(); // закриваємо з'єднання
@@ -117,7 +116,7 @@ namespace ExpressPost_CourseWork
                     // Додавання Parcel до клієнта
                     Classes.Client client = (Classes.Client)Users.FirstOrDefault(u => u.Id == userInfo.Id); // шукаємо користувача з відповідним Id в списку Users і перетворюємо його в Client
                     if (client != null)
-                        client.Parcels = Parcels; // якщо знайдено відповідного клієнта, встановлюємо його parcels на раніше зібраний список parcels
+                        client.Parcels = userParcels; // якщо знайдено відповідного клієнта, встановлюємо його parcels на раніше зібраний список parcels
                 }
             }
         }

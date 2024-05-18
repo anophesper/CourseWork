@@ -49,7 +49,7 @@ CREATE TABLE Parcel (
     BillOfLading CHAR(14) NOT NULL CHECK (LENGTH(TRIM(BillOfLading)) = 14) PRIMARY KEY UNIQUE,
     Type ENUM('Документи', 'Посилка', 'ВеликийВантаж') NOT NULL,
     Weight DECIMAL(10,2) NOT NULL,
-    Status ENUM('Створено', 'В_дорозі', 'Доставлено', 'Забрали', 'Втрачено') NOT NULL,
+    Status ENUM('Створено', 'В_дорозі', 'Доставлено', 'Отримано', 'Втрачено') NOT NULL,
     ValuationPrice DECIMAL(10,2) NOT NULL  -- Оціночна вартість
 );
 

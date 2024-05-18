@@ -53,3 +53,5 @@ C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\obj\Debug\E
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\obj\Debug\ExpressPost_CourseWork.Forms.SystemAdmin.RoutesForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\obj\Debug\ExpressPost_CourseWork.Forms.SystemAdmin.SystemAdmMainForm.resources
 C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\obj\Debug\ExpressPost_CourseWork.Forms.SystemAdmin.WorkersForm.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\obj\Debug\ExpressPost_CourseWork.Forms.BranchAdmin.PickUpPackages.resources
+C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\obj\Debug\ExpressPost_CourseWork.Forms.BranchAdmin.SendPackages.resources

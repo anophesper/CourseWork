@@ -220,6 +220,12 @@
     <EmbeddedResource Include="Forms\BranchAdmin\BranchAdmMainForm.resx">
       <DependentUpon>BranchAdmMainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BranchAdmin\PickUpPackages.resx">
+      <DependentUpon>PickUpPackages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BranchAdmin\SendPackages.resx">
+      <DependentUpon>SendPackages.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Client\ClientMainForm.resx">
       <DependentUpon>ClientMainForm.cs</DependentUpon>
     </EmbeddedResource>

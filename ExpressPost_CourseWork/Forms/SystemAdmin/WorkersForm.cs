@@ -118,7 +118,26 @@ namespace ExpressPost_CourseWork.Forms.SystemAdmin
             {
                 // Код для збереження змін у базі даних
                 foreach (int rowIndex in changedRows)
-                    DB_DataManager.UpdateDatabase(dataGridView.Rows[rowIndex].DataBoundItem);// Оновлення даних у базі даних для кожного зміненого рядка
+                {
+                    // Отримуємо об'єкт з DataGridView
+                    var item = dataGridView.Rows[rowIndex].DataBoundItem;
+
+                    // Перетворюємо об'єкт на відповідний тип
+                    var user = item as User;
+                    if (user != null)
+                    {
+                        // Розбиваємо FullName на FirstName та LastName
+                        var names = user.FullName.Split(' ');
+                        if (names.Length >= 2)
+                        {
+                            user.FirstName = names[0];
+                            user.LastName = names[1];
+                        }
+
+                        // Оновлюємо дані у базі даних для кожного зміненого рядка
+                        DB_DataManager.UpdateDatabase(user);
+                    }
+                }
                 foreach (int rowIndex in newRows)
                     SaveNewUser(dataGridView.Rows[rowIndex]);// Додавання нових даних до бази даних
                 foreach (int rowIndex in deletedRows)

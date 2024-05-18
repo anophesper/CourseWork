@@ -20,6 +20,11 @@ namespace ExpressPost_CourseWork.Classes
             }
         }
 
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
+
         public BranchAdmin(int id, string firstName, string lastName, string phoneNumber, string password, Branch branch) :
             base(id, firstName, lastName, phoneNumber, password)
         {

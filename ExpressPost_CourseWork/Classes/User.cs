@@ -33,6 +33,10 @@ namespace ExpressPost_CourseWork.Classes
                 _firstName = value;
             }
         }
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
         public string LastName
         {
             get { return _lastName; }
