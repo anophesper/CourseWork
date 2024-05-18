@@ -24,6 +24,7 @@ namespace ExpressPost_CourseWork.Forms.SystemAdmin
             InitializeComponent();
             FormProperties.DefaultFormSetup(this);
             SetupDataGridView();
+            EditButton.Visible = false; //не доведено до розуму, треба виправити баги
 
             dataGridView.ReadOnly = true;
             dataGridView.AllowUserToAddRows = false;

@@ -24,6 +24,8 @@ namespace ExpressPost_CourseWork.Forms.SystemAdmin
             InitializeComponent();
             FormProperties.DefaultFormSetup(this);
             SetupDataGridView();
+            EditButton.Visible = false; //не доведено до розуму, треба виправити баги
+
 
             dataGridView.CellValueChanged += new DataGridViewCellEventHandler(dataGridView_CellValueChanged);
             dataGridView.RowsAdded += new DataGridViewRowsAddedEventHandler(dataGridView_RowsAdded);
