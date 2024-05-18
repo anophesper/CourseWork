@@ -78,10 +78,17 @@ namespace ExpressPost_CourseWork.Forms.Client
 
                 Route route = Route.SearchRoute(origin, destination);
 
+                //дані, які не можемо просто вщяти з полів отримуємо за допомогою пошуку та інших речей
+                DateTime now = DateTime.Now;
+                DateTime dispatchTime = new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0).AddHours(1);
+                DateTime deliveryTime = dispatchTime.AddHours(route.Duration);
+
+                Branch currentBranch = origin;
+
                 if (Program.CurrentUser is Classes.Client)
                 {
-
-                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route, type, weight, Status.Створено, false, estimatedCost);
+                    Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route, type, weight, Status.Створено,
+                        currentBranch, false, deliveryPrice, dispatchTime, deliveryTime, estimatedCost);
                     DB_DataManager.InsertIntoDatabase(parcel);
 
                     FormProperties.SwitchToForm(this, new ClientMainForm());
@@ -89,13 +96,6 @@ namespace ExpressPost_CourseWork.Forms.Client
                 }
                 else
                 {
-                    //дані, які не можемо просто вщяти з полів отримуємо за допомогою пошуку та інших речей
-                    DateTime now = DateTime.Now;
-                    DateTime dispatchTime = new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0).AddHours(1);
-                    DateTime deliveryTime = dispatchTime.AddHours(route.Duration);
-
-                    Branch currentBranch = origin;
-
                     Parcel parcel = new Parcel(billOfLading, senderUser, recipientUser, isSenderPay, route, type, weight, Status.Створено,
                         currentBranch, true, deliveryPrice, dispatchTime, deliveryTime, estimatedCost);
                     DB_DataManager.InsertIntoDatabase(parcel);

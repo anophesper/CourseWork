@@ -1,4 +1,5 @@
 ﻿using ExpressPost_CourseWork.Classes;
+using ExpressPost_CourseWork.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +14,18 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
 {
     public partial class PickUpPackages : Form
     {
+        // Отримуємо поточного користувача
+        Classes.BranchAdmin currentUser = Program.CurrentUser as Classes.BranchAdmin;
+
         public PickUpPackages()
         {
             InitializeComponent();
             FormProperties.DefaultFormSetup(this);
+            LoadInfo();
+        }
 
-            // Отримуємо поточного користувача
-            Classes.BranchAdmin currentUser = Program.CurrentUser as Classes.BranchAdmin;
-
+        private void LoadInfo()
+        {
             // Створюємо список PickUpPackages
             List<Parcel> PickUpPackages = Program.DataManager.Parcels
                 .Where(parcel => parcel.Route.Destination == currentUser.Branch && parcel.IsConfirmedBranch == true)
@@ -96,9 +101,28 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
             dataGridView.Refresh();
         }
 
-        private void EditButton_Click(object sender, EventArgs e)
+        private void CheckButton_Click(object sender, EventArgs e)
         {
+            // Перевіряємо, чи вибрана якась посилка
+            if (dataGridView.SelectedRows.Count > 0)
+            {
+                // Отримуємо вибрану посилку
+                string selectedBillOfLading = dataGridView.SelectedRows[0].Cells["BillOfLading"].Value.ToString();
+                Parcel selectedParcel = Program.DataManager.Parcels.FirstOrDefault(p => p.BillOfLading == selectedBillOfLading);
 
+                if (selectedParcel != null)
+                {
+                    // Якщо статус посилки "Доставлено", змінюємо його на "Отримано"
+                    if (selectedParcel.Status == Status.Доставлено)
+                        selectedParcel.Status = Status.Отримано;
+
+                    // Оновлюємо дані в базі даних
+                    DB_DataManager.UpdateDatabase(selectedParcel);
+                    LoadInfo();
+                }
+            }
+            else
+                MessageBox.Show("Оберіть одну строчку з даними посилки яку хочете відмітити");
         }
     }
 

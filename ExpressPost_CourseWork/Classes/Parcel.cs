@@ -157,20 +157,6 @@ namespace ExpressPost_CourseWork.Classes
             IsSenderPay = isSenderPay;
         }
 
-        public Parcel(string billOfLading, User senderUser, User recipientUser, bool isSenderPay, Route route, TypeP type, double weight, Enum.Status status, bool? isConfirmedBranch, decimal valuationPrice)
-        {
-            BillOfLading = billOfLading;
-            SenderUser = senderUser;
-            RecipientUser = recipientUser;
-            IsSenderPay = isSenderPay;
-            Route = route;
-            Type = type;
-            Weight = weight;
-            Status = status;
-            IsConfirmedBranch = isConfirmedBranch;
-            ValuationPrice = valuationPrice;
-        }
-
         public static string GenerateBillOfLading()
         {
             // Отримуємо поточну дату та час

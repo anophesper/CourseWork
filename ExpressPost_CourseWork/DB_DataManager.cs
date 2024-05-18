@@ -271,7 +271,7 @@ namespace ExpressPost_CourseWork
                         command2 = new MySqlCommand($"INSERT INTO BranchAdmins (UserID, BranchID) VALUES (LAST_INSERT_ID(), '{branchAdmin.Branch.Id}')", DBConnection.GetConnection());
                         command2.ExecuteNonQuery(); //виконуємо запит
                         break;
-                    case Classes.Client client:
+                    case Client client:
                         // Вставляємо дані про клієнта в таблицю Users
                         command = new MySqlCommand($"INSERT INTO Users (FirstName, LastName, PhoneNumber, Password, Role) VALUES ('{client.FirstName}', '{client.LastName}', '{client.PhoneNumber}', '{client.Password}', 'Клієнт')", DBConnection.GetConnection());
                         command.ExecuteNonQuery(); //виконуємо запит
@@ -306,19 +306,14 @@ namespace ExpressPost_CourseWork
                         string dispatchTimeString = parcel.DispatchTime.HasValue ? parcel.DispatchTime.Value.ToString("yyyy-MM-dd HH:mm:ss") : null;
                         string deliveryTimeString = parcel.DeliveryTime.HasValue ? parcel.DeliveryTime.Value.ToString("yyyy-MM-dd HH:mm:ss") : null;
 
-                        // Перевіряємо, чи CurrentBranch не null
-                        if (parcel.CurrentBranch != null)
-                        {
-                            // Вставляємо дані про маршрут, поточне відділення, підтвердження відділення, ціну доставки, час відправки та час доставки в таблицю ParcelRouteDelivery
-                            command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{dispatchTimeString}', '{deliveryTimeString}')", DBConnection.GetConnection());
-                            command.ExecuteNonQuery(); //виконуємо запит
-                        }
+                        // Вставляємо дані про маршрут, поточне відділення, підтвердження відділення, ціну доставки, час відправки та час доставки в таблицю ParcelRouteDelivery
+                        command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{dispatchTimeString}', '{deliveryTimeString}')", DBConnection.GetConnection());
+                        command.ExecuteNonQuery(); //виконуємо запит
                         break;
                     default:
                         throw new Exception("Невідомий тип об'єкта");
                 }
                 transaction.Commit(); //завершуємо транзакцію, якщо всі запити успішно виконані
-                LoadData();
             }
             catch (Exception)
             {
@@ -327,6 +322,7 @@ namespace ExpressPost_CourseWork
             }
             finally
             {
+                LoadData();
                 DBConnection.CloseConnection(); //закриваємо з'єднання з бд
             }
         }
@@ -367,27 +363,13 @@ namespace ExpressPost_CourseWork
                         command = new MySqlCommand($"UPDATE ParcelUsers SET SenderUser = '{parcel.SenderUser.Id}', RecipientUser = '{parcel.RecipientUser.Id}', IsSenderPay = '{parcel.IsSenderPay}', Route = '{parcel.Route.Id}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
                         command.ExecuteNonQuery(); //виконуємо запит
 
-                        // Перевіряємо, чи існує запис з таким BillOfLading
-                        command = new MySqlCommand($"SELECT COUNT(*) FROM ParcelRouteDelivery WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                        int count = Convert.ToInt32(command.ExecuteScalar());
-
-                        if (count > 0)
-                        {
-                            // Якщо запис існує, оновлюємо дані
-                            command = new MySqlCommand($"UPDATE ParcelRouteDelivery SET CurrentBranch = '{parcel.CurrentBranch.Id}', IsConfirmedBranch = '{parcel.IsConfirmedBranch}', DeliveryPrice = '{parcel.DeliveryPrice}', DispatchTime = '{parcel.DispatchTime}', DeliveryTime = '{parcel.DeliveryTime}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
-                        }
-                        else
-                        {
-                            // Якщо запису не існує, створюємо новий
-                            command = new MySqlCommand($"INSERT INTO ParcelRouteDelivery (BillOfLading, CurrentBranch, IsConfirmedBranch, DeliveryPrice, DispatchTime, DeliveryTime) VALUES ('{parcel.BillOfLading}', '{parcel.CurrentBranch.Id}', '{parcel.IsConfirmedBranch}', '{parcel.DeliveryPrice}', '{parcel.DispatchTime}', '{parcel.DeliveryTime}')", DBConnection.GetConnection());
-                        }
+                        command = new MySqlCommand($"UPDATE ParcelRouteDelivery SET CurrentBranch = '{parcel.CurrentBranch.Id}', IsConfirmedBranch = '{parcel.IsConfirmedBranch}', DeliveryPrice = '{parcel.DeliveryPrice}' WHERE BillOfLading = '{parcel.BillOfLading}'", DBConnection.GetConnection());
                         command.ExecuteNonQuery(); //виконуємо запит
                         break;
                     default:
                         throw new Exception("Невідомий тип об'єкта");
                 }
                 transaction.Commit(); //завершуємо транзакцію, якщо всі запити успішно виконані
-                LoadData();
             }
             catch (Exception)
             {
@@ -396,6 +378,7 @@ namespace ExpressPost_CourseWork
             }
             finally
             {
+                LoadData();
                 DBConnection.CloseConnection(); //закриваємо з'єднання з бд
             }
         }
@@ -444,7 +427,7 @@ namespace ExpressPost_CourseWork
                         throw new Exception("Невідомий тип об'єкта для видалення");
                 }
                 transaction.Commit(); //завершуємо транзакцію, якщо всі запити успішно виконані
-                LoadData();
+
             }
             catch (Exception)
             {
@@ -453,6 +436,7 @@ namespace ExpressPost_CourseWork
             }
             finally
             {
+                LoadData();
                 DBConnection.CloseConnection(); //закриваємо з'єднання з бд
             }
         }
