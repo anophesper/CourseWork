@@ -176,6 +176,12 @@
     <Compile Include="Forms\Client\CreatePackageForm.Designer.cs">
       <DependentUpon>CreatePackageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Client\ParcelsClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Client\ParcelsClient.Designer.cs">
+      <DependentUpon>ParcelsClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SystemAdmin\BranchesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Client\CreatePackageForm.resx">
       <DependentUpon>CreatePackageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Client\ParcelsClient.resx">
+      <DependentUpon>ParcelsClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SystemAdmin\BranchesForm.resx">
       <DependentUpon>BranchesForm.cs</DependentUpon>

@@ -30,6 +30,7 @@
         {
             this.MyProfileButton = new System.Windows.Forms.Button();
             this.CreateParcelButton = new System.Windows.Forms.Button();
+            this.ParcelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MyProfileButton
@@ -54,11 +55,23 @@
             this.CreateParcelButton.UseVisualStyleBackColor = true;
             this.CreateParcelButton.Click += new System.EventHandler(this.CreateParcelButton_Click);
             // 
+            // ParcelButton
+            // 
+            this.ParcelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParcelButton.Location = new System.Drawing.Point(266, 86);
+            this.ParcelButton.Name = "ParcelButton";
+            this.ParcelButton.Size = new System.Drawing.Size(250, 40);
+            this.ParcelButton.TabIndex = 15;
+            this.ParcelButton.Text = "Переглянути посилки";
+            this.ParcelButton.UseVisualStyleBackColor = true;
+            this.ParcelButton.Click += new System.EventHandler(this.ParcelButton_Click);
+            // 
             // ClientMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 540);
+            this.Controls.Add(this.ParcelButton);
             this.Controls.Add(this.CreateParcelButton);
             this.Controls.Add(this.MyProfileButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -72,5 +85,6 @@
 
         private System.Windows.Forms.Button MyProfileButton;
         private System.Windows.Forms.Button CreateParcelButton;
+        private System.Windows.Forms.Button ParcelButton;
     }
 }

@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\classes\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:classes\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\classes\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:classes\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\db_datamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:db_datamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\client\\parcelsclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\client\\parcelsclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\classes\\parcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:classes\\parcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\branchadmin\\sendpackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\branchadmin\\sendpackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\formproperties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,17 +42,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABAAAAAFAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAEwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-16T18:24:12.245Z",
               "IsPinned": true,
@@ -40,7 +60,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "FormProperties.cs",
               "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\FormProperties.cs",
               "RelativeDocumentMoniker": "FormProperties.cs",
@@ -53,16 +73,82 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "DB_DataManager.cs",
               "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\DB_DataManager.cs",
               "RelativeDocumentMoniker": "DB_DataManager.cs",
               "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\DB_DataManager.cs",
               "RelativeToolTip": "DB_DataManager.cs",
-              "ViewState": "AQIAAFwBAAAAAAAAAAAUwHwBAAAQAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAADwv3kAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-16T19:26:52.24Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Classes\\Client.cs",
+              "RelativeDocumentMoniker": "Classes\\Client.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Classes\\Client.cs",
+              "RelativeToolTip": "Classes\\Client.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T14:28:27.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Classes\\User.cs",
+              "RelativeDocumentMoniker": "Classes\\User.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Classes\\User.cs",
+              "RelativeToolTip": "Classes\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T14:28:20.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Parcel.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Classes\\Parcel.cs",
+              "RelativeDocumentMoniker": "Classes\\Parcel.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Classes\\Parcel.cs",
+              "RelativeToolTip": "Classes\\Parcel.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAAAI8AAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T14:18:27.059Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SendPackages.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\BranchAdmin\\SendPackages.cs",
+              "RelativeDocumentMoniker": "Forms\\BranchAdmin\\SendPackages.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\BranchAdmin\\SendPackages.cs",
+              "RelativeToolTip": "Forms\\BranchAdmin\\SendPackages.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIgAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T14:14:35.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ParcelsClient.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Client\\ParcelsClient.cs",
+              "RelativeDocumentMoniker": "Forms\\Client\\ParcelsClient.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\Client\\ParcelsClient.cs",
+              "RelativeToolTip": "Forms\\Client\\ParcelsClient.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAkwGUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T14:14:03.069Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -28,5 +28,10 @@ namespace ExpressPost_CourseWork.Forms.Client
         {
             FormProperties.SwitchToForm(this, new CreatePackageForm());
         }
+
+        private void ParcelButton_Click(object sender, EventArgs e)
+        {
+            FormProperties.SwitchToForm(this, new ParcelsClient());
+        }
     }
 }
