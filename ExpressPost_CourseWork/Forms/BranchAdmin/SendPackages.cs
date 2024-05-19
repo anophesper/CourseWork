@@ -24,6 +24,7 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
             LoadInfo();
         }
 
+        //BUG чомусь після збереження змін в бд список SendPackages не заповнюється елементами, хоча в списку Parcels є потрібні елементи, і не хоче заповнюватись доки не перезапустити програму
         private void LoadInfo()
         {
             try
@@ -128,19 +129,8 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
 
                     if (selectedParcel != null)
                     {
-                        // Змінюємо CurrentBranch на наступне відділення в маршруті
-                        int currentIndex = selectedParcel.Route.GetIntermediateBranches().IndexOf(selectedParcel.CurrentBranch);
-                        if (currentIndex < selectedParcel.Route.GetIntermediateBranches().Count - 1)
-                            selectedParcel.CurrentBranch = selectedParcel.Route.GetIntermediateBranches()[currentIndex + 1];// Якщо є наступне проміжне відділення
-                        else
-                            selectedParcel.CurrentBranch = selectedParcel.Route.Destination;// Якщо немає наступного проміжного відділення, встановлюємо кінцеве відділення
-
-                        // Встановлюємо IsConfirmedBranch в false
-                        selectedParcel.IsConfirmedBranch = false;
-
-                        // Якщо статус посилки "Створено", змінюємо його на "В_дорозі"
-                        if (selectedParcel.Status == Status.Створено)
-                            selectedParcel.Status = Status.В_дорозі;
+                        // Використовуємо метод MarkDeparture для переміщення посилки до наступного відділення
+                        currentUser.MarkDeparture(selectedParcel);
 
                         // Оновлюємо дані в базі даних
                         DB_DataManager.UpdateDatabase(selectedParcel);

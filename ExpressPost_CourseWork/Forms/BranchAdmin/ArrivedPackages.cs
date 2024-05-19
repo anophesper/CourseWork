@@ -24,6 +24,7 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
             LoadInfo();
         }
 
+        //BUG чомусь після збереження змін в бд список ArrivedPackages не заповнюється елементами, хоча в списку Parcels є потрібні елементи, і не хоче заповнюватись доки не перезапустити програму
         private void LoadInfo()
         {
             try
@@ -128,12 +129,8 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
 
                     if (selectedParcel != null)
                     {
-                        // Встановлюємо IsConfirmedBranch в true
-                        selectedParcel.IsConfirmedBranch = true;
-
-                        // Якщо статус посилки "В_дорозі" і поточне відділення є кінцевим відділенням маршруту, змінюємо його на "Доставлено"
-                        if (selectedParcel.Status == Status.В_дорозі && selectedParcel.CurrentBranch == selectedParcel.Route.Destination)
-                            selectedParcel.Status = Status.Доставлено;
+                        /// Використовуємо метод MarkArrival для позначення прибуття посилки
+                        currentUser.MarkArrival(selectedParcel);
 
                         // Оновлюємо дані в базі даних
                         DB_DataManager.UpdateDatabase(selectedParcel);

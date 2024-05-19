@@ -165,7 +165,7 @@ namespace ExpressPost_CourseWork.Classes
             // Форматуємо дату та час в рядок
             string dateString = now.ToString("yyyyMMddHHmmss");
 
-            // Комбінуємо дату, час та унікальний ідентифікатор для створення ТТН
+            // Комбінуємо дату та час для створення ТТН
             return dateString;
         }
     }

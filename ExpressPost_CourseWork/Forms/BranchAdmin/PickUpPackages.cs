@@ -24,6 +24,7 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
             LoadInfo();
         }
 
+        //BUG чомусь після збереження змін в бд список PickUpPackages не заповнюється елементами, хоча в списку Parcels є потрібні елементи, і не хоче заповнюватись доки не перезапустити програму
         private void LoadInfo()
         {
             try

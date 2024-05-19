@@ -112,7 +112,7 @@ namespace ExpressPost_CourseWork.Classes
             File.WriteAllText(filePath, json);
         }
 
-        //метод для загрузки інформації з файлу (якщо він існує)
+        //метод для загрузки інформації з файлу
         public static User Load()
         {
             string json = File.ReadAllText(filePath);
