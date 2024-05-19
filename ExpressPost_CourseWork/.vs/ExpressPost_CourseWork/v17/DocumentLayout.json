@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\db_datamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:db_datamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\classes\\branchadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:classes\\branchadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\branchadmin\\arrivedpackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\branchadmin\\arrivedpackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|c:\\users\\owner\\desktop\\labs\\second\\coursework\\expresspost_coursework\\forms\\branchadmin\\pickuppackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B29BD05F-569F-461E-A9C6-4E1CB05578EF}|ExpressPost_CourseWork.csproj|solutionrelative:forms\\branchadmin\\pickuppackages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DB_DataManager.cs",
-              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\DB_DataManager.cs",
-              "RelativeDocumentMoniker": "DB_DataManager.cs",
-              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\DB_DataManager.cs",
-              "RelativeToolTip": "DB_DataManager.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAEkBAAA1AAAA",
+              "Title": "PickUpPackages.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\BranchAdmin\\PickUpPackages.cs",
+              "RelativeDocumentMoniker": "Forms\\BranchAdmin\\PickUpPackages.cs",
+              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\BranchAdmin\\PickUpPackages.cs",
+              "RelativeToolTip": "Forms\\BranchAdmin\\PickUpPackages.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAB0AAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T12:59:25.731Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BranchAdmin.cs",
-              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Classes\\BranchAdmin.cs",
-              "RelativeDocumentMoniker": "Classes\\BranchAdmin.cs",
-              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Classes\\BranchAdmin.cs",
-              "RelativeToolTip": "Classes\\BranchAdmin.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAADkAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T12:58:46.89Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ArrivedPackages.cs",
-              "DocumentMoniker": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\BranchAdmin\\ArrivedPackages.cs",
-              "RelativeDocumentMoniker": "Forms\\BranchAdmin\\ArrivedPackages.cs",
-              "ToolTip": "C:\\Users\\Owner\\Desktop\\labs\\Second\\CourseWork\\ExpressPost_CourseWork\\Forms\\BranchAdmin\\ArrivedPackages.cs",
-              "RelativeToolTip": "Forms\\BranchAdmin\\ArrivedPackages.cs",
-              "ViewState": "AQIAADcAAAAAAAAAAAAUwJMAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T12:53:57.481Z",
+              "WhenOpened": "2024-05-19T13:49:37.224Z",
               "EditorCaption": ""
             }
           ]

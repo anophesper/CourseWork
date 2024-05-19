@@ -31,7 +31,7 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
             {
                 // Створюємо список PickUpPackages
                 List<Parcel> PickUpPackages = Program.DataManager.Parcels
-                    .Where(parcel => parcel.Route.Destination == currentUser.Branch && parcel.IsConfirmedBranch == true)
+                    .Where(parcel => parcel.Route.Destination == currentUser.Branch && parcel.IsConfirmedBranch == true && parcel.Status != Status.Отримано)
                     .ToList();
 
                 SetupDataGridView(PickUpPackages);
