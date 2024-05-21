@@ -38,5 +38,10 @@ namespace ExpressPost_CourseWork.Forms.BranchAdmin
         {
             FormProperties.SwitchToForm(this, new PickUpPackages());
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormProperties.SwitchToForm(this, new Client.CreatePackageForm());
+        }
     }
 }

@@ -32,12 +32,13 @@
             this.MyProfileButton = new System.Windows.Forms.Button();
             this.SendParcelButton = new System.Windows.Forms.Button();
             this.PickUpParcelButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ArrivedParcelButton
             // 
             this.ArrivedParcelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ArrivedParcelButton.Location = new System.Drawing.Point(250, 12);
+            this.ArrivedParcelButton.Location = new System.Drawing.Point(516, 154);
             this.ArrivedParcelButton.Name = "ArrivedParcelButton";
             this.ArrivedParcelButton.Size = new System.Drawing.Size(250, 40);
             this.ArrivedParcelButton.TabIndex = 16;
@@ -59,7 +60,7 @@
             // SendParcelButton
             // 
             this.SendParcelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SendParcelButton.Location = new System.Drawing.Point(250, 88);
+            this.SendParcelButton.Location = new System.Drawing.Point(516, 230);
             this.SendParcelButton.Name = "SendParcelButton";
             this.SendParcelButton.Size = new System.Drawing.Size(250, 40);
             this.SendParcelButton.TabIndex = 17;
@@ -70,7 +71,7 @@
             // PickUpParcelButton
             // 
             this.PickUpParcelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PickUpParcelButton.Location = new System.Drawing.Point(250, 164);
+            this.PickUpParcelButton.Location = new System.Drawing.Point(516, 306);
             this.PickUpParcelButton.Name = "PickUpParcelButton";
             this.PickUpParcelButton.Size = new System.Drawing.Size(250, 40);
             this.PickUpParcelButton.TabIndex = 18;
@@ -78,11 +79,23 @@
             this.PickUpParcelButton.UseVisualStyleBackColor = true;
             this.PickUpParcelButton.Click += new System.EventHandler(this.PickUpParcelButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(159, 154);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(250, 40);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Створити посилку";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // BranchAdmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 540);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.PickUpParcelButton);
             this.Controls.Add(this.SendParcelButton);
             this.Controls.Add(this.ArrivedParcelButton);
@@ -100,5 +113,6 @@
         private System.Windows.Forms.Button MyProfileButton;
         private System.Windows.Forms.Button SendParcelButton;
         private System.Windows.Forms.Button PickUpParcelButton;
+        private System.Windows.Forms.Button button1;
     }
 }
