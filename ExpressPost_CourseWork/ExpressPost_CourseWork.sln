@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressPost_CourseWork", "ExpressPost_CourseWork.csproj", "{B29BD05F-569F-461E-A9C6-4E1CB05578EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "..\TestProject\TestProject.csproj", "{C783A57B-DDDD-4F69-8597-087D4936A708}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "..\TestProject\TestProject.csproj", "{C783A57B-DDDD-4F69-8597-087D4936A708}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeExport", "..\OfficeExport\OfficeExport.csproj", "{D0526685-FE89-4BB2-88FF-18917E33C5D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C783A57B-DDDD-4F69-8597-087D4936A708}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C783A57B-DDDD-4F69-8597-087D4936A708}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C783A57B-DDDD-4F69-8597-087D4936A708}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0526685-FE89-4BB2-88FF-18917E33C5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0526685-FE89-4BB2-88FF-18917E33C5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0526685-FE89-4BB2-88FF-18917E33C5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0526685-FE89-4BB2-88FF-18917E33C5D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

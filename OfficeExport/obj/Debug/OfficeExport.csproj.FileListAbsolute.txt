@@ -1,0 +1,6 @@
+C:\Users\Owner\Desktop\labs\Second\CourseWork\OfficeExport\bin\Debug\OfficeExport.dll
+C:\Users\Owner\Desktop\labs\Second\CourseWork\OfficeExport\bin\Debug\OfficeExport.pdb
+C:\Users\Owner\Desktop\labs\Second\CourseWork\OfficeExport\obj\Debug\OfficeExport.csproj.AssemblyReference.cache
+C:\Users\Owner\Desktop\labs\Second\CourseWork\OfficeExport\obj\Debug\OfficeExport.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\labs\Second\CourseWork\OfficeExport\obj\Debug\OfficeExport.dll
+C:\Users\Owner\Desktop\labs\Second\CourseWork\OfficeExport\obj\Debug\OfficeExport.pdb

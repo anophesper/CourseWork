@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -219,6 +220,88 @@ namespace ExpressPost_CourseWork.Forms.SystemAdmin
             {
                 MessageBox.Show($"Помилка при видаленні рядка: {ex.Message}");
             }
+        }
+
+        private void OpenWordButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] data = GetWordExportData();
+                string dllPath = @"C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\libs\OfficeExport.dll";
+                Assembly assembly = Assembly.LoadFrom(dllPath);
+                Type type = assembly.GetType("OfficeExport.WordExport");
+                object instance = Activator.CreateInstance(type);
+                MethodInfo method = type.GetMethod("ExportData");
+                method.Invoke(instance, new object[] { @"C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\UsersReport.docx", data });
+                MessageBox.Show("Export to Word completed successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error exporting to Word: {ex.Message}");
+            }
+        }
+
+        private void OpenExelButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string[,] data = GetExcelExportData();
+                string dllPath = @"C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\libs\OfficeExport.dll";
+                Assembly assembly = Assembly.LoadFrom(dllPath);
+                Type type = assembly.GetType("OfficeExport.ExcelExport");
+                object instance = Activator.CreateInstance(type);
+                MethodInfo method = type.GetMethod("ExportData");
+                method.Invoke(instance, new object[] { @"C:\Users\Owner\Desktop\labs\Second\CourseWork\ExpressPost_CourseWork\UsersReport.xlsx", data });
+                MessageBox.Show("Export to Excel completed successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error exporting to Excel: {ex.Message}");
+            }
+        }
+
+        private string[] GetWordExportData()
+        {
+            List<string> data = new List<string>();
+
+            // Додавання заголовків
+            string headers = string.Join(", ", dataGridView.Columns.Cast<DataGridViewColumn>().Select(column => column.HeaderText));
+            data.Add(headers);
+
+            // Додавання даних з DataGridView
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (row.IsNewRow) continue;
+                var cells = row.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value?.ToString() ?? "");
+                data.Add(string.Join(", ", cells));
+            }
+
+            return data.ToArray();
+        }
+
+        private string[,] GetExcelExportData()
+        {
+            int rowCount = dataGridView.Rows.Count;
+            int colCount = dataGridView.Columns.Count;
+            string[,] data = new string[rowCount + 1, colCount];
+
+            // Додавання заголовків
+            for (int col = 0; col < colCount; col++)
+            {
+                data[0, col] = dataGridView.Columns[col].HeaderText;
+            }
+
+            // Додавання даних з DataGridView
+            for (int row = 0; row < rowCount; row++)
+            {
+                if (dataGridView.Rows[row].IsNewRow) continue;
+                for (int col = 0; col < colCount; col++)
+                {
+                    data[row + 1, col] = dataGridView.Rows[row].Cells[col].Value?.ToString();
+                }
+            }
+
+            return data;
         }
     }
 }
